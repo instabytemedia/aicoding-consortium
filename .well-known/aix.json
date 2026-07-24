@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-24T21:55:20.905Z",
+  "generated": "2026-07-24T22:02:12.096Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -160,8 +160,8 @@
       "url": "/spec/adp-1.0.html",
       "title": "ADP — Agent Discovery &amp; Policy 1.0 | AICC Technical Report 006",
       "summary": "ADP 1.0 — the discovery and policy layer for the agent-native web: agents.txt, the /.well-known/adp.json manifest, and HTTP signalling for AI code engines.",
-      "hash": "sha256-ec6ce70a20a525cc6bbacc6a5971f793be9edd5b95b00ab344310cd770093f2d",
-      "tokens": 4063,
+      "hash": "sha256-da90b754ee94382f76af62aa5835980aa456876f11285aacce45fa90dc19cac7",
+      "tokens": 4134,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -187,8 +187,8 @@
       "url": "/spec/aqp-1.0.html",
       "title": "AQP — Agent Query Protocol 1.0 | AICC Technical Report 009",
       "summary": "AICC-TR-009 — a declared query endpoint that replaces multi-page crawling with one grounded question.",
-      "hash": "sha256-353e4779ea4e3cb35d25f57127e5266a57efbf5ef7cd87f7ec7fd06b71edeec2",
-      "tokens": 630,
+      "hash": "sha256-359235c7b1f271d67843d278d6bb8f2b9016d7e9163cf312e81a5b2c848a5cf0",
+      "tokens": 684,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -196,8 +196,8 @@
       "url": "/spec/chunks-1.0.html",
       "title": "Chunk Addressing 1.0 | AICC Technical Report 010",
       "summary": "AICC-TR-010 — stable fragment identity for web content: id grammar, stability rules, hashing, and the citation format.",
-      "hash": "sha256-aa871ced1034b0da81c47d465f3d097209a1cfa2206908156f44308cd37c53ce",
-      "tokens": 645,
+      "hash": "sha256-2b13122fdde4fc4c651e1983c8fb56c1b1e1c9a33ec3f81f65ef0487fcf45145",
+      "tokens": 712,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -214,8 +214,8 @@
       "url": "/spec/identity-1.0.html",
       "title": "Agent Identity &amp; Attestation 1.0 | AICC Technical Report 013",
       "summary": "AICC-TR-013 — signed agent attestations over HTTP: engine identity, principal class, and verification keys.",
-      "hash": "sha256-a04b2212999df450b56e146d0d0964a2e5bf4a388843c4ae3267ab39c4499526",
-      "tokens": 625,
+      "hash": "sha256-38f4cd1635243499e43d08db49d6c580e0c3710af8cb0c6ec23b52ffdd6cc1d0",
+      "tokens": 675,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -231,9 +231,9 @@
     {
       "url": "/spec/licensing-1.0.html",
       "title": "AI Licensing Signals 1.0 | AICC Technical Report 014",
-      "summary": "AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the Content-Usage header.",
-      "hash": "sha256-82bcae1fe34dfd9f1c970310fae9fadf7a0f3dbf18e6d79d144cb6aad38e1080",
-      "tokens": 597,
+      "summary": "AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the AICC-Usage header.",
+      "hash": "sha256-fbfb2b6a01266d1cf6ffac6e213e81861f460505170f38e922079c71f1187ecb",
+      "tokens": 698,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -241,8 +241,8 @@
       "url": "/spec/provenance-1.0.html",
       "title": "Provenance &amp; Freshness 1.0 | AICC Technical Report 011",
       "summary": "AICC-TR-011 — source classes, verification timestamps, and a signing envelope for web content consumed by agents.",
-      "hash": "sha256-87b3240b68e00bbb298f32eeb32c4f4e9d99d6186896db4a42f3b676d0896b9d",
-      "tokens": 578,
+      "hash": "sha256-f52f16eef25f8665716f716537f17285e0d4392e8b9801a83caad47fe4952a65",
+      "tokens": 652,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -250,8 +250,8 @@
       "url": "/stack.html",
       "title": "The Agent Web Stack — AI Coding Consortium",
       "summary": "The web was built for browsers. The next decade of traffic will be agents. The Agent Web Stack maps every layer the agent-native web needs — and the AICC standard that covers it.",
-      "hash": "sha256-c2ed6253440d262180c618b723c22acabdea61388f400ebe2cd829c90727fe46",
-      "tokens": 856,
+      "hash": "sha256-8a63fec0c75b4fee14a3f618864b4fda5693c1ea84f69316d386f83e702bad4a",
+      "tokens": 917,
       "updated": "2026-07-24",
       "type": "article"
     },

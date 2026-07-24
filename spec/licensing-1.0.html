@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Licensing Signals 1.0 | AICC Technical Report 014</title>
-<meta name="description" content="AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the Content-Usage header.">
+<meta name="description" content="AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the AICC-Usage header.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/licensing-1.0.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Coding Consortium">
 <meta property="og:title" content="AI Licensing Signals 1.0">
-<meta property="og:description" content="AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the Content-Usage header.">
+<meta property="og:description" content="AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the AICC-Usage header.">
 <meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/licensing-1.0.html">
 <meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -45,9 +45,13 @@
     published so that origins, engines, and adjacent standards bodies can shape it before it
     hardens. Comments via the public repository.</p>
     <h2 id="abstract">Abstract</h2>
-<p>Whether AI may use web content is today buried in terms-of-service prose no agent reads and no court enjoys. This report defines a three-verb grant vocabulary — <code>quote</code> (reproduce excerpts with citation), <code>process</code> (read, summarise, act on, without retention beyond the task), <code>train</code> (retain for model training) — declarable per AIX entry (<code>"usage": ["quote", "process"]</code>) and per response (<code>Content-Usage</code> header, RFC 8941 list). It standardizes the <em>expression</em> of permission; what silence means remains jurisdiction-dependent and out of scope.</p>
+<p>Whether AI may use web content is today buried in terms-of-service prose no agent reads and no court enjoys. This report defines a three-verb grant vocabulary — <code>quote</code> (reproduce excerpts with citation), <code>process</code> (read, summarise, act on, without retention beyond the task), <code>train</code> (retain for model training) — declarable per AIX entry (<code>"usage": ["quote", "process"]</code>) and per response (<code>AICC-Usage</code> header, RFC 9651 Structured Fields list). It standardizes the <em>expression</em> of permission; what silence means remains jurisdiction-dependent and out of scope.</p>
 <h2 id="semantics">1. Semantics</h2>
-<div class="norm"><p>Grants are independent (train does not imply quote). Engines <span class="kw">MUST</span> honour an explicit <code>Content-Usage</code> header for the response it accompanies, <span class="kw">SHOULD</span> honour AIX-level grants for indexed resources, and <span class="kw">MUST</span> treat the verbs as a floor for their own stricter policies, never a licence override in either direction: a grant here cannot expand what copyright law forbids, and a denial here cannot revoke rights law grants (e.g. quotation rights). The header exists to make the origin's position explicit and machine-actionable.</p></div>
+<div class="note"><p>Relationship to IETF AIPREF: the IETF <em>aipref</em> working group is standardising
+a <code>Content-Usage</code> preference field (draft-ietf-aipref-attach) with its own vocabulary.
+This report uses the distinct field name <code>AICC-Usage</code> to avoid collision; WG-INTEROP
+tracks AIPREF and will align or profile the vocabularies before this report advances.</p></div>
+<div class="norm"><p>Grants are independent (train does not imply quote). Engines <span class="kw">MUST</span> honour an explicit <code>AICC-Usage</code> header for the response it accompanies, <span class="kw">SHOULD</span> honour AIX-level grants for indexed resources, and <span class="kw">MUST</span> treat the verbs as a floor for their own stricter policies, never a licence override in either direction: a grant conveys permission only to the extent of rights the origin actually holds and cannot convey rights it lacks, and a denial cannot revoke statutory exceptions (e.g. quotation rights). The header exists to make the origin's position explicit and machine-actionable.</p></div>
 <h2 id="security">2. Considerations</h2>
 <ul><li><strong>Legal honesty.</strong> This is a signal standard, not a licence: it removes the "we couldn't know" excuse in both directions, which is precisely its value.</li><li><strong>Mixed content.</strong> UGC entries carry the platform's grant; platforms SHOULD reflect their actual terms with contributors, and mislabelling is a conformance violation attributable to the origin.</li></ul>
 
