@@ -84,8 +84,9 @@ and zero warnings.
 
 ## Migrating existing files
 
-To standardize a repo that has CLAUDE.md / AGENTS.md / .cursorrules: create
-`product.aicc.md` as the single source of truth, move binding rules into `## Constraints`
-with one keyword per line, move context into `## Overview`/`## Architecture`, then keep the
-legacy files as thin generated derivatives (or delete them once every engine in use reads
-AICC directly).
+Run `node ${CLAUDE_PLUGIN_ROOT}/scripts/migrate.mjs .` (or the `/aicc-migrate` command) — it
+converts CLAUDE.md, AGENTS.md, .cursorrules, .cursor/rules/*.mdc, copilot-instructions.md,
+GEMINI.md and .windsurfrules into a `product.aicc.md` draft with polarity-preserving keyword
+inference. Review every inferred MUST/SHOULD strength with the user, then raise
+`conformance` to `strict`. Keep the legacy files as thin generated derivatives (see
+AICC-TR-005 interop mappings), or delete them once every engine in use reads AICC directly.

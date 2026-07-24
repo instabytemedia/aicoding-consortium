@@ -16,9 +16,11 @@ and policy layer for the agent-native web. Write once. Parse everywhere.
 | Series | Specification | Status |
 |---|---|---|
 | AICC-TR-001 | [AICC Core — Level 1.0](spec/aicc-core-1.0.html) — document model, frontmatter, taxonomy, keywords, directives, conformance | Candidate Recommendation |
-| AICC-TR-005 | AICC Interop Mappings (to be split from Core § 11) | Editor's Draft |
+| AICC-TR-005 | [AICC Interop Mappings 1.0](spec/interop-1.0.html) — translation tables + migration tool | Editor's Draft |
 | AICC-TR-006 | [ADP — Agent Discovery & Policy 1.0](spec/adp-1.0.html) | Working Draft |
 | AICC-TR-002/003/004/007 | Frontmatter Schema · Conformance & Validation · Agent Directives · Media Type Registration (numbers reserved; content currently lives in TR-001/TR-006) | Reserved |
+
+See [NEWS.md](NEWS.md) for announcements and [PATENT-POLICY.md](PATENT-POLICY.md) for the RF patent policy.
 
 ## Repository layout
 

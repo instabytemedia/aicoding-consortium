@@ -1,0 +1,29 @@
+name: "AICC Validate"
+description: "Validate AICC Markdown (.aicc.md) documents against AICC Core 1.0"
+branding:
+  icon: "check-square"
+  color: "yellow"
+inputs:
+  files:
+    description: "Space-separated list of .aicc.md files (default: all *.aicc.md in the repo)"
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: Validate AICC documents
+      shell: bash
+      run: |
+        set -e
+        FILES="${{ inputs.files }}"
+        if [ -z "$FILES" ]; then
+          FILES=$(find . -name "*.aicc.md" -not -path "./node_modules/*" | sort)
+        fi
+        if [ -z "$FILES" ]; then
+          echo "No .aicc.md files found."; exit 0
+        fi
+        STATUS=0
+        for f in $FILES; do
+          node "${{ github.action_path }}/../../../plugins/aicc/scripts/validate.mjs" "$f" || STATUS=1
+        done
+        exit $STATUS

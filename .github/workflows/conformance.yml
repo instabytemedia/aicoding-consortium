@@ -1,0 +1,19 @@
+name: conformance
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+jobs:
+  suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run conformance suite
+        run: node conformance/run.mjs
+      - name: Validate dogfood documents
+        run: |
+          node plugins/aicc/scripts/validate.mjs product.aicc.md
+          node plugins/aicc/scripts/validate.mjs examples/product.aicc.md

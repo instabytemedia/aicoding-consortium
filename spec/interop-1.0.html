@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AICC Interop Mappings 1.0 | AICC Technical Report 005</title>
+<meta name="description" content="AICC-TR-005 — lossless translation between AICC Markdown and engine dialects: CLAUDE.md, AGENTS.md, .cursor/rules, copilot-instructions.md and more.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/interop-1.0.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="AICC Interop Mappings 1.0">
+<meta property="og:description" content="Lossless translation between AICC Markdown and engine dialects.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/interop-1.0.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f; --bg-raise: #121316; --bg-raise-2: #17181c;
+    --ink: #e9e7e2; --ink-dim: #9b9994; --ink-faint: #8a8781;
+    --border: rgba(128, 128, 128, 0.5); --border-soft: rgba(128, 128, 128, 0.28);
+    --accent: #e0b84f; --accent-ink: #14100a;
+    --status-rec: #58b98a; --status-draft: #8f8d88;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+    --sans: "IBM Plex Sans", system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15.5px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .topbar { position: sticky; top: 0; z-index: 50; background: rgba(12,13,15,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .topbar .in { max-width: 1280px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; gap: 16px; }
+  .topbar .seal { font-family: var(--mono); font-weight: 600; font-size: 13px; letter-spacing: 0.08em; border: 1px solid var(--border); padding: 2px 7px; color: var(--accent); }
+  .topbar a { border: none; }
+  .topbar .crumb { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); }
+  .topbar .crumb b { color: var(--ink-dim); font-weight: 500; }
+  .layout { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 260px 1fr; gap: 64px; }
+  @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } .toc { display: none; } }
+  .toc { position: sticky; top: 88px; align-self: start; max-height: calc(100vh - 120px); overflow-y: auto; padding: 32px 0 48px; font-size: 13px; }
+  .toc h5 { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .toc a { display: block; color: var(--ink-dim); border: none; padding: 4px 0 4px 12px; border-left: 1px solid var(--border-soft); }
+  .toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+  main { padding: 48px 0 120px; max-width: 760px; }
+  .doc-status { border: 1px solid var(--border); background: var(--bg-raise); padding: 26px 30px; margin-bottom: 56px; font-size: 13.5px; color: var(--ink-dim); }
+  .doc-status .stamp { display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; border: 1.5px solid var(--status-draft); color: var(--status-draft); padding: 4px 10px; margin-bottom: 14px; }
+  .doc-status dl { display: grid; grid-template-columns: 140px 1fr; gap: 4px 16px; margin-top: 8px; }
+  .doc-status dt { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 3px; }
+  .doc-status dd { color: var(--ink-dim); }
+  .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 10px; }
+  .subtitle { color: var(--ink-dim); font-size: 16px; margin-bottom: 40px; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; margin: 72px 0 8px; padding-top: 24px; border-top: 1px solid var(--border); }
+  h2 .no, h3 .no { color: var(--accent); font-family: var(--mono); font-size: 0.75em; margin-right: 14px; }
+  h3 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; margin: 44px 0 8px; }
+  p { margin: 14px 0; color: var(--ink-dim); }
+  p strong, li strong { color: var(--ink); }
+  ul, ol { margin: 14px 0 14px 26px; color: var(--ink-dim); }
+  li { margin: 7px 0; }
+  code { font-family: var(--mono); font-size: 0.86em; background: var(--bg-raise-2); border: 1px solid var(--border-soft); padding: 1.5px 6px; color: var(--ink); }
+  .kw { font-family: var(--mono); font-size: 0.82em; font-weight: 600; color: var(--status-rec); }
+  pre.block { background: var(--bg-raise); border: 1px solid var(--border); font-family: var(--mono); font-size: 12.8px; line-height: 1.7; padding: 20px 24px; margin: 20px 0; overflow-x: auto; color: var(--ink-dim); }
+  pre.block .c { color: var(--ink-faint); }
+  pre.block .k { color: var(--accent); }
+  pre.block .v { color: var(--ink); }
+  pre.block .m { color: var(--status-rec); font-weight: 600; }
+  pre.block .h { color: var(--ink); font-weight: 600; }
+  .norm, .note, .example { border-left: 3px solid; padding: 14px 22px; margin: 22px 0; background: var(--bg-raise); font-size: 14.5px; }
+  .norm { border-color: var(--status-rec); }
+  .note { border-color: var(--border); }
+  .example { border-color: var(--accent); }
+  .norm::before, .note::before, .example::before { display: block; font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; margin-bottom: 6px; }
+  .norm::before { content: "NORMATIVE"; color: var(--status-rec); }
+  .note::before { content: "NOTE — INFORMATIVE"; color: var(--ink-faint); }
+  .example::before { content: "EXAMPLE — INFORMATIVE"; color: var(--accent); }
+  .norm p, .note p, .example p { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14px; }
+  th { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-faint); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--border-soft); color: var(--ink-dim); vertical-align: top; }
+  td:first-child { color: var(--ink); }
+  footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 32px 0; font-family: var(--mono); font-size: 12px; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="in">
+    <a href="../index.html"><span class="seal">AICC</span></a>
+    <span class="crumb"><b>Technical Reports</b> / AICC-TR-005 / Interop Mappings 1.0</span>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="toc">
+    <div style="padding-top:32px;">
+      <h5>Contents</h5>
+      <a href="#abstract">Abstract</a>
+      <a href="#status">Status of This Document</a>
+      <a href="#principles">1. Mapping Principles</a>
+      <a href="#loss">2. Loss Markers</a>
+      <a href="#claude">3. CLAUDE.md / AGENTS.md</a>
+      <a href="#cursor">4. .cursor/rules/*.mdc</a>
+      <a href="#copilot">5. copilot-instructions.md</a>
+      <a href="#others">6. Other Dialects</a>
+      <a href="#reverse">7. Reverse Mapping</a>
+      <a href="#roundtrip">8. Round-Trip Conformance</a>
+      <a href="#appendix-a">Appendix A. Worked Example</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="kicker">AICC Technical Report 005</div>
+    <h1>AICC Interop Mappings 1.0</h1>
+    <p class="subtitle">Lossless translation between AICC Markdown and engine dialects. AICC is the source of truth; every dialect file is a derived artifact.</p>
+
+    <div class="doc-status">
+      <span class="stamp">EDITOR'S DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>Interop Mappings 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-005</dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="aicc-core-1.0.html">AICC Core 1.0</a> (AICC-TR-001)</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy (GOVERNANCE § 4).</dd>
+      </dl>
+    </div>
+
+    <h2 id="abstract">Abstract</h2>
+    <p>
+      This report defines bidirectional mappings between AICC Markdown
+      (<a href="aicc-core-1.0.html">AICC Core 1.0</a>) and the instruction dialects of registered
+      engines. The forward direction (AICC → dialect) is normative and lossless for normative
+      content; the reverse direction (dialect → AICC) is a reviewed heuristic, implemented by the
+      consortium's migration tool. Third-party engine and product names appear solely to describe
+      interoperability; no endorsement is implied in either direction.
+    </p>
+
+    <h2 id="status">Status of This Document</h2>
+    <p>
+      This is an <strong>Editor's Draft</strong> of the Engine Interop Working Group. It has no
+      standing. It is published so that engine vendors can review their dialect's mapping before
+      the document advances to Working Draft. The initial mapping target is Claude Code
+      (<a href="#claude">§ 3</a>); further dialect sections advance as vendor liaisons confirm them.
+    </p>
+
+    <h2 id="principles"><span class="no">1</span>Mapping Principles</h2>
+    <div class="norm">
+      <p>A forward mapping (AICC → dialect) <span class="kw">MUST</span> be lossless for normative
+      content: every requirement and directive survives translation with its RFC-2119 keyword
+      strength and its requirement identifier (if any) intact. Informative content
+      <span class="kw">MAY</span> be summarised. Where the target dialect cannot express a
+      construct, the mapping <span class="kw">MUST</span> emit a loss marker (§ 2) instead of
+      silently dropping it.</p>
+      <p>Derived files <span class="kw">MUST</span> begin with a generation header naming the
+      source document and its version, so humans and engines know which file is canonical.</p>
+    </div>
+    <div class="example">
+      <pre class="block" style="margin:8px 0 4px; border:none; padding:8px 0; background:transparent;"><span class="c">&lt;!-- generated from product.aicc.md v2.3.0 — edit the source, not this file --&gt;</span></pre>
+    </div>
+
+    <h2 id="loss"><span class="no">2</span>Loss Markers</h2>
+    <div class="norm">
+      <p>A construct the target dialect cannot express is emitted as an HTML comment of the form
+      <code>&lt;!-- aicc:untranslated key="…" value="…" --&gt;</code> at the position where the
+      construct would apply. Reverse mappings <span class="kw">MUST</span> restore marked
+      constructs verbatim, which is what makes round-trips lossless even through lossy
+      dialects.</p>
+    </div>
+
+    <h2 id="claude"><span class="no">3</span>CLAUDE.md / AGENTS.md (Claude Code)</h2>
+    <p>
+      Because AICC Markdown is plain CommonMark, the Claude Code mapping is nearly the identity —
+      it is the reference-quality mapping and the reason Claude Code is the initial conformance
+      target.
+    </p>
+    <table>
+      <thead><tr><th>AICC construct</th><th>CLAUDE.md / AGENTS.md mapping</th></tr></thead>
+      <tbody>
+        <tr><td>Frontmatter</td><td>Generation header comment; <code>id</code>/<code>version</code> preserved inside it. Frontmatter keys without dialect equivalents get loss markers.</td></tr>
+        <tr><td>Body sections</td><td>Copied verbatim — headings, keywords, requirement IDs and <code>@aicc</code> annotations are all valid markdown/comments in the dialect.</td></tr>
+        <tr><td><code>scope</code></td><td>A scoped document becomes a nested <code>CLAUDE.md</code> in the deepest common directory of its globs; residual glob precision emitted as a loss marker.</td></tr>
+        <tr><td><code>context-exclude</code> / <code>context-prime</code></td><td>Rendered as an explicit instruction block ("Do not read …", "Read first …") plus loss markers carrying the raw globs.</td></tr>
+        <tr><td><code>## Constraints</code> directives</td><td>Copied verbatim: the dialect is free-form, so keyword-bearing directives survive unchanged.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="cursor"><span class="no">4</span>.cursor/rules/*.mdc</h2>
+    <table>
+      <thead><tr><th>AICC construct</th><th>.mdc mapping</th></tr></thead>
+      <tbody>
+        <tr><td>Document</td><td>One <code>.mdc</code> file per AICC document; filename derived from the last segment of <code>id</code>.</td></tr>
+        <tr><td><code>scope</code></td><td>Maps directly to the <code>.mdc</code> frontmatter <code>globs</code> key — the one dialect construct with native scoping.</td></tr>
+        <tr><td>Directives</td><td>Flattened to rule lines, keyword strength preserved inline (<code>MUST</code>/<code>SHOULD</code> kept in text).</td></tr>
+        <tr><td>Requirements / Non-Goals</td><td>Emitted under headings of the same name; IDs preserved.</td></tr>
+        <tr><td>Frontmatter rest</td><td>Generation header + loss markers.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="copilot"><span class="no">5</span>copilot-instructions.md</h2>
+    <table>
+      <thead><tr><th>AICC construct</th><th>Mapping</th></tr></thead>
+      <tbody>
+        <tr><td>Document set</td><td>The dialect is a single unscoped file: all documents concatenate, each under a path header (<code>## src/checkout/ — com.example.checkout</code>).</td></tr>
+        <tr><td><code>scope</code></td><td>No native equivalent — expressed in the path header plus a loss marker.</td></tr>
+        <tr><td>Normative sections</td><td>Copied verbatim with keywords and IDs.</td></tr>
+        <tr><td>Informative sections</td><td>Summarised to the first paragraph, remainder behind a loss marker, to respect the dialect's practical size limits.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="others"><span class="no">6</span>Other Dialects</h2>
+    <table>
+      <thead><tr><th>Dialect</th><th>Status</th><th>Sketch</th></tr></thead>
+      <tbody>
+        <tr><td><code>GEMINI.md</code></td><td>Planned</td><td>Free-form markdown — same shape as § 3.</td></tr>
+        <tr><td><code>.windsurfrules</code></td><td>Planned</td><td>Flattened rules — same shape as § 4 without glob support.</td></tr>
+        <tr><td><code>.cursorrules</code> (deprecated)</td><td>Legacy, reverse-only</td><td>Read by the migration tool; never emitted.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="reverse"><span class="no">7</span>Reverse Mapping (dialect → AICC)</h2>
+    <div class="norm">
+      <p>Reverse mappings are heuristic: legacy dialects do not carry machine-readable keyword
+      strength. A reverse mapper <span class="kw">MUST</span> mark its output as a draft
+      (<code>conformance: basic</code>, provenance note in <code>## Overview</code>) and
+      <span class="kw">MUST NOT</span> emit <code>conformance: strict</code> without human review.
+      Polarity <span class="kw">MUST</span> be preserved when rewriting imperatives
+      ("Never X" → "Engines MUST NOT X").</p>
+    </div>
+    <p>
+      The consortium's reference implementation is
+      <code>plugins/aicc/scripts/migrate.mjs</code> (the <code>/aicc-migrate</code> command of the
+      Claude Code plugin). It reads CLAUDE.md, AGENTS.md, .cursorrules, .cursor/rules/*.mdc,
+      copilot-instructions.md, GEMINI.md and .windsurfrules.
+    </p>
+
+    <h2 id="roundtrip"><span class="no">8</span>Round-Trip Conformance</h2>
+    <div class="norm">
+      <p>A mapping implementation is <strong>round-trip conforming</strong> for a dialect when,
+      for every document in the conformance corpus, AICC → dialect → AICC reproduces the original
+      effective content: identical requirement set (IDs, keyword strengths, section classes),
+      identical directives, and identical frontmatter after loss-marker restoration. This is the
+      test the Certified (AAA) document class of
+      <a href="aicc-core-1.0.html#classes">Core § 10.1</a> builds on.</p>
+    </div>
+
+    <h2 id="appendix-a">Appendix A — Worked Example (AICC → CLAUDE.md)</h2>
+    <pre class="block"><span class="c">&lt;!-- generated from product.aicc.md v2.3.0 — edit the source, not this file --&gt;</span>
+<span class="c">&lt;!-- aicc:untranslated key="engines" value="[claude-code, cursor]" --&gt;</span>
+
+<span class="h"># Checkout Service</span>
+
+Do not read (context-exclude): dist/**, node_modules/**, *.lock, fixtures/**
+Read first (context-prime): README.md, src/checkout/index.ts
+
+<span class="h">## Requirements</span>
+- [REQ-001] Payments <span class="m">MUST</span> be idempotent per order id.
+- [REQ-002] The API <span class="m">MUST NOT</span> expose card data in any response or log.
+
+<span class="h">## Constraints</span>
+- [DIR-001] Engines <span class="m">MUST</span> run `pnpm test --filter checkout` before proposing a commit.</pre>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-005 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../index.html" style="font-family:var(--mono); font-size:12.5px;">← Back to the Consortium</a> · <a href="aicc-core-1.0.html" style="font-family:var(--mono); font-size:12.5px;">AICC Core 1.0</a> · <a href="adp-1.0.html" style="font-family:var(--mono); font-size:12.5px;">ADP 1.0</a></div>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>

@@ -39,6 +39,8 @@ Steering Board within 30 days; Board decisions are final and published with rati
 
 ## 4. Royalty-Free Patent Policy
 
+The full policy is [PATENT-POLICY.md](PATENT-POLICY.md); this section summarises it.
+
 - Specifications are published under **CC-BY-4.0**.
 - Every working-group participant commits, as a condition of participation, to license all
   patent claims essential to implementing the specifications they contribute to on a

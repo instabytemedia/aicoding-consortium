@@ -1,0 +1,9 @@
+# AICC News
+
+- **2026-07-24 — AICC Core 1.0 published as Candidate Recommendation** (AICC-TR-001), together
+  with two interoperable reference validators (browser + CLI) and a passing conformance suite.
+- **2026-07-24 — ADP 1.0 Working Draft** (AICC-TR-006): agents.txt, /.well-known/adp.json, and
+  HTTP signalling for the agent-native web.
+- **2026-07-24 — Interop Mappings Editor's Draft** (AICC-TR-005) and the reference migration
+  tool: convert CLAUDE.md / AGENTS.md / .cursorrules to AICC Markdown in one command.
+- **2026-07-24 — Claude Code plugin available**: `/plugin marketplace add instabytemedia/aicoding-consortium`.
