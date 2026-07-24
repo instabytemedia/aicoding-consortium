@@ -1,0 +1,14 @@
+{
+  "registry": "aicc-adopters",
+  "updated": "2026-07-24",
+  "note": "Add your origin via pull request. 'verified' requires Agent-Readiness grade B or better at review time.",
+  "adopters": [
+    {
+      "origin": "https://aicoding-consortium.vercel.app",
+      "name": "AI Coding Consortium",
+      "since": "2026-07-24",
+      "signals": ["agents.txt", "adp.json", "aix.json", "product.aicc.md"],
+      "verified": true
+    }
+  ]
+}

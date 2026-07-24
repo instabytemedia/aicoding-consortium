@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adopters — AI Coding Consortium</title>
+<meta name="description" content="Origins that are ready for the agent web: the public AICC adopter directory. Verified via the Agent-Readiness Scanner.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/adopters.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0d0f;--bg-raise:#121316;--ink:#e9e7e2;--ink-dim:#9b9994;--ink-faint:#8a8781;--border:rgba(128,128,128,.5);--border-soft:rgba(128,128,128,.28);--accent:#e0b84f;--accent-ink:#14100a;--ok:#58b98a;--mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--serif:"Newsreader",Georgia,serif}
+*{margin:0;padding:0;box-sizing:border-box}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--accent-ink)}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border)}a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(12,13,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topbar .in{max-width:1000px;margin:0 auto;padding:0 32px;height:56px;display:flex;align-items:center;gap:16px}
+.seal{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:.08em;border:1px solid var(--border);padding:2px 7px;color:var(--accent)}
+.topbar a{border:none}.crumb{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}.crumb b{color:var(--ink-dim);font-weight:500}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 32px 120px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:8px}
+.sub{color:var(--ink-dim);max-width:640px;margin-bottom:40px}
+table{width:100%;border-collapse:collapse}
+th{font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);text-align:left;padding:10px 14px;border-bottom:1px solid var(--border)}
+td{padding:14px;border-bottom:1px solid var(--border-soft);color:var(--ink-dim);font-size:14px}
+td:first-child{color:var(--ink)}
+.v{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;color:var(--ok);border:1px solid var(--ok);padding:3px 8px;white-space:nowrap}
+.sig{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cta{margin-top:40px;border:1px dashed var(--border);padding:22px 26px;font-size:14px;color:var(--ink-dim)}
+footer{border-top:1px solid var(--border);padding:28px 32px;font-family:var(--mono);font-size:12px;color:var(--ink-faint);text-align:center}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><a href="index.html"><span class="seal">AICC</span></a><span class="crumb"><b>Community</b> / Adopter Directory</span></div></div>
+<div class="wrap">
+<div class="kicker">The origins that moved first</div>
+<h1>Adopter Directory</h1>
+<p class="sub">
+Public record of origins ready for the agent web. Your <em>since</em> date is permanent —
+being early is provable here forever. Verification is mechanical: scanner grade B or better.
+</p>
+<table id="t">
+  <thead><tr><th>Origin</th><th>Signals</th><th>Since</th><th>Status</th></tr></thead>
+  <tbody></tbody>
+</table>
+<div class="cta">
+  <strong style="color:var(--ink)">Join:</strong> reach grade B on the
+  <a href="scanner.html">scanner</a>, then open a pull request adding your origin to
+  <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/registry/adopters.json">registry/adopters.json</a>.
+  Review is mechanical, usually within days.
+</div>
+</div>
+<footer>© 2026 AI Coding Consortium · listing is free and does not imply consortium membership</footer>
+<script>
+fetch("registry/adopters.json").then(r=>r.json()).then(d=>{
+  const tb=document.querySelector("#t tbody");
+  for(const a of d.adopters){
+    const tr=document.createElement("tr");
+    tr.innerHTML='<td><a></a></td><td class="sig"></td><td class="sig"></td><td></td>';
+    const link=tr.querySelector("a");link.href="scanner.html?url="+encodeURIComponent(a.origin.replace(/^https:\/\//,""));link.textContent=a.name;
+    tr.children[1].textContent=a.signals.join(" · ");
+    tr.children[2].textContent=a.since;
+    tr.children[3].innerHTML=a.verified?'<span class="v">VERIFIED</span>':'<span class="sig">pending</span>';
+    tb.appendChild(tr);
+  }
+});
+</script>
+</body>
+</html>

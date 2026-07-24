@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-24T21:42:49.744Z",
+  "generated": "2026-07-24T21:52:18.993Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -42,9 +42,9 @@
     {
       "url": "/NEWS.md",
       "title": "AICC News",
-      "summary": "# AICC News - **2026-07-24 — The Agent Web Stack published** with AIX 1.0 (AICC-TR-008, Editor's Draft): the agent-native successor to sitemap.xml, with generator tool (`/aicc-index`) and the consortium's own index live at `/.well-known/aix",
-      "hash": "sha256-7e7459bdb9db67cfd3ef333bb037f874886ce1ceb0107f4485412d34f250fde6",
-      "tokens": 230,
+      "summary": "# AICC News - **2026-07-24 — Agent-Readiness Scanner, badges and adopter directory launched**: scan any origin, get a grade A-F with concrete fixes, wear the badge, claim your permanent \"since\" date in the public directory. - **2026-07-24 —",
+      "hash": "sha256-a8a99ea95c089797d1f880c9a4a4c9732eafb3b85d6d98418c9434d323804b11",
+      "tokens": 283,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -61,10 +61,28 @@
       "url": "/README.md",
       "title": "AI Coding Consortium (AICC)",
       "summary": "# AI Coding Consortium (AICC) **The standards body for AI-readable specifications.** One normative format for the markdown that drives every AI code engine. CLAUDE.md, AGENTS.md, `.cursorrules`, scattered spec files — every engine invents i",
-      "hash": "sha256-e8a245e2ac3d6b008cc1689fcdeca3fcd80f577919a13c001d3268950959ff19",
-      "tokens": 870,
+      "hash": "sha256-d7fed576afdfb0522f9419df875c52a898be247114e315f0457ecc5765b98511",
+      "tokens": 910,
       "updated": "2026-07-24",
       "type": "docs"
+    },
+    {
+      "url": "/adopters.html",
+      "title": "Adopters — AI Coding Consortium",
+      "summary": "Origins that are ready for the agent web: the public AICC adopter directory. Verified via the Agent-Readiness Scanner.",
+      "hash": "sha256-5d791fa5749acf8252158f3be973e94d79d760d744411e163c33fb0032253321",
+      "tokens": 139,
+      "updated": "2026-07-24",
+      "type": "article"
+    },
+    {
+      "url": "/badges.html",
+      "title": "Badges — AI Coding Consortium",
+      "summary": "Show that your site is ready for the agent web: AICC badges for adopters, earned via the Agent-Readiness Scanner.",
+      "hash": "sha256-e95b0afc2b44434f01827421fa64ed9565a84a7173884c45356c3569305ed297",
+      "tokens": 325,
+      "updated": "2026-07-24",
+      "type": "article"
     },
     {
       "url": "/examples/product.aicc.md",
@@ -79,8 +97,8 @@
       "url": "/index.html",
       "title": "AI Coding Consortium — The Open Standard for AI-Readable Specifications",
       "summary": "The AI Coding Consortium (AICC) maintains AICC Markdown, the open specification standard consumed by AI code engines, and ADP, the agent-web policy layer. One format. Every engine.",
-      "hash": "sha256-ab471163c3ecfd2077d37e4894634046463a3cea6dbd7d4b4038530d4249bbc2",
-      "tokens": 1981,
+      "hash": "sha256-5c1a8587622a3dc1add59bb3640079c22b23798b3fa4b90241fa527b9bc8c150",
+      "tokens": 1996,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -128,6 +146,15 @@
       "tokens": 329,
       "updated": "2026-07-24",
       "type": "docs"
+    },
+    {
+      "url": "/scanner.html",
+      "title": "Agent-Readiness Scanner — AI Coding Consortium",
+      "summary": "Is your site ready for the agent web? Scan any origin for agents.txt, ADP policy, AIX index and markdown negotiation — get a grade from A to F.",
+      "hash": "sha256-1cd5b13862940d82d7bd8c3139ea38904901071850dc876f731a27bb05cc44cf",
+      "tokens": 133,
+      "updated": "2026-07-24",
+      "type": "article"
     },
     {
       "url": "/spec/adp-1.0.html",

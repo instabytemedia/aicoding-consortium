@@ -1,5 +1,9 @@
 # AICC News
 
+- **2026-07-24 — Agent-Readiness Scanner, badges and adopter directory launched**: scan any
+  origin, get a grade A-F with concrete fixes, wear the badge, claim your permanent "since"
+  date in the public directory.
+
 - **2026-07-24 — The Agent Web Stack published** with AIX 1.0 (AICC-TR-008, Editor's Draft):
   the agent-native successor to sitemap.xml, with generator tool (`/aicc-index`) and the
   consortium's own index live at `/.well-known/aix.json`. TR numbers 009-014 reserved for the

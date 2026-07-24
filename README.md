@@ -22,6 +22,8 @@ and policy layer for the agent-native web. Write once. Parse everywhere.
 | AICC-TR-009…014 | Agent Query Protocol · Chunk Addressing · Provenance · Crawl Economics · Agent Identity · AI Licensing — see [The Agent Web Stack](stack.html) | Reserved |
 | AICC-TR-002/003/004/007 | Frontmatter Schema · Conformance & Validation · Agent Directives · Media Type Registration (numbers reserved; content currently lives in TR-001/TR-006) | Reserved |
 
+Community: [Agent-Readiness Scanner](scanner.html) · [Badges](badges.html) · [Adopter Directory](adopters.html) · [Growth Playbook](docs/growth-playbook.md)
+
 See [NEWS.md](NEWS.md) for announcements and [PATENT-POLICY.md](PATENT-POLICY.md) for the RF patent policy.
 
 ## Repository layout
