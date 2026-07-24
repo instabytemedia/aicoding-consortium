@@ -18,6 +18,8 @@ and policy layer for the agent-native web. Write once. Parse everywhere.
 | AICC-TR-001 | [AICC Core — Level 1.0](spec/aicc-core-1.0.html) — document model, frontmatter, taxonomy, keywords, directives, conformance | Candidate Recommendation |
 | AICC-TR-005 | [AICC Interop Mappings 1.0](spec/interop-1.0.html) — translation tables + migration tool | Editor's Draft |
 | AICC-TR-006 | [ADP — Agent Discovery & Policy 1.0](spec/adp-1.0.html) | Working Draft |
+| AICC-TR-008 | [AIX — Agent Content Index 1.0](spec/aix-1.0.html) — the sitemap.xml successor for agents | Editor's Draft |
+| AICC-TR-009…014 | Agent Query Protocol · Chunk Addressing · Provenance · Crawl Economics · Agent Identity · AI Licensing — see [The Agent Web Stack](stack.html) | Reserved |
 | AICC-TR-002/003/004/007 | Frontmatter Schema · Conformance & Validation · Agent Directives · Media Type Registration (numbers reserved; content currently lives in TR-001/TR-006) | Reserved |
 
 See [NEWS.md](NEWS.md) for announcements and [PATENT-POLICY.md](PATENT-POLICY.md) for the RF patent policy.
@@ -43,9 +45,9 @@ This repository is an installable Claude Code plugin marketplace:
 /plugin install aicc
 ```
 
-You get the `aicc-markdown` skill (author, migrate, and consume AICC documents) and the
-`/aicc-validate` command backed by the reference CLI validator
-(`plugins/aicc/scripts/validate.mjs`).
+You get the `aicc-markdown` skill (author, migrate, and consume AICC documents) plus three
+commands: `/aicc-validate` (reference CLI validator), `/aicc-migrate` (legacy-file converter),
+and `/aicc-index` (AIX generator, `plugins/aicc/scripts/aix.mjs`).
 
 ## Quick start
 

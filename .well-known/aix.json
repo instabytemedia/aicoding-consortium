@@ -1,0 +1,187 @@
+{
+  "aix": "1.0",
+  "origin": "https://aicoding-consortium.vercel.app",
+  "generated": "2026-07-24T21:42:49.744Z",
+  "entries": [
+    {
+      "url": "/CODE_OF_CONDUCT.md",
+      "title": "Code of Conduct",
+      "summary": "# Code of Conduct The AI Coding Consortium adopts the [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) for every consortium space: repositories, issue trackers, working-group calls, and events. ",
+      "hash": "sha256-b7a5489e118ab6d3baac8f6d137cd91becfb740bf7e9f40f852d53c7931e10da",
+      "tokens": 100,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/CONTRIBUTING.md",
+      "title": "Contributing to AICC",
+      "summary": "# Contributing to AICC Everything the consortium does is public. There are four ways in, in ascending order of commitment. ## 1. File errata Found an error, ambiguity, or contradiction in a published Technical Report? Open an issue titled `",
+      "hash": "sha256-d3c1e274c444da7d32f57bc6a85e53381805dc5466058b1ca7c938a4dffbd7fa",
+      "tokens": 466,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/GOVERNANCE.md",
+      "title": "AICC Governance",
+      "summary": "# AICC Governance The AI Coding Consortium (AICC) is an independent standards body. It is funded by its members and owned by no vendor. This document defines how the consortium works and how its specifications advance. ## 1. Bodies | Body |",
+      "hash": "sha256-16fcfb0d2dd061b6aa446478bd178a8c2dabbc13b975cded5208dc70abe93133",
+      "tokens": 770,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/LICENSE.md",
+      "title": "Licensing",
+      "summary": "# Licensing This repository contains two classes of material under two licenses. ## Specifications and examples — CC-BY-4.0 All Technical Reports (`spec/`), specification text embedded in the site, and example artifacts (`examples/`) are li",
+      "hash": "sha256-2e2bc14614948cae95e6b369ff43cd553b858a76212857d5b88fa4b73122f78a",
+      "tokens": 591,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/NEWS.md",
+      "title": "AICC News",
+      "summary": "# AICC News - **2026-07-24 — The Agent Web Stack published** with AIX 1.0 (AICC-TR-008, Editor's Draft): the agent-native successor to sitemap.xml, with generator tool (`/aicc-index`) and the consortium's own index live at `/.well-known/aix",
+      "hash": "sha256-7e7459bdb9db67cfd3ef333bb037f874886ce1ceb0107f4485412d34f250fde6",
+      "tokens": 230,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/PATENT-POLICY.md",
+      "title": "AICC Royalty-Free Patent Policy",
+      "summary": "# AICC Royalty-Free Patent Policy Version 1.0 — normative for all consortium work. Modeled on the W3C Patent Policy (RF mode). 1. **RF commitment.** Every working-group participant commits, as a condition of participation, to grant a royalt",
+      "hash": "sha256-386cebea1e17880f9594402d0aac2ce1515238164ee97b3c81f25cc3a73bc232",
+      "tokens": 373,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/README.md",
+      "title": "AI Coding Consortium (AICC)",
+      "summary": "# AI Coding Consortium (AICC) **The standards body for AI-readable specifications.** One normative format for the markdown that drives every AI code engine. CLAUDE.md, AGENTS.md, `.cursorrules`, scattered spec files — every engine invents i",
+      "hash": "sha256-e8a245e2ac3d6b008cc1689fcdeca3fcd80f577919a13c001d3268950959ff19",
+      "tokens": 870,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/examples/product.aicc.md",
+      "title": "Checkout Service",
+      "summary": "--- aicc: \"1.0\" kind: product-spec id: com.example.checkout version: 2.3.0 conformance: strict engines: [claude-code, cursor] scope: [\"src/checkout/**\"] owner: payments-team updated: 2026-07-24 context-exclude: [\"dist/**\", \"node_modules/**\"",
+      "hash": "sha256-324cad165fa151dcb888709dab068140d9f3ddabf429bfc115b3c7f520d4206c",
+      "tokens": 301,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/index.html",
+      "title": "AI Coding Consortium — The Open Standard for AI-Readable Specifications",
+      "summary": "The AI Coding Consortium (AICC) maintains AICC Markdown, the open specification standard consumed by AI code engines, and ADP, the agent-web policy layer. One format. Every engine.",
+      "hash": "sha256-ab471163c3ecfd2077d37e4894634046463a3cea6dbd7d4b4038530d4249bbc2",
+      "tokens": 1981,
+      "updated": "2026-07-24",
+      "type": "article"
+    },
+    {
+      "url": "/plugins/aicc/commands/aicc-index.md",
+      "title": "plugins/aicc/commands/aicc-index.md",
+      "summary": "--- description: Generate /.well-known/aix.json (AIX Agent Content Index) for a static site --- Generate an AIX content index (AICC-TR-008) for the site directory in $ARGUMENTS (default: current directory). The origin URL is required — ask ",
+      "hash": "sha256-45155691d3908d8384d5f5a4d7d0f8ad1dfc55eedb105607d3514d8ce5484a3d",
+      "tokens": 169,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/plugins/aicc/commands/aicc-migrate.md",
+      "title": "plugins/aicc/commands/aicc-migrate.md",
+      "summary": "--- description: Migrate CLAUDE.md / AGENTS.md / .cursorrules into a product.aicc.md draft --- Migrate this repository's legacy engine instruction files to AICC Markdown. Run: `node ${CLAUDE_PLUGIN_ROOT}/scripts/migrate.mjs $ARGUMENTS` (def",
+      "hash": "sha256-1bb76a3d3bd17761efd1e8b8136caf51f7e98fa3f4c5bcc26812c434c920604d",
+      "tokens": 163,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/plugins/aicc/commands/aicc-validate.md",
+      "title": "plugins/aicc/commands/aicc-validate.md",
+      "summary": "--- description: Validate an AICC Markdown document against AICC Core 1.0 --- Validate the AICC Markdown document at the path given in $ARGUMENTS (default: ./product.aicc.md). Run: `node ${CLAUDE_PLUGIN_ROOT}/scripts/validate.mjs <path>` Re",
+      "hash": "sha256-48587ce73462189704b88170b6a7240b4997fb0a36ef3687ab1368a57ca5e87e",
+      "tokens": 115,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/plugins/aicc/skills/aicc-markdown/SKILL.md",
+      "title": "AICC Markdown",
+      "summary": "--- name: aicc-markdown description: Author, migrate to, and validate AICC Markdown (.aicc.md) — the open specification standard for AI code engines. Use when creating or editing product/feature specs, agent instruction files (CLAUDE.md, AG",
+      "hash": "sha256-0817ad82763e3f3d95cf2f07090424d41b0f78687b352a9dbd2df16c4ded29b4",
+      "tokens": 1085,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/product.aicc.md",
+      "title": "AI Coding Consortium Website",
+      "summary": "--- aicc: \"1.0\" kind: product-spec id: org.aicodingconsortium.site version: 1.0.0 conformance: strict engines: [claude-code] owner: wg-core updated: 2026-07-24 context-exclude: [\"*.lock\"] context-prime: [\"README.md\", \"GOVERNANCE.md\"] --- # ",
+      "hash": "sha256-370bfb0784f7bc16292caf2c9002fdc1cdb9a1ae28b5c964de2f740ae2eb63e8",
+      "tokens": 329,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/adp-1.0.html",
+      "title": "ADP — Agent Discovery &amp; Policy 1.0 | AICC Technical Report 006",
+      "summary": "ADP 1.0 — the discovery and policy layer for the agent-native web: agents.txt, the /.well-known/adp.json manifest, and HTTP signalling for AI code engines.",
+      "hash": "sha256-ec6ce70a20a525cc6bbacc6a5971f793be9edd5b95b00ab344310cd770093f2d",
+      "tokens": 4063,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/aicc-core-1.0.html",
+      "title": "AICC Core — Level 1.0 | AICC Technical Report 001",
+      "summary": "AICC Core 1.0 — the normative specification for AICC Markdown, the open standard format consumed by AI code engines.",
+      "hash": "sha256-e4a89487a5b76d943d8b71aea03fc67d696e791975e38f2cbebf829932415da5",
+      "tokens": 6070,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/aix-1.0.html",
+      "title": "AIX — Agent Content Index 1.0 | AICC Technical Report 008",
+      "summary": "AICC-TR-008 — AIX, the agent-native successor to sitemap.xml: a machine-readable content index with summaries, content hashes and token costs, enabling differential crawling.",
+      "hash": "sha256-02047a37928e3c29f045ddce7041cd13a0ba6fd982cd5232bab6db49832b4869",
+      "tokens": 2591,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/interop-1.0.html",
+      "title": "AICC Interop Mappings 1.0 | AICC Technical Report 005",
+      "summary": "AICC-TR-005 — lossless translation between AICC Markdown and engine dialects: CLAUDE.md, AGENTS.md, .cursor/rules, copilot-instructions.md and more.",
+      "hash": "sha256-c2cc8b64d757858cd85ed380f1d7062d98070a213d03c5ec1f93a77f0d2be070",
+      "tokens": 1634,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/stack.html",
+      "title": "The Agent Web Stack — AI Coding Consortium",
+      "summary": "The web was built for browsers. The next decade of traffic will be agents. The Agent Web Stack maps every layer the agent-native web needs — and the AICC standard that covers it.",
+      "hash": "sha256-6ea672fbca463815844e60ee27df9a19ae59aadd747ab3a39b78d472c3af268a",
+      "tokens": 847,
+      "updated": "2026-07-24",
+      "type": "article"
+    },
+    {
+      "url": "/validator.html",
+      "title": "AICC Validator — AI Coding Consortium",
+      "summary": "The official AICC validation service. Check any AICC Markdown document against AICC Core 1.0.",
+      "hash": "sha256-9ffc169a7c841c4aee9db7b7f28f4516c9c1b967528fdb6291adf4e582ac415e",
+      "tokens": 136,
+      "updated": "2026-07-24",
+      "type": "article"
+    }
+  ]
+}

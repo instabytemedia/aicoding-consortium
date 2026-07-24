@@ -2,6 +2,7 @@
 Engine: *
 Spec: /product.aicc.md
 Policy: /.well-known/adp.json
+Index: /.well-known/aix.json
 Allow: read
 Allow: propose
 Disallow: write
