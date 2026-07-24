@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chunk Addressing 1.0 | AICC Technical Report 010</title>
+<meta name="description" content="AICC-TR-010 — stable fragment identity for web content: id grammar, stability rules, hashing, and the citation format.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/chunks-1.0.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="Chunk Addressing 1.0">
+<meta property="og:description" content="AICC-TR-010 — stable fragment identity for web content: id grammar, stability rules, hashing, and the citation format.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/chunks-1.0.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="spec.css">
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="../index.html"><span class="seal">AICC</span></a>
+  <span class="crumb"><b>Technical Reports</b> / AICC-TR-010 / Chunk Addressing</span>
+</div></div>
+<div class="layout">
+  <nav class="toc"><div style="padding-top:32px;"><h5>Contents</h5><a href="#status">Status of This Document</a><a href="#abstract">Abstract</a><a href="#grammar">1. Identifier Grammar & Stability</a><a href="#citation">2. Citation Form</a><a href="#security">3. Security Considerations</a></div></nav>
+  <main>
+    <div class="kicker">AICC Technical Report 010</div>
+    <h1>Chunk Addressing 1.0</h1>
+    <p class="subtitle">Stable, hash-verifiable addresses for parts of documents — cite a paragraph, fetch a section, verify a quote.</p>
+    <div class="doc-status">
+      <span class="stamp">EDITOR'S DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>Chunk Addressing 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-010 · Layer of <a href="../stack.html">the Agent Web Stack</a></dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="aix-1.0.html">AIX 1.0</a> (chunk entries), <a href="aicc-core-1.0.html">AICC Core</a> § 6.2 (identifier discipline)</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy.</dd>
+      </dl>
+    </div>
+    <h2 id="status">Status of This Document</h2>
+    <p>This is an <strong>Editor's Draft</strong>. It has no standing and will change. It is
+    published so that origins, engines, and adjacent standards bodies can shape it before it
+    hardens. Comments via the public repository.</p>
+    <h2 id="abstract">Abstract</h2>
+<p>Agents quote the web constantly but can address almost none of it: fragments break on redesign, quotes cannot be re-verified, and fetching one section means fetching the document. This report promotes the chunk model seeded in AIX § 4 to a full layer: an identifier grammar, stability obligations, a reproducible per-chunk hash, and the citation form <code>url#id@hash</code> that makes any quote re-checkable forever.</p>
+<h2 id="grammar">1. Identifier Grammar &amp; Stability</h2>
+<div class="norm"><p>A chunk id <span class="kw">MUST</span> match <code>^[a-z0-9][a-z0-9-]{0,63}$</code> and be unique per resource. For HTML it is an element <code>id</code>; for markdown, the heading slug (lowercase, spaces→hyphens, punctuation stripped — the algorithm is normative in Appendix A of AIX). An id <span class="kw">MUST</span> remain attached to its topic across revisions and <span class="kw">MUST NOT</span> be reused for different content once retired — the AICC Core § 6.2 rule, applied to content.</p></div>
+<h2 id="citation">2. Citation Form</h2>
+<div class="norm"><p>A full citation is <code>&lt;url&gt;#&lt;id&gt;@&lt;hash-prefix&gt;</code>, where the hash prefix is at least 12 hex chars of the chunk's AIX § 3.1 hash. Engines <span class="kw">SHOULD</span> emit full citations when quoting; a consumer re-fetches the chunk, recomputes the hash, and knows whether the quoted text still exists, changed, or vanished. The bare form <code>url#id</code> remains a valid browser link — humans and agents share one address.</p></div>
+<h2 id="security">3. Security Considerations</h2>
+<ul><li><strong>Quote integrity.</strong> Hash-pinned citations detect silent revision of quoted material — and equally protect origins against misquotation.</li><li><strong>Id squatting.</strong> Reusing a retired id for different content is the content-level variant of requirement-id reuse; validators flag it across AIX snapshots.</li></ul>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-010 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../stack.html" style="font-family:var(--mono); font-size:12.5px;">← The Agent Web Stack</a></div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

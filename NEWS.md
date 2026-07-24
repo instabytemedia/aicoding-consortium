@@ -1,5 +1,10 @@
 # AICC News
 
+- **2026-07-24 — The stack is fully drafted**: TR-009 through TR-014 published as Editor's
+  Drafts — Agent Query Protocol, Chunk Addressing, Provenance & Freshness, Crawl Economics,
+  Agent Identity & Attestation, and AI Licensing Signals. Every layer of the Agent Web Stack
+  now has spec text open for comments.
+
 - **2026-07-24 — Agent-Readiness Scanner, badges and adopter directory launched**: scan any
   origin, get a grade A-F with concrete fixes, wear the badge, claim your permanent "since"
   date in the public directory.

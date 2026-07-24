@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-24T21:52:18.993Z",
+  "generated": "2026-07-24T21:55:20.905Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -42,9 +42,9 @@
     {
       "url": "/NEWS.md",
       "title": "AICC News",
-      "summary": "# AICC News - **2026-07-24 — Agent-Readiness Scanner, badges and adopter directory launched**: scan any origin, get a grade A-F with concrete fixes, wear the badge, claim your permanent \"since\" date in the public directory. - **2026-07-24 —",
-      "hash": "sha256-a8a99ea95c089797d1f880c9a4a4c9732eafb3b85d6d98418c9434d323804b11",
-      "tokens": 283,
+      "summary": "# AICC News - **2026-07-24 — The stack is fully drafted**: TR-009 through TR-014 published as Editor's Drafts — Agent Query Protocol, Chunk Addressing, Provenance & Freshness, Crawl Economics, Agent Identity & Attestation, and AI Licensing ",
+      "hash": "sha256-4eea3e723f327c5202d7e27ae56ae8d266719d6af113e42935959724ab9b65d7",
+      "tokens": 360,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -61,8 +61,8 @@
       "url": "/README.md",
       "title": "AI Coding Consortium (AICC)",
       "summary": "# AI Coding Consortium (AICC) **The standards body for AI-readable specifications.** One normative format for the markdown that drives every AI code engine. CLAUDE.md, AGENTS.md, `.cursorrules`, scattered spec files — every engine invents i",
-      "hash": "sha256-d7fed576afdfb0522f9419df875c52a898be247114e315f0457ecc5765b98511",
-      "tokens": 910,
+      "hash": "sha256-5de2504c5a660fec25865c6531a28dfb3477fa47517f92de0adefe676e2dd781",
+      "tokens": 944,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -97,8 +97,8 @@
       "url": "/index.html",
       "title": "AI Coding Consortium — The Open Standard for AI-Readable Specifications",
       "summary": "The AI Coding Consortium (AICC) maintains AICC Markdown, the open specification standard consumed by AI code engines, and ADP, the agent-web policy layer. One format. Every engine.",
-      "hash": "sha256-5c1a8587622a3dc1add59bb3640079c22b23798b3fa4b90241fa527b9bc8c150",
-      "tokens": 1996,
+      "hash": "sha256-85c8c9fa841f5d3146a64f3793d60830295a97eddd4f157ea4ee6f631c929c36",
+      "tokens": 2065,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -184,6 +184,42 @@
       "type": "docs"
     },
     {
+      "url": "/spec/aqp-1.0.html",
+      "title": "AQP — Agent Query Protocol 1.0 | AICC Technical Report 009",
+      "summary": "AICC-TR-009 — a declared query endpoint that replaces multi-page crawling with one grounded question.",
+      "hash": "sha256-353e4779ea4e3cb35d25f57127e5266a57efbf5ef7cd87f7ec7fd06b71edeec2",
+      "tokens": 630,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/chunks-1.0.html",
+      "title": "Chunk Addressing 1.0 | AICC Technical Report 010",
+      "summary": "AICC-TR-010 — stable fragment identity for web content: id grammar, stability rules, hashing, and the citation format.",
+      "hash": "sha256-aa871ced1034b0da81c47d465f3d097209a1cfa2206908156f44308cd37c53ce",
+      "tokens": 645,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/economics-1.0.html",
+      "title": "Crawl Economics 1.0 | AICC Technical Report 012",
+      "summary": "AICC-TR-012 — rate budgets, batch endpoints and HTTP 402 payment negotiation for agent access.",
+      "hash": "sha256-eca41b4f3881bed67fb5a13841148e7f69b11f74c724815b1905de168753fa99",
+      "tokens": 543,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/identity-1.0.html",
+      "title": "Agent Identity &amp; Attestation 1.0 | AICC Technical Report 013",
+      "summary": "AICC-TR-013 — signed agent attestations over HTTP: engine identity, principal class, and verification keys.",
+      "hash": "sha256-a04b2212999df450b56e146d0d0964a2e5bf4a388843c4ae3267ab39c4499526",
+      "tokens": 625,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
       "url": "/spec/interop-1.0.html",
       "title": "AICC Interop Mappings 1.0 | AICC Technical Report 005",
       "summary": "AICC-TR-005 — lossless translation between AICC Markdown and engine dialects: CLAUDE.md, AGENTS.md, .cursor/rules, copilot-instructions.md and more.",
@@ -193,11 +229,29 @@
       "type": "docs"
     },
     {
+      "url": "/spec/licensing-1.0.html",
+      "title": "AI Licensing Signals 1.0 | AICC Technical Report 014",
+      "summary": "AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the Content-Usage header.",
+      "hash": "sha256-82bcae1fe34dfd9f1c970310fae9fadf7a0f3dbf18e6d79d144cb6aad38e1080",
+      "tokens": 597,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
+      "url": "/spec/provenance-1.0.html",
+      "title": "Provenance &amp; Freshness 1.0 | AICC Technical Report 011",
+      "summary": "AICC-TR-011 — source classes, verification timestamps, and a signing envelope for web content consumed by agents.",
+      "hash": "sha256-87b3240b68e00bbb298f32eeb32c4f4e9d99d6186896db4a42f3b676d0896b9d",
+      "tokens": 578,
+      "updated": "2026-07-24",
+      "type": "docs"
+    },
+    {
       "url": "/stack.html",
       "title": "The Agent Web Stack — AI Coding Consortium",
       "summary": "The web was built for browsers. The next decade of traffic will be agents. The Agent Web Stack maps every layer the agent-native web needs — and the AICC standard that covers it.",
-      "hash": "sha256-6ea672fbca463815844e60ee27df9a19ae59aadd747ab3a39b78d472c3af268a",
-      "tokens": 847,
+      "hash": "sha256-c2ed6253440d262180c618b723c22acabdea61388f400ebe2cd829c90727fe46",
+      "tokens": 856,
       "updated": "2026-07-24",
       "type": "article"
     },

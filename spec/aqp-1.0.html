@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQP — Agent Query Protocol 1.0 | AICC Technical Report 009</title>
+<meta name="description" content="AICC-TR-009 — a declared query endpoint that replaces multi-page crawling with one grounded question.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/aqp-1.0.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="AQP — Agent Query Protocol 1.0">
+<meta property="og:description" content="AICC-TR-009 — a declared query endpoint that replaces multi-page crawling with one grounded question.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/aqp-1.0.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="spec.css">
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="../index.html"><span class="seal">AICC</span></a>
+  <span class="crumb"><b>Technical Reports</b> / AICC-TR-009 / AQP</span>
+</div></div>
+<div class="layout">
+  <nav class="toc"><div style="padding-top:32px;"><h5>Contents</h5><a href="#status">Status of This Document</a><a href="#abstract">Abstract</a><a href="#declare">1. Declaration</a><a href="#request">2. Request & Response</a><a href="#security">3. Security Considerations</a></div></nav>
+  <main>
+    <div class="kicker">AICC Technical Report 009</div>
+    <h1>AQP — Agent Query Protocol 1.0</h1>
+    <p class="subtitle">Don't crawl me, ask me: a declared query endpoint with grounded, structured answers.</p>
+    <div class="doc-status">
+      <span class="stamp">EDITOR'S DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>AQP 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-009 · Layer of <a href="../stack.html">the Agent Web Stack</a></dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="adp-1.0.html">ADP 1.0</a> (discovery, action classes), <a href="aix-1.0.html">AIX 1.0</a> (grounding citations)</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy.</dd>
+      </dl>
+    </div>
+    <h2 id="status">Status of This Document</h2>
+    <p>This is an <strong>Editor's Draft</strong>. It has no standing and will change. It is
+    published so that origins, engines, and adjacent standards bodies can shape it before it
+    hardens. Comments via the public repository.</p>
+    <h2 id="abstract">Abstract</h2>
+<p>The cheapest page is the one never fetched. AQP lets an origin answer agent questions directly: a query endpoint declared in <code>adp.json</code>, accepting a natural-language or structured query, returning a structured answer whose every claim carries a grounding citation into the origin's AIX index. A fifty-page crawl becomes one request — and the origin, not the agent, decides how answers are produced.</p>
+<h2 id="declare">1. Declaration</h2>
+<div class="norm"><p>An origin declares the endpoint in <code>adp.json</code>: <code>"query": { "href": "/agent/query", "methods": ["POST"], "class": "read" }</code>. Engines <span class="kw">MUST</span> treat querying as the declared ADP action class and <span class="kw">MUST NOT</span> assume an endpoint exists without the declaration.</p></div>
+<h2 id="request">2. Request &amp; Response</h2>
+<div class="norm"><p>Request: <code>{ "aqp": "1.0", "query": "…", "limit": n, "context": "task hint" }</code> as <code>application/json</code>. Response: <code>{ "answers": [{ "text": "…", "citations": [{ "url": "…", "chunk": "id" }] }], "coverage": "full | partial | none" }</code>. Every answer <span class="kw">MUST</span> carry at least one citation resolvable against the origin's AIX index; engines <span class="kw">MUST</span> treat uncited answer text as untrusted. <code>coverage: none</code> tells the engine to fall back to index-guided crawling — an AQP origin is never a dead end.</p></div>
+<h2 id="security">3. Security Considerations</h2>
+<ul><li><strong>Answer injection.</strong> Answers are origin-authored text: data, never instructions (ADP § 9.3 rule). Citations make hallucinated or manipulative answers auditable.</li><li><strong>Asymmetric cost.</strong> Query endpoints invert the cost model (origin pays compute); origins SHOULD rate-limit per Agent-Profile and MAY require identity (TR-013) or payment (TR-012) for elevated limits.</li></ul>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-009 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../stack.html" style="font-family:var(--mono); font-size:12.5px;">← The Agent Web Stack</a></div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

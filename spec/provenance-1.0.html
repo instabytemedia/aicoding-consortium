@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provenance &amp; Freshness 1.0 | AICC Technical Report 011</title>
+<meta name="description" content="AICC-TR-011 — source classes, verification timestamps, and a signing envelope for web content consumed by agents.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/provenance-1.0.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="Provenance &amp; Freshness 1.0">
+<meta property="og:description" content="AICC-TR-011 — source classes, verification timestamps, and a signing envelope for web content consumed by agents.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/provenance-1.0.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="spec.css">
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="../index.html"><span class="seal">AICC</span></a>
+  <span class="crumb"><b>Technical Reports</b> / AICC-TR-011 / Provenance</span>
+</div></div>
+<div class="layout">
+  <nav class="toc"><div style="padding-top:32px;"><h5>Contents</h5><a href="#status">Status of This Document</a><a href="#abstract">Abstract</a><a href="#fields">1. Fields</a><a href="#security">2. Security Considerations</a></div></nav>
+  <main>
+    <div class="kicker">AICC Technical Report 011</div>
+    <h1>Provenance &amp; Freshness 1.0</h1>
+    <p class="subtitle">Checkable trust: who published this, when was it last true, and did a human write it.</p>
+    <div class="doc-status">
+      <span class="stamp">EDITOR'S DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>Provenance 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-011 · Layer of <a href="../stack.html">the Agent Web Stack</a></dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="aix-1.0.html">AIX 1.0</a> (per-entry metadata), <a href="adp-1.0.html">ADP</a> § 9.3 (trust labels)</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy.</dd>
+      </dl>
+    </div>
+    <h2 id="status">Status of This Document</h2>
+    <p>This is an <strong>Editor's Draft</strong>. It has no standing and will change. It is
+    published so that origins, engines, and adjacent standards bodies can shape it before it
+    hardens. Comments via the public repository.</p>
+    <h2 id="abstract">Abstract</h2>
+<p>The most expensive token is the one spent on stale or fabricated information. This report adds three checkable properties to AIX entries: a <code>source</code> class (<code>human | ai-assisted | ai-generated | syndicated</code>), a <code>verified</code> timestamp ("an accountable party last confirmed this content as correct on date X" — distinct from <em>modified</em>), and an optional detached signature over the entry's § 3.1 text extraction, binding content to an origin-published key.</p>
+<h2 id="fields">1. Fields</h2>
+<div class="norm"><p>Origins adopting this layer add to AIX entries: <code>"source"</code> (required — mislabelling <code>ai-generated</code> as <code>human</code> is a conformance violation, not an opinion), <code>"verified"</code> (optional ISO date), and <code>"sig"</code> (optional: Ed25519 signature over the extracted text, key published at <code>/.well-known/aicc-keys.json</code>). Engines <span class="kw">SHOULD</span> prefer recently-verified, signed, human-source content when sources conflict, and <span class="kw">MUST</span> surface source class when quoting <code>ai-generated</code> content to a user.</p></div>
+<h2 id="security">2. Security Considerations</h2>
+<ul><li><strong>Self-attestation limits.</strong> Signatures prove origin, not truth; <code>verified</code> is a liability statement, not an oracle. The value is accountability: claims become attributable and datable.</li><li><strong>Key rotation.</strong> The key file carries validity windows; signatures verify against the key valid at <code>updated</code> time.</li><li><strong>Relation to C2PA.</strong> For media assets, engines SHOULD consume C2PA where present; this layer covers the text web C2PA does not reach.</li></ul>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-011 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../stack.html" style="font-family:var(--mono); font-size:12.5px;">← The Agent Web Stack</a></div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

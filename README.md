@@ -19,7 +19,7 @@ and policy layer for the agent-native web. Write once. Parse everywhere.
 | AICC-TR-005 | [AICC Interop Mappings 1.0](spec/interop-1.0.html) — translation tables + migration tool | Editor's Draft |
 | AICC-TR-006 | [ADP — Agent Discovery & Policy 1.0](spec/adp-1.0.html) | Working Draft |
 | AICC-TR-008 | [AIX — Agent Content Index 1.0](spec/aix-1.0.html) — the sitemap.xml successor for agents | Editor's Draft |
-| AICC-TR-009…014 | Agent Query Protocol · Chunk Addressing · Provenance · Crawl Economics · Agent Identity · AI Licensing — see [The Agent Web Stack](stack.html) | Reserved |
+| AICC-TR-009…014 | [AQP](spec/aqp-1.0.html) · [Chunk Addressing](spec/chunks-1.0.html) · [Provenance](spec/provenance-1.0.html) · [Crawl Economics](spec/economics-1.0.html) · [Agent Identity](spec/identity-1.0.html) · [AI Licensing](spec/licensing-1.0.html) — [The Agent Web Stack](stack.html) | Editor's Drafts |
 | AICC-TR-002/003/004/007 | Frontmatter Schema · Conformance & Validation · Agent Directives · Media Type Registration (numbers reserved; content currently lives in TR-001/TR-006) | Reserved |
 
 Community: [Agent-Readiness Scanner](scanner.html) · [Badges](badges.html) · [Adopter Directory](adopters.html) · [Growth Playbook](docs/growth-playbook.md)

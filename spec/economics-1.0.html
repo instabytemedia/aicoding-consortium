@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crawl Economics 1.0 | AICC Technical Report 012</title>
+<meta name="description" content="AICC-TR-012 — rate budgets, batch endpoints and HTTP 402 payment negotiation for agent access.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/economics-1.0.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="Crawl Economics 1.0">
+<meta property="og:description" content="AICC-TR-012 — rate budgets, batch endpoints and HTTP 402 payment negotiation for agent access.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/economics-1.0.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="spec.css">
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="../index.html"><span class="seal">AICC</span></a>
+  <span class="crumb"><b>Technical Reports</b> / AICC-TR-012 / Crawl Economics</span>
+</div></div>
+<div class="layout">
+  <nav class="toc"><div style="padding-top:32px;"><h5>Contents</h5><a href="#status">Status of This Document</a><a href="#abstract">Abstract</a><a href="#tiers">1. Tiers & Negotiation</a><a href="#security">2. Security Considerations</a></div></nav>
+  <main>
+    <div class="kicker">AICC Technical Report 012</div>
+    <h1>Crawl Economics 1.0</h1>
+    <p class="subtitle">Declared budgets, batch access, and a payment path — the business model of the agent web, standardized.</p>
+    <div class="doc-status">
+      <span class="stamp">EDITOR'S DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>Crawl Economics 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-012 · Layer of <a href="../stack.html">the Agent Web Stack</a></dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="adp-1.0.html">ADP 1.0</a> (rate member, action classes), <a href="identity-1.0.html">TR-013</a> (identity for elevated tiers)</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy.</dd>
+      </dl>
+    </div>
+    <h2 id="status">Status of This Document</h2>
+    <p>This is an <strong>Editor's Draft</strong>. It has no standing and will change. It is
+    published so that origins, engines, and adjacent standards bodies can shape it before it
+    hardens. Comments via the public repository.</p>
+    <h2 id="abstract">Abstract</h2>
+<p>Today the economics of agent traffic are settled by WAF rules and lawsuits. This report gives both sides a declared alternative: origins publish access tiers (free budget, batch endpoints, paid tiers), agents discover them, and HTTP 402 becomes a real status code — "yes, at this price" instead of "no". A declared price beats an arms race for everyone.</p>
+<h2 id="tiers">1. Tiers &amp; Negotiation</h2>
+<div class="norm"><p><code>adp.json</code> gains <code>"access"</code>: an array of tiers <code>{ "id", "rate", "classes", "price", "auth" }</code>. The free tier <span class="kw">MUST</span> exist (possibly read-only and slow) — economics never overrides the ADP baseline. An origin answering <code>402 Payment Required</code> <span class="kw">MUST</span> include <code>Agent-Price</code> (an RFC 8941 dictionary naming tier, price, currency, and a payment URL) so the engine can present a concrete decision to its principal. Engines <span class="kw">MUST NOT</span> commit funds without explicit principal authorization.</p></div>
+<h2 id="security">2. Security Considerations</h2>
+<ul><li><strong>Price spoofing.</strong> Payment URLs MUST be same-origin or on the origin's declared payment allowlist; engines pay through their principal's payment instruments, never embedded credentials.</li><li><strong>Discrimination transparency.</strong> Tiers are public by design — differential treatment of engines is visible, which is the point.</li></ul>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-012 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../stack.html" style="font-family:var(--mono); font-size:12.5px;">← The Agent Web Stack</a></div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

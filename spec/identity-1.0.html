@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Identity &amp; Attestation 1.0 | AICC Technical Report 013</title>
+<meta name="description" content="AICC-TR-013 — signed agent attestations over HTTP: engine identity, principal class, and verification keys.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/spec/identity-1.0.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="Agent Identity &amp; Attestation 1.0">
+<meta property="og:description" content="AICC-TR-013 — signed agent attestations over HTTP: engine identity, principal class, and verification keys.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/spec/identity-1.0.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="spec.css">
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="../index.html"><span class="seal">AICC</span></a>
+  <span class="crumb"><b>Technical Reports</b> / AICC-TR-013 / Agent Identity</span>
+</div></div>
+<div class="layout">
+  <nav class="toc"><div style="padding-top:32px;"><h5>Contents</h5><a href="#status">Status of This Document</a><a href="#abstract">Abstract</a><a href="#mech">1. Mechanism</a><a href="#security">2. Security Considerations</a></div></nav>
+  <main>
+    <div class="kicker">AICC Technical Report 013</div>
+    <h1>Agent Identity &amp; Attestation 1.0</h1>
+    <p class="subtitle">Verifiable "who is this agent, acting for what class of principal" — without identifying the human.</p>
+    <div class="doc-status">
+      <span class="stamp">EDITOR'S DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>Agent Identity 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-013 · Layer of <a href="../stack.html">the Agent Web Stack</a></dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="adp-1.0.html">ADP 1.0</a> § 4.1 (Agent-Profile), Engine Registry</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy.</dd>
+      </dl>
+    </div>
+    <h2 id="status">Status of This Document</h2>
+    <p>This is an <strong>Editor's Draft</strong>. It has no standing and will change. It is
+    published so that origins, engines, and adjacent standards bodies can shape it before it
+    hardens. Comments via the public repository.</p>
+    <h2 id="abstract">Abstract</h2>
+<p>ADP's <code>Agent-Profile</code> header is a claim anyone can type. This report makes it verifiable: an <code>Agent-Attestation</code> header carrying a short-lived token signed by the engine vendor, binding the request to a registered engine and a <em>principal class</em> (<code>interactive-user | scheduled | autonomous-service</code>) — deliberately never the principal's identity. Origins can then grant real trust tiers (TR-012) to verified engines while treating unverifiable traffic as anonymous, and a misbehaving engine's attestation is revocable at the registry.</p>
+<h2 id="mech">1. Mechanism</h2>
+<div class="norm"><p><code>Agent-Attestation</code> is a compact signed token (issuer = engine vendor key published in the AICC Engine Registry entry; audience = target origin; expiry ≤ 10 minutes; claims: engine id, ADP level, principal class). Origins verify against registry keys with standard caching. Engines <span class="kw">MUST NOT</span> include user-identifying data in attestations — the privacy rule of ADP § 8 is load-bearing here. Verification failure downgrades trust; it <span class="kw">MUST NOT</span> block the free tier.</p></div>
+<h2 id="security">2. Security Considerations</h2>
+<ul><li><strong>Token replay.</strong> Short expiry + audience binding; origins MAY add nonce challenges for execute-class requests.</li><li><strong>Registry as trust root.</strong> The registry publishes keys, never issues them; vendors control their own keys and revocation. Governance keeps the registry non-discriminatory (reverse-DNS engines can self-publish keys at their own well-known location).</li><li><strong>Anonymity preserved.</strong> Attestation classes traffic, it does not identify humans; origins requiring more must use their own auth (ADP handoff).</li></ul>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-013 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../stack.html" style="font-family:var(--mono); font-size:12.5px;">← The Agent Web Stack</a></div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
