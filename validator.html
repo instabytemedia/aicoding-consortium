@@ -267,6 +267,7 @@ function validate(text) {
       continue;
     }
     const key = m[1];
+    if (m[2].trim() === "") { err("E104", i + 1, `Key '${key}' has no inline value — block constructs are outside the Level 1.0 subset.`, "#encoding"); continue; }
     let val = m[2].trim();
     if (val.startsWith("[") && val.endsWith("]")) {
       val = val.slice(1, -1).split(",").map(s => s.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
@@ -314,15 +315,22 @@ function validate(text) {
   /* --- body: section scan --- */
   const sections = []; // {name, canon, line, cls, items:[{line,text}], annotated}
   let cur = null;
-  let inFence = false, fenceChar = "", fenceLen = 0;
+  let inFence = false, fenceChar = "", fenceLen = 0, inComment = false;
   for (let i = fmEnd + 1; i < lines.length; i++) {
     const ln = lines[i];
     const fmk = ln.match(/^ {0,3}(`{3,}|~{3,})/);
-    if (fmk) {
+    if (fmk && !inComment) {
       if (!inFence) { inFence = true; fenceChar = fmk[1][0]; fenceLen = fmk[1].length; continue; }
       if (fmk[1][0] === fenceChar && fmk[1].length >= fenceLen) { inFence = false; continue; }
     }
     if (inFence) continue;
+    /* multi-line HTML comment spans: content is dead text, never live sections */
+    if (inComment) { if (ln.includes("-->")) inComment = false; continue; }
+    if (ln.includes("<!--") && !ln.includes("-->")) { inComment = true; continue; }
+    /* annotations on non-level-2 headings are E401 (§ 7) */
+    if (/^#{1,6}\s/.test(ln) && !/^##[^#]/.test(ln) && /@aicc:[a-z-]+/.test(ln)) {
+      err("E401", i + 1, "Annotations attach only to '##' headings (§ 7).", "#annotations");
+    }
 
     const h = ln.match(/^##\s+([^#].*?)\s*(<!--.*-->)?\s*$/);
     if (h) {
@@ -352,18 +360,25 @@ function validate(text) {
     const stray = ln.match(/^\s*<!--\s*@aicc:([a-z-]+)([^>]*)-->\s*$/);
     if (stray) {
       const prev = lines[i-1] || "";
-      const attached = /^#{1,6}\s/.test(prev.trim());
+      const attached = /^##[^#]/.test(prev.trim());
       if (!attached && ANNOTATIONS.includes(stray[1]))
         err("E401", i + 1, `Annotation '@aicc:${stray[1]}' must appear on, or immediately after, a heading line.`, "#annotations");
       continue;
     }
 
-    const im = cur && ln.match(/^\s*(?:[-*+]|\d{1,3}[.)])\s+(.*)$/);
-    if (im) {
-      let text = im[1], rid = null;
-      const idm = text.match(/^\[([A-Z][A-Z0-9]{0,7}-[0-9]{1,5})\]\s*/);
-      if (idm) { rid = idm[1]; text = text.slice(idm[0].length); }
-      cur.items.push({ line: i + 1, text, rid });
+    /* the first list item of a section sets the top-level indent; deeper items elaborate (§ 6.1) */
+    const li = cur && ln.match(/^(\s*)(?:[-*+]|\d{1,3}[.)])\s+(.*)$/);
+    if (li) {
+      const indent = li[1].length;
+      if (cur.topIndent === undefined && indent <= 3) cur.topIndent = indent;
+      if (cur.topIndent !== undefined && indent <= cur.topIndent) {
+        let text = li[2], rid = null;
+        const idm = text.match(/^\[([A-Z][A-Z0-9]{0,7}-[0-9]{1,5})\]\s*/);
+        if (idm) { rid = idm[1]; text = text.slice(idm[0].length); }
+        cur.items.push({ line: i + 1, text, rid });
+      } else {
+        cur.nested = (cur.nested || []).concat([{ line: i + 1, text: li[2] }]);
+      }
     }
   }
 
@@ -407,6 +422,12 @@ function validate(text) {
         strictViolations++;
         (strict ? err : warn)("E303", s.line, `Section '## ${s.name}' mixes identified and unidentified requirements — in class strict, all or none carry identifiers (§ 6.2).`, "#req-ids");
       }
+      for (const nit of (s.nested || [])) {
+        if ((nit.text.match(KW_RE) || []).length > 0) {
+          strictViolations++;
+          (strict ? err : warn)("E301", nit.line, `Nested list item in '## ${s.name}' contains an RFC-2119 keyword — nested items elaborate and must not carry keywords (§ 6.1).`, "#keywords");
+        }
+      }
     } else if (isNonNormative || s.cls === null) {
       for (const it of s.items) {
         if ((it.text.match(KW_RE) || []).length > 0)
@@ -422,8 +443,11 @@ function validate(text) {
 
   /* --- E501: extends sanity (single-file heuristics) --- */
   if (fm.extends && typeof fm.extends.value === "string") {
-    if (fm.extends.value.includes(".."))
-      err("E501", fm.extends.line, `'extends' must not escape the repository root.`, "#composition");
+    const v = fm.extends.value;
+    if (v.startsWith("/") || /^[a-z][a-z0-9+.-]*:/i.test(v))
+      err("E501", fm.extends.line, `'extends' must be a repository-relative path — absolute paths and URLs are forbidden (§ 8.2 trust boundary).`, "#composition");
+    else if (v.includes(".."))
+      warn("E501", fm.extends.line, `'extends' uses '..' — cannot verify it stays inside the repository root in single-file mode.`, "#composition");
   }
 
   return { findings, fm, sections, strictViolations };
@@ -455,8 +479,11 @@ function runValidation() {
 
   const claimedRaw = fm && fm.conformance ? fm.conformance.value : "basic";
   const claimed = CONF_ENUM.includes(claimedRaw) ? claimedRaw : "invalid";
+  /* achieved class is claim-independent (§ 10.1): evaluate each class's check set */
+  const coreErrors = findings.filter(f => f.sev === "error" && !["E301","E202","E303"].includes(f.code)).length;
+  const strictWarnings = findings.filter(f => f.sev === "warning" && f.code === "E302").length;
   let achieved = "—";
-  if (errors === 0) achieved = (strictViolations === 0 && warnings === 0) ? "AA (strict)" : "A (basic)";
+  if (coreErrors === 0) achieved = (strictViolations === 0 && strictWarnings === 0) ? "AA (strict)" : "A (basic)";
 
   verdict.classList.add("show");
   verdict.classList.toggle("pass", errors === 0);

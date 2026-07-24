@@ -1,0 +1,42 @@
+{
+  "valid-strict.aicc.md": {
+    "errors": [],
+    "achieved": "AA (strict)"
+  },
+  "valid-basic-nested.aicc.md": {
+    "errors": [],
+    "achieved": "AA (strict)"
+  },
+  "invalid-frontmatter.aicc.md": {
+    "errors": [
+      "E102",
+      "E102",
+      "E102",
+      "E102",
+      "E103",
+      "E104",
+      "E104"
+    ],
+    "achieved": "\u2014"
+  },
+  "invalid-strict-rules.aicc.md": {
+    "errors": [
+      "E201",
+      "E202",
+      "E301",
+      "E301",
+      "E301",
+      "E303",
+      "E303",
+      "E401"
+    ],
+    "achieved": "\u2014"
+  },
+  "invalid-escape.aicc.md": {
+    "errors": [
+      "E501",
+      "E502"
+    ],
+    "achieved": "\u2014"
+  }
+}

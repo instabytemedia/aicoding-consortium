@@ -427,8 +427,8 @@
       warning in class <code>basic</code>.</p>
       <p>Engines <span class="kw">MUST</span> treat <span class="kw">MUST</span> /
       <span class="kw">MUST NOT</span> requirements as hard constraints: output that violates one is
-      non-conforming regardless of any other instruction except a direct end-user override
-      (see precedence, § 8.2). <span class="kw">SHOULD</span> requirements are defaults an engine
+      non-conforming regardless of any other instruction except an override under precedence
+      rules 1 or 2 (§ 8.2). <span class="kw">SHOULD</span> requirements are defaults an engine
       departs from only with stated reason. <span class="kw">MAY</span> marks explicitly granted
       freedom.</p>
     </div>
@@ -551,9 +551,11 @@
       acyclic and <span class="kw">MUST NOT</span> exceed a depth of 8. Engines
       <span class="kw">MUST</span> apply the most specific document whose <code>scope</code> matches
       the path being worked on; documents with non-matching scope <span class="kw">MUST NOT</span>
-      contribute requirements to that path. The effective requirement set for any path is therefore a
-      pure function of the file tree — engines <span class="kw">MAY</span> compute and cache it once
-      per session.</p>
+      contribute requirements to that path. The <em>governing document</em> for a path is the
+      scope-matching document deepest in the composition chain; among scope-matching documents at
+      equal depth, the one with the more specific matching glob governs. The effective requirement
+      set for any path is therefore a pure function of the file tree — engines
+      <span class="kw">MAY</span> compute and cache it once per session.</p>
     </div>
     <div class="note">
       <p>This mirrors the directory-cascading behaviour teams already use with nested instruction
@@ -574,10 +576,14 @@
     <div class="norm">
       <p>The class a document <em>achieves</em> is determined solely by the checks it satisfies; the
       <code>conformance</code> key states a claim and <span class="kw">MUST NOT</span> alter the
-      achieved class. Validators <span class="kw">MUST</span> report both claimed and achieved class.
+      achieved class. Validators <span class="kw">MUST</span> evaluate every class's check set
+      independently of the claim and report both the claimed class and the achieved class — the
+      highest class whose complete check set passes. The per-class severities of § 10.3 affect only
+      how findings are <em>reported</em> against the claim, never which class is achieved.
       <strong>Certified</strong> is awarded by the consortium's conformance programme and is never
       claimed in frontmatter — which is why the <code>conformance</code> enum contains only
-      <code>basic</code> and <code>strict</code>.</p>
+      <code>basic</code> and <code>strict</code>. The Certified class is provisional: it becomes
+      testable only when AICC-TR-005 (Interop Mappings) reaches Candidate Recommendation.</p>
     </div>
     <h3><span class="no">10.2</span>Conformance Classes — Engines</h3>
     <div class="norm">
@@ -617,11 +623,11 @@
       AICC is the source of truth; engine dialects are derived artifacts. AICC-TR-005 defines the full
       translation tables. The core principle:
     </p>
-    <div class="norm">
-      <p>A mapping <span class="kw">MUST</span> be lossless for normative content: every requirement
-      and directive survives translation with its keyword strength intact. Where a target dialect
-      cannot express a construct (e.g. scope globs), the mapping <span class="kw">MUST</span> emit the
-      construct as a clearly-delimited comment so no information is silently dropped.</p>
+    <div class="note">
+      <p>A mapping is lossless for normative content: every requirement and directive survives
+      translation with its keyword strength intact. Where a target dialect cannot express a
+      construct (e.g. scope globs), the mapping emits the construct as a clearly-delimited comment
+      so no information is silently dropped. (Normative phrasing moves to AICC-TR-005.)</p>
     </div>
     <table>
       <thead><tr><th>Target</th><th>Mapping sketch</th></tr></thead>

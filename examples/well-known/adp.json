@@ -6,5 +6,5 @@
   "policies": [
     { "engine": "*", "allow": ["read", "propose"], "disallow": ["write", "execute"] }
   ],
-  "contact": "mailto:agents@aicodingconsortium.org"
+  "contact": "mailto:agents@example.com"
 }

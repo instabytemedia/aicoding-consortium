@@ -18,6 +18,7 @@ and policy layer for the agent-native web. Write once. Parse everywhere.
 | AICC-TR-001 | [AICC Core — Level 1.0](spec/aicc-core-1.0.html) — document model, frontmatter, taxonomy, keywords, directives, conformance | Candidate Recommendation |
 | AICC-TR-005 | AICC Interop Mappings (to be split from Core § 11) | Editor's Draft |
 | AICC-TR-006 | [ADP — Agent Discovery & Policy 1.0](spec/adp-1.0.html) | Working Draft |
+| AICC-TR-002/003/004/007 | Frontmatter Schema · Conformance & Validation · Agent Directives · Media Type Registration (numbers reserved; content currently lives in TR-001/TR-006) | Reserved |
 
 ## Repository layout
 
@@ -48,7 +49,7 @@ You get the `aicc-markdown` skill (author, migrate, and consume AICC documents) 
 
 1. Copy [`examples/product.aicc.md`](examples/product.aicc.md) to your repository root as `product.aicc.md`.
 2. Adapt frontmatter and requirements. One list item, one RFC-2119 keyword.
-3. Check it with the [validator](validator.html).
+3. Check it with the [hosted validator](https://aicoding-consortium.vercel.app/validator.html) — or offline: `node plugins/aicc/scripts/validate.mjs product.aicc.md`.
 4. Optionally publish [`examples/agents.txt`](examples/agents.txt) at your web origin.
 
 ## Licensing

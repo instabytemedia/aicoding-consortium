@@ -597,7 +597,7 @@ Cart-to-payment conversion for all storefronts.
       <div class="tier">
         <div class="lvl">Class AA</div>
         <h3>AICC Strict</h3>
-        <p>All normative sections annotated, every requirement carries an RFC-2119 keyword, zero validator warnings. Machine-verifiable end to end.</p>
+        <p>Every non-canonical section explicitly annotated, every requirement carries exactly one RFC-2119 keyword, zero validator warnings. Machine-verifiable end to end.</p>
       </div>
       <div class="tier featured">
         <div class="lvl">Class AAA</div>
@@ -610,7 +610,7 @@ Cart-to-payment conversion for all storefronts.
       <span>Reference implementation: the AICC Web Validator — implements the full § 10.3 error taxonomy, runs entirely in your browser.</span>
       <a class="btn btn-solid" href="validator.html" style="margin-left:auto;">Open the Validator</a>
     </div>
-    <p style="margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--ink-faint);">A CLI (<code style="font-family:inherit;">aicc validate</code>) is in development by WG-CONF and will ship with the conformance test suite.</p>
+    <p style="margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--ink-faint);">Reference CLI: <code style="font-family:inherit;">node plugins/aicc/scripts/validate.mjs &lt;file&gt;</code> — ships in the <a href="https://github.com/instabytemedia/aicoding-consortium" style="color:var(--ink-dim);">aicc Claude Code plugin</a> as <code style="font-family:inherit;">/aicc-validate</code>. The conformance test suite is maintained by WG-CONF in <code style="font-family:inherit;">conformance/</code>.</p>
   </div>
 </section>
 
@@ -629,7 +629,7 @@ Cart-to-payment conversion for all storefronts.
     <div class="sample">
       <div class="codeblock">
         <div class="bar">
-          <span>https://example.com/agents.txt</span>
+          <span>https://example.com/.well-known/agents.txt</span>
           <span class="ok">ADP/1.0</span>
         </div>
         <pre><span class="tk-c"># agents.txt — what agents may do here</span>
@@ -752,7 +752,7 @@ Cart-to-payment conversion for all storefronts.
       <div>
         <h5>AI Coding Consortium</h5>
         <p class="about">
-          An independent standards body maintaining AICC — the open specification format
+          An independent standards body maintaining AICC Markdown — the open specification format
           consumed by AI code engines. Modeled on the processes of W3C and IETF.
         </p>
       </div>
@@ -768,14 +768,14 @@ Cart-to-payment conversion for all storefronts.
         <a href="#governance">Process</a>
         <a href="#governance">Working Groups</a>
         <a href="#membership">Membership</a>
-        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/CODE_OF_CONDUCT.md">Code of Conduct</a>
       </div>
       <div>
         <h5>Community</h5>
         <a href="https://github.com/instabytemedia/aicoding-consortium">GitHub</a>
         <a href="https://github.com/instabytemedia/aicoding-consortium/discussions">Discussions</a>
-        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/main/CONTRIBUTING.md">Errata</a>
-        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/main/GOVERNANCE.md">Governance Docs</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/CONTRIBUTING.md">Errata</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/GOVERNANCE.md">Governance Docs</a>
       </div>
     </div>
     <div class="legal">

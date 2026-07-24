@@ -212,7 +212,7 @@
       <strong>Where is the specification for this thing? What is an agent allowed to do here?
       How do we tell each other?</strong> ADP answers all three with a human-editable policy file
       (<code>agents.txt</code>), a machine manifest (<code>/.well-known/adp.json</code>), and a
-      small set of HTTP headers. Together with <a href="aicc-core-1.0.html">AICC</a>, this forms
+      small set of HTTP headers. Together with <a href="aicc-core-1.0.html">AICC Core 1.0</a>, this forms
       the complete contract between an origin and any conforming engine.
     </p>
 
@@ -400,9 +400,15 @@
         <li>Merge engine-specific records per action class (§ 3.1): unmentioned classes inherit from <code>*</code>.</li>
         <li>Apply per-response narrowing from headers and markup — remove classes only.</li>
       </ol>
-      <p>A <code>Disallow</code> for a class always defeats an <code>Allow</code> for the same class
-      at the same or lower layer. Origin policy governs <em>autonomous</em> engine activity; its
-      place relative to user instructions and engine safety policy is defined in § 4.1.</p>
+      <p>The layers are: (1) the grant ceiling (manifest or <code>agents.txt</code>) and (2)
+      per-response narrowing (headers, markup). <em>Within</em> the ceiling, engine-specific records
+      merge per action class as defined in § 3.1 — an explicit engine-record declaration replaces
+      the <code>*</code> declaration for that class, which is how a record can add
+      <code>execute</code> on top of the baseline. <em>After</em> that merge, a
+      <code>Disallow</code> for a class defeats an <code>Allow</code> for the same class within a
+      single record or from any lower layer. Origin policy governs <em>autonomous</em> engine
+      activity; its place relative to user instructions and engine safety policy is defined in
+      § 4.1.</p>
     </div>
 
     <h2 id="caching"><span class="no">6</span>Caching</h2>
@@ -439,7 +445,7 @@
 <span class="k">Spec-Location:</span> <span class="v">/product.aicc.md</span>
 <span class="k">Agent-Policy:</span> <span class="v">allow=(read propose), disallow=(write execute)</span>
 
-<span class="c">— /agents.txt —</span>
+<span class="c">— /.well-known/agents.txt — (root /agents.txt may mirror it)</span>
 <span class="k">Engine:</span> <span class="v">*</span>
 <span class="k">Spec:</span> <span class="v">/product.aicc.md</span>
 <span class="k">Policy:</span> <span class="v">/.well-known/adp.json</span>
