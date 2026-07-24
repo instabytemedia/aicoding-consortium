@@ -1,0 +1,14 @@
+{
+  "registry": "aicc-engines",
+  "version": "1.0.0",
+  "updated": "2026-07-24",
+  "engines": [
+    { "id": "claude-code",  "vendor": "Anthropic",  "dialects": ["CLAUDE.md", "AGENTS.md"], "status": "first-conformance-target" },
+    { "id": "cursor",       "vendor": "Anysphere",  "dialects": [".cursor/rules", ".cursorrules"], "status": "listed" },
+    { "id": "copilot",      "vendor": "GitHub",     "dialects": ["copilot-instructions.md"], "status": "listed" },
+    { "id": "codex",        "vendor": "OpenAI",     "dialects": ["AGENTS.md"], "status": "listed" },
+    { "id": "gemini-cli",   "vendor": "Google",     "dialects": ["GEMINI.md"], "status": "listed" },
+    { "id": "windsurf",     "vendor": "Codeium",    "dialects": [".windsurfrules"], "status": "listed" }
+  ],
+  "note": "Listing means an interop mapping is planned or drafted in AICC-TR-005; it does not imply vendor endorsement. Unregistered engines use reverse-DNS identifiers per ADP § 3.1."
+}

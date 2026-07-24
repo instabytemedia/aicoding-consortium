@@ -1,0 +1,11 @@
+{
+  "name": "aicc",
+  "owner": { "name": "AI Coding Consortium", "url": "https://aicodingconsortium.org" },
+  "plugins": [
+    {
+      "name": "aicc",
+      "source": "./plugins/aicc",
+      "description": "Author and validate AICC Markdown (.aicc.md) — the open specification standard for AI code engines. Includes the aicc-markdown skill and /aicc-validate command."
+    }
+  ]
+}

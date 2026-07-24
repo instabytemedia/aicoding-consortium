@@ -1,0 +1,9 @@
+# agents.txt — ADP/1.0 — the AI Coding Consortium eats its own dogfood
+Engine: *
+Spec: /product.aicc.md
+Policy: /.well-known/adp.json
+Allow: read
+Allow: propose
+Disallow: write
+Disallow: execute
+Contact: mailto:agents@aicodingconsortium.org

@@ -1,0 +1,10 @@
+{
+  "adp": "1.0",
+  "specs": [
+    { "href": "/product.aicc.md", "id": "org.aicodingconsortium.site", "scope": ["/**"] }
+  ],
+  "policies": [
+    { "engine": "*", "allow": ["read", "propose"], "disallow": ["write", "execute"] }
+  ],
+  "contact": "mailto:agents@aicodingconsortium.org"
+}

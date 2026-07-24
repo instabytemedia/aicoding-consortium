@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADP — Agent Discovery &amp; Policy 1.0 | AICC Technical Report 006</title>
+<meta name="description" content="ADP 1.0 — the discovery and policy layer for the agent-native web: agents.txt, the /.well-known/adp.json manifest, and HTTP signalling for AI code engines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --bg-raise: #121316;
+    --bg-raise-2: #17181c;
+    --ink: #e9e7e2;
+    --ink-dim: #9b9994;
+    --ink-faint: #8a8781;
+    --border: rgba(128, 128, 128, 0.5);
+    --border-soft: rgba(128, 128, 128, 0.28);
+    --accent: #e0b84f;
+    --accent-ink: #14100a;
+    --status-rec: #58b98a;
+    --status-draft: #8f8d88;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+    --sans: "IBM Plex Sans", system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 15.5px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(12,13,15,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .in {
+    max-width: 1280px; margin: 0 auto; padding: 0 32px;
+    height: 56px; display: flex; align-items: center; gap: 16px;
+  }
+  .topbar .seal {
+    font-family: var(--mono); font-weight: 600; font-size: 13px;
+    letter-spacing: 0.08em; border: 1px solid var(--border);
+    padding: 2px 7px; color: var(--accent);
+  }
+  .topbar a { border: none; }
+  .topbar .crumb { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); }
+  .topbar .crumb b { color: var(--ink-dim); font-weight: 500; }
+  .layout {
+    max-width: 1280px; margin: 0 auto; padding: 0 32px;
+    display: grid; grid-template-columns: 260px 1fr; gap: 64px;
+  }
+  @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } .toc { display: none; } }
+  .toc {
+    position: sticky; top: 88px; align-self: start;
+    max-height: calc(100vh - 120px); overflow-y: auto;
+    padding: 32px 0 48px; font-size: 13px;
+  }
+  .toc h5 {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .toc a {
+    display: block; color: var(--ink-dim); border: none;
+    padding: 4px 0 4px 12px; border-left: 1px solid var(--border-soft);
+  }
+  .toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+  .toc a.sub { padding-left: 26px; font-size: 12.5px; color: var(--ink-faint); }
+  main { padding: 48px 0 120px; max-width: 760px; }
+  .doc-status {
+    border: 1px solid var(--border); background: var(--bg-raise);
+    padding: 26px 30px; margin-bottom: 56px;
+    font-size: 13.5px; color: var(--ink-dim);
+  }
+  .doc-status .stamp {
+    display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; border: 1.5px solid var(--status-draft); color: var(--status-draft);
+    padding: 4px 10px; margin-bottom: 14px;
+  }
+  .doc-status dl { display: grid; grid-template-columns: 140px 1fr; gap: 4px 16px; margin-top: 8px; }
+  .doc-status dt { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 3px; }
+  .doc-status dd { color: var(--ink-dim); }
+  .kicker {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2;
+    letter-spacing: -0.01em; margin-bottom: 10px;
+  }
+  .subtitle { color: var(--ink-dim); font-size: 16px; margin-bottom: 40px; }
+  h2 {
+    font-family: var(--serif); font-weight: 400; font-size: 1.7rem;
+    margin: 72px 0 8px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  h2 .no, h3 .no { color: var(--accent); font-family: var(--mono); font-size: 0.75em; margin-right: 14px; }
+  h3 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; margin: 44px 0 8px; }
+  p { margin: 14px 0; color: var(--ink-dim); }
+  p strong, li strong { color: var(--ink); }
+  ul, ol { margin: 14px 0 14px 26px; color: var(--ink-dim); }
+  li { margin: 7px 0; }
+  code {
+    font-family: var(--mono); font-size: 0.86em;
+    background: var(--bg-raise-2); border: 1px solid var(--border-soft);
+    padding: 1.5px 6px; color: var(--ink);
+  }
+  .kw { font-family: var(--mono); font-size: 0.82em; font-weight: 600; color: var(--status-rec); }
+  pre.block {
+    background: var(--bg-raise); border: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12.8px; line-height: 1.7;
+    padding: 20px 24px; margin: 20px 0; overflow-x: auto; color: var(--ink-dim);
+  }
+  pre.block .c { color: var(--ink-faint); }
+  pre.block .k { color: var(--accent); }
+  pre.block .v { color: var(--ink); }
+  pre.block .m { color: var(--status-rec); font-weight: 600; }
+  .norm, .note, .example {
+    border-left: 3px solid; padding: 14px 22px; margin: 22px 0;
+    background: var(--bg-raise); font-size: 14.5px;
+  }
+  .norm { border-color: var(--status-rec); }
+  .note { border-color: var(--border); }
+  .example { border-color: var(--accent); }
+  .norm::before, .note::before, .example::before {
+    display: block; font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.16em; margin-bottom: 6px;
+  }
+  .norm::before { content: "NORMATIVE"; color: var(--status-rec); }
+  .note::before { content: "NOTE — INFORMATIVE"; color: var(--ink-faint); }
+  .example::before { content: "EXAMPLE — INFORMATIVE"; color: var(--accent); }
+  .norm p, .note p, .example p { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14px; }
+  th {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-faint);
+    text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border);
+  }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--border-soft); color: var(--ink-dim); vertical-align: top; }
+  td:first-child { color: var(--ink); }
+  footer {
+    border-top: 1px solid var(--border); margin-top: 40px;
+    padding: 32px 0; font-family: var(--mono); font-size: 12px; color: var(--ink-faint);
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="in">
+    <a href="../index.html"><span class="seal">AICC</span></a>
+    <span class="crumb"><b>Technical Reports</b> / AICC-TR-006 / ADP — Agent Discovery &amp; Policy 1.0</span>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="toc">
+    <div style="padding-top:32px;">
+      <h5>Contents</h5>
+      <a href="#abstract">Abstract</a>
+      <a href="#status">Status of This Document</a>
+      <a href="#intro">1. Introduction</a>
+      <a href="#terminology">2. Terminology</a>
+      <a href="#discovery">3. Discovery Layer</a>
+      <a class="sub" href="#agentstxt">3.1 agents.txt</a>
+      <a class="sub" href="#wellknown">3.2 /.well-known/adp.json</a>
+      <a class="sub" href="#repos">3.3 Repository Discovery</a>
+      <a href="#http">4. HTTP Signalling</a>
+      <a class="sub" href="#req-headers">4.1 Request Headers</a>
+      <a class="sub" href="#res-headers">4.2 Response Headers</a>
+      <a class="sub" href="#html">4.3 HTML-Level Signalling</a>
+      <a href="#precedence">5. Precedence &amp; Merging</a>
+      <a href="#caching">6. Caching</a>
+      <a href="#conformance">7. Conformance</a>
+      <a href="#security">8. Security Considerations</a>
+      <a href="#appendix-a">Appendix A. Complete Example</a>
+      <a href="#appendix-b">Appendix B. Manifest JSON Schema</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="kicker">AICC Technical Report 006</div>
+    <h1>ADP — Agent Discovery &amp; Policy 1.0</h1>
+    <p class="subtitle">The discovery and policy layer for the agent-native web: how origins publish specifications, declare agent policy, and signal conformance over HTTP.</p>
+
+    <div class="doc-status">
+      <span class="stamp">WORKING DRAFT</span>
+      <dl>
+        <dt>This version</dt><dd>ADP 1.0, 24 July 2026</dd>
+        <dt>Series</dt><dd>AICC-TR-006</dd>
+        <dt>Editors</dt><dd>AICC Engine Interop Working Group (WG-INTEROP)</dd>
+        <dt>Depends on</dt><dd><a href="aicc-core-1.0.html">AICC Core 1.0</a> (AICC-TR-001)</dd>
+        <dt>License</dt><dd>Text: CC-BY-4.0 · Patents: AICC Royalty-Free Patent Policy (GOVERNANCE § 4). Implementation is royalty-free under that policy.</dd>
+      </dl>
+    </div>
+
+    <h2 id="abstract">Abstract</h2>
+    <p>
+      <code>robots.txt</code> told crawlers where they may go. It says nothing about what an
+      <em>agent</em> may <em>do</em>. As AI code engines become first-class consumers of websites,
+      APIs, and repositories, every origin needs a standard way to answer three questions:
+      <strong>Where is the specification for this thing? What is an agent allowed to do here?
+      How do we tell each other?</strong> ADP answers all three with a human-editable policy file
+      (<code>agents.txt</code>), a machine manifest (<code>/.well-known/adp.json</code>), and a
+      small set of HTTP headers. Together with <a href="aicc-core-1.0.html">AICC</a>, this forms
+      the complete contract between an origin and any conforming engine.
+    </p>
+
+    <h2 id="status">Status of This Document</h2>
+    <p>
+      This is a <strong>Working Draft</strong> of the Engine Interop Working Group. Breaking
+      changes are expected. It is published for early implementation feedback and is not yet a
+      Recommendation.
+    </p>
+
+    <h2 id="intro"><span class="no">1</span>Introduction</h2>
+    <p>
+      The web's existing agent controls were designed for a read-only visitor: a crawler that
+      fetches pages and leaves. Code engines are different in kind — they read specifications,
+      open pull requests, call APIs, execute workflows, and act on behalf of users. Three gaps
+      follow:
+    </p>
+    <ul>
+      <li><strong>No discovery.</strong> An engine landing on an origin has no standard way to find the specification that governs it.</li>
+      <li><strong>No policy vocabulary.</strong> <code>robots.txt</code> can say <em>don't fetch</em>; it cannot say <em>read, but never execute</em> or <em>propose changes, but only under this spec</em>.</li>
+      <li><strong>No signalling.</strong> Origins and engines cannot identify each other's capabilities or conformance levels in-band.</li>
+    </ul>
+    <p>
+      ADP fills these gaps with deliberately boring technology: a line-based text file, a JSON
+      document at a <a href="https://www.rfc-editor.org/rfc/rfc8615">well-known URI (RFC 8615)</a>,
+      and HTTP header fields — each layered so that adopting the first requires five minutes and a
+      text editor.
+    </p>
+
+    <h2 id="terminology"><span class="no">2</span>Terminology</h2>
+    <p>
+      The key words <span class="kw">MUST</span>, <span class="kw">MUST NOT</span>,
+      <span class="kw">SHOULD</span>, <span class="kw">SHOULD NOT</span>, and
+      <span class="kw">MAY</span> are to be interpreted as described in RFC 2119.
+      <strong>Engine</strong> and <strong>Document</strong> are defined in
+      <a href="aicc-core-1.0.html#terminology">AICC Core § 2</a>. An <strong>Origin</strong> is a
+      scheme/host/port triple as defined in RFC 6454. An <strong>Action class</strong> is one of
+      the verbs defined in § 3.1.
+    </p>
+
+    <h2 id="discovery"><span class="no">3</span>Discovery Layer</h2>
+
+    <h3 id="agentstxt"><span class="no">3.1</span>agents.txt</h3>
+    <div class="norm">
+      <p>An origin that adopts ADP <span class="kw">MUST</span> serve a UTF-8 text file at
+      <code>/.well-known/agents.txt</code> (per RFC 8615) and <span class="kw">MAY</span> also serve
+      it at the legacy-friendly root path <code>/agents.txt</code>; when both exist, the well-known
+      resource wins. The file is line-based; each line is a <code>Field: value</code>
+      pair, <code>#</code> starts a comment. Records begin with an <code>Engine:</code> line
+      naming an engine identifier from the AICC Engine Registry, or <code>*</code> for all
+      engines. Fields apply to the most recent <code>Engine:</code> record.</p>
+    </div>
+    <table>
+      <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>Engine:</code></td><td>Starts a record. An identifier from the public AICC Engine Registry, a reverse-DNS identifier for unregistered engines (e.g. <code>com.example.mybot</code>), or <code>*</code>.</td></tr>
+        <tr><td><code>Spec:</code></td><td>Path or URL of the governing AICC document. Repeatable.</td></tr>
+        <tr><td><code>Allow:</code> / <code>Disallow:</code></td><td>Grants or forbids an action class: <code>read</code>, <code>propose</code> (suggest changes, open PRs), <code>write</code> (direct mutation), <code>execute</code> (run code/API calls with side effects).</td></tr>
+        <tr><td><code>Policy:</code></td><td>URL of the machine manifest (§ 3.2).</td></tr>
+        <tr><td><code>Contact:</code></td><td><code>mailto:</code> or URL for the humans responsible for agent traffic.</td></tr>
+      </tbody>
+    </table>
+    <div class="norm">
+      <p>The four action classes form an escalation ladder. A grant of a higher class
+      <span class="kw">MUST NOT</span> be interpreted as an implicit grant of a lower one — each
+      class is declared explicitly. In the absence of an <code>agents.txt</code> and manifest,
+      the default policy for <em>autonomous</em> agent activity is <code>Allow: read</code> and
+      nothing else; an explicit, contemporaneous end-user instruction always overrides origin policy
+      (see § 5).</p>
+      <p><strong>Merging is per action class, never per field.</strong> An engine-specific record
+      overrides the <code>*</code> record only for the action classes it explicitly names; every
+      class it does not mention is inherited from the <code>*</code> record. In the example below,
+      the effective policy for <code>claude-code</code> is therefore
+      <code>read, propose</code> (inherited) plus <code>execute</code> (granted) —
+      the record adds rope, it does not revoke the baseline.</p>
+    </div>
+    <div class="example">
+      <pre class="block" style="margin:8px 0 4px; border:none; padding:8px 0; background:transparent;"><span class="c"># agents.txt — ADP/1.0</span>
+<span class="k">Engine:</span> <span class="v">*</span>
+<span class="k">Spec:</span> <span class="v">/product.aicc.md</span>
+<span class="k">Policy:</span> <span class="v">/.well-known/adp.json</span>
+<span class="k">Allow:</span> <span class="v">read</span>
+<span class="k">Allow:</span> <span class="v">propose</span>
+<span class="k">Disallow:</span> <span class="v">execute</span>
+<span class="k">Contact:</span> <span class="v">mailto:agents@example.com</span>
+
+<span class="c"># CI bots get more rope</span>
+<span class="k">Engine:</span> <span class="v">claude-code</span>
+<span class="k">Allow:</span> <span class="v">execute</span></pre>
+    </div>
+
+    <h3 id="wellknown"><span class="no">3.2</span>/.well-known/adp.json</h3>
+    <p>
+      The manifest is the machine-grade version of <code>agents.txt</code>: same semantics, richer
+      structure, JSON syntax. When both exist and disagree, the manifest wins (§ 5).
+    </p>
+    <pre class="block"><span class="c">{</span>
+  <span class="k">"adp"</span><span class="c">:</span> <span class="v">"1.0"</span><span class="c">,</span>
+  <span class="k">"specs"</span><span class="c">:</span> <span class="c">[</span>
+    <span class="c">{</span> <span class="k">"href"</span><span class="c">:</span> <span class="v">"/product.aicc.md"</span><span class="c">,</span> <span class="k">"id"</span><span class="c">:</span> <span class="v">"com.example.shop"</span><span class="c">,</span> <span class="k">"scope"</span><span class="c">:</span> <span class="v">["/**"]</span> <span class="c">}</span>
+  <span class="c">],</span>
+  <span class="k">"policies"</span><span class="c">:</span> <span class="c">[</span>
+    <span class="c">{</span> <span class="k">"engine"</span><span class="c">:</span> <span class="v">"*"</span><span class="c">,</span> <span class="k">"allow"</span><span class="c">:</span> <span class="v">["read", "propose"]</span><span class="c">,</span> <span class="k">"disallow"</span><span class="c">:</span> <span class="v">["write", "execute"]</span> <span class="c">},</span>
+    <span class="c">{</span> <span class="k">"engine"</span><span class="c">:</span> <span class="v">"claude-code"</span><span class="c">,</span> <span class="k">"allow"</span><span class="c">:</span> <span class="v">["execute"]</span> <span class="c">}</span>
+  <span class="c">],</span>
+  <span class="k">"rate"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"requests_per_minute"</span><span class="c">:</span> <span class="v">120</span> <span class="c">},</span>
+  <span class="k">"contact"</span><span class="c">:</span> <span class="v">"mailto:agents@example.com"</span>
+<span class="c">}</span></pre>
+
+    <h3 id="repos"><span class="no">3.3</span>Repository Discovery</h3>
+    <div class="norm">
+      <p>Inside a repository (as opposed to an HTTP origin), discovery follows
+      <a href="aicc-core-1.0.html#naming">AICC Core § 3.1</a> unchanged: the most specific
+      scope-matching document governs, and documents compose per
+      <a href="aicc-core-1.0.html#composition">Core § 9</a>; the root <code>product.aicc.md</code>
+      is the repository-wide fallback when no nearer document's scope matches. A repository
+      <span class="kw">MAY</span> additionally carry an <code>agents.txt</code> at its root with
+      identical semantics, governing engines that operate on the repository through any
+      transport.</p>
+    </div>
+
+    <h2 id="http"><span class="no">4</span>HTTP Signalling</h2>
+
+    <h3 id="req-headers"><span class="no">4.1</span>Request Headers (engine → origin)</h3>
+    <table>
+      <thead><tr><th>Header</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>Agent-Profile</code></td><td>A URI identifying the engine and the ADP level it implements, e.g. <code>https://registry.aicodingconsortium.org/engines/claude-code#adp-1.0</code>. Analogous in spirit to the profile mechanism of RFC 9110 content negotiation.</td></tr>
+        <tr><td><code>Agent-Intent</code></td><td>The action class this request belongs to: <code>read</code>, <code>propose</code>, <code>write</code>, or <code>execute</code>. Lets origins enforce policy at the edge, per request.</td></tr>
+      </tbody>
+    </table>
+    <div class="norm">
+      <p>A conforming engine <span class="kw">MUST</span> send both headers on every request to an
+      origin whose policy it has read. Acting <em>autonomously</em>, an engine
+      <span class="kw">MUST NOT</span> issue a request whose <code>Agent-Intent</code> the origin's
+      effective policy disallows. Acting on an explicit, contemporaneous end-user instruction, the
+      engine <span class="kw">MAY</span> proceed despite a disallow — mirroring rule 2 of the
+      precedence ladder in <a href="aicc-core-1.0.html#precedence">AICC Core § 8.2</a> — and
+      <span class="kw">SHOULD</span> tell the user it is overriding origin policy. The engine's own
+      safety policy (rule 1) sits above both.</p>
+    </div>
+
+    <h3 id="res-headers"><span class="no">4.2</span>Response Headers (origin → engine)</h3>
+    <table>
+      <thead><tr><th>Header</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>Spec-Location</code></td><td>URL of the governing AICC document for the requested resource, e.g. <code>Spec-Location: /product.aicc.md</code>. The HTTP-level equivalent of <code>Spec:</code> in agents.txt, resolvable per-path.</td></tr>
+        <tr><td><code>Agent-Policy</code></td><td>Effective policy for the requesting engine in compact form: <code>Agent-Policy: allow=(read propose), disallow=(write execute)</code>.</td></tr>
+        <tr><td><code>ADP-Version</code></td><td>The ADP level the origin implements: <code>ADP-Version: 1.0</code>.</td></tr>
+      </tbody>
+    </table>
+    <div class="norm">
+      <p>Origins <span class="kw">MAY</span> answer a disallowed request with status
+      <code>403</code> and <span class="kw">SHOULD</span> include <code>Agent-Policy</code> in
+      that response so the engine can self-correct instead of retrying.</p>
+    </div>
+
+    <h3 id="html"><span class="no">4.3</span>HTML-Level Signalling</h3>
+    <p>For static hosting where headers are impractical, the same information
+    <span class="kw">MAY</span> be embedded in markup:</p>
+    <pre class="block"><span class="c">&lt;</span><span class="k">link</span> <span class="k">rel</span><span class="c">=</span><span class="v">"spec"</span> <span class="k">type</span><span class="c">=</span><span class="v">'text/markdown; variant="AICC"'</span> <span class="k">href</span><span class="c">=</span><span class="v">"/product.aicc.md"</span><span class="c">&gt;</span>
+<span class="c">&lt;</span><span class="k">meta</span> <span class="k">name</span><span class="c">=</span><span class="v">"adp:policy"</span> <span class="k">content</span><span class="c">=</span><span class="v">"disallow=write execute"</span><span class="c">&gt;</span></pre>
+    <div class="note">
+      <p>AICC documents use the existing <code>text/markdown</code> media type with the
+      <code>variant</code> parameter that <a href="https://www.rfc-editor.org/rfc/rfc7763">RFC 7763</a>
+      defines for exactly this purpose (<code>variant=AICC</code>, plus an optional
+      <code>level</code> parameter). AICC-TR-007 (forthcoming) specifies the variant registration
+      submitted to IANA's markdown-variants registry. Per § 5, HTML-level signalling can only
+      <em>narrow</em> policy, so <code>adp:policy</code> markup carries <code>disallow</code> lists
+      only.</p>
+    </div>
+
+    <h2 id="precedence"><span class="no">5</span>Precedence &amp; Merging</h2>
+    <div class="norm">
+      <p>Policy sources form a <strong>narrowing-only ratchet</strong>. The manifest
+      (<code>/.well-known/adp.json</code>) — or, absent a manifest, <code>agents.txt</code> — is the
+      <em>grant ceiling</em> for an origin. Per-response HTTP headers (§ 4.2) and HTML-level
+      signalling (§ 4.3) <span class="kw">MUST NOT</span> grant an action class the ceiling does not
+      already grant; they <span class="kw">MAY</span> only remove classes for the current resource or
+      request. Any grant of <code>write</code> or <code>execute</code> <span class="kw">MUST</span>
+      originate from a manifest or <code>agents.txt</code> fetched over HTTPS from the same origin.</p>
+      <p>Evaluation order for a given request:</p>
+      <ol style="margin-top:10px;">
+        <li>Start from the grant ceiling: manifest if present, else <code>agents.txt</code>, else the default (<code>read</code> only for autonomous activity).</li>
+        <li>Merge engine-specific records per action class (§ 3.1): unmentioned classes inherit from <code>*</code>.</li>
+        <li>Apply per-response narrowing from headers and markup — remove classes only.</li>
+      </ol>
+      <p>A <code>Disallow</code> for a class always defeats an <code>Allow</code> for the same class
+      at the same or lower layer. Origin policy governs <em>autonomous</em> engine activity; its
+      place relative to user instructions and engine safety policy is defined in § 4.1.</p>
+    </div>
+
+    <h2 id="caching"><span class="no">6</span>Caching</h2>
+    <div class="norm">
+      <p>Engines <span class="kw">MUST</span> honour standard HTTP caching for
+      <code>agents.txt</code> and <code>adp.json</code>. Absent cache metadata, engines
+      <span class="kw">MUST NOT</span> cache policy longer than 24 hours and
+      <span class="kw">SHOULD</span> re-fetch before any <code>write</code> or
+      <code>execute</code> action. A newly fetched, more restrictive policy applies immediately,
+      including to in-flight plans.</p>
+    </div>
+
+    <h2 id="conformance"><span class="no">7</span>Conformance</h2>
+    <table>
+      <thead><tr><th>Class</th><th>Requirements</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Conforming origin</strong></td><td>Serves a syntactically valid <code>agents.txt</code>; every <code>Spec:</code> target is a Basic-class AICC document; manifest (if present) validates against the ADP JSON Schema.</td></tr>
+        <tr><td><strong>Conforming engine</strong></td><td>Discovers policy in § 5 order; sends § 4.1 headers; never performs a disallowed action class; passes the ADP engine test suite.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="security"><span class="no">8</span>Security Considerations</h2>
+    <ul>
+      <li><strong>Policy is not access control.</strong> ADP is a declaration of intent, honoured by conforming engines. Origins <span class="kw">MUST NOT</span> rely on it as a security boundary and <span class="kw">MUST</span> keep enforcing authentication and authorization independently — exactly as <code>robots.txt</code> never replaced access control.</li>
+      <li><strong>Policy injection.</strong> A compromised <code>agents.txt</code> could grant <code>execute</code> to lure engines into destructive actions. Engines <span class="kw">SHOULD</span> treat policy <em>upgrades</em> (new grants of <code>write</code>/<code>execute</code>) as events to surface to their user, and <span class="kw">MUST</span> apply the precedence rule that their own safety policy sits above any origin grant (<a href="aicc-core-1.0.html#precedence">AICC Core § 8.2</a>).</li>
+      <li><strong>Fingerprinting.</strong> <code>Agent-Profile</code> identifies engine software, not users. Engines <span class="kw">MUST NOT</span> embed user-identifying data in it.</li>
+      <li><strong>Cross-origin spec references.</strong> A <code>Spec:</code> pointing at a foreign origin <span class="kw">MAY</span> be fetched, and only under all of these conditions: HTTPS only; no redirects to a third origin; no private, loopback, or link-local address targets; a response-size cap. Content fetched cross-origin is <em>informative only</em> — it <span class="kw">MUST NOT</span> contribute directives or requirements, preventing both third-party steering and the use of <code>agents.txt</code> as an SSRF vector.</li>
+    </ul>
+
+    <h2 id="appendix-a">Appendix A — Complete Example</h2>
+    <p>A shop that lets any engine read and propose, lets one engine execute, and publishes its spec at the root:</p>
+    <pre class="block"><span class="c">GET / HTTP/1.1  →  200 OK</span>
+<span class="k">ADP-Version:</span> <span class="v">1.0</span>
+<span class="k">Spec-Location:</span> <span class="v">/product.aicc.md</span>
+<span class="k">Agent-Policy:</span> <span class="v">allow=(read propose), disallow=(write execute)</span>
+
+<span class="c">— /agents.txt —</span>
+<span class="k">Engine:</span> <span class="v">*</span>
+<span class="k">Spec:</span> <span class="v">/product.aicc.md</span>
+<span class="k">Policy:</span> <span class="v">/.well-known/adp.json</span>
+<span class="k">Allow:</span> <span class="v">read</span>
+<span class="k">Allow:</span> <span class="v">propose</span>
+<span class="k">Disallow:</span> <span class="v">write</span>
+<span class="k">Disallow:</span> <span class="v">execute</span>
+<span class="k">Contact:</span> <span class="v">mailto:agents@example.com</span>
+
+<span class="c"># engine-specific record: adds execute on top of the * baseline (§ 3.1 merge)</span>
+<span class="k">Engine:</span> <span class="v">claude-code</span>
+<span class="k">Allow:</span> <span class="v">execute</span>
+
+<span class="c"># effective policy for claude-code: read, propose (inherited) + execute (granted)</span>
+<span class="c"># effective policy for all other engines: read, propose</span></pre>
+
+    <h2 id="appendix-b">Appendix B — Manifest JSON Schema (Normative)</h2>
+    <pre class="block"><span class="c">{</span>
+  <span class="k">"$schema"</span><span class="c">:</span> <span class="v">"https://json-schema.org/draft/2020-12/schema"</span><span class="c">,</span>
+  <span class="k">"$id"</span><span class="c">:</span> <span class="v">"https://spec.aicodingconsortium.org/adp/1.0/manifest.json"</span><span class="c">,</span>
+  <span class="k">"type"</span><span class="c">:</span> <span class="v">"object"</span><span class="c">,</span>
+  <span class="k">"required"</span><span class="c">:</span> <span class="v">["adp"]</span><span class="c">,</span>
+  <span class="k">"$defs"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"action"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"enum"</span><span class="c">:</span> <span class="v">["read", "propose", "write", "execute"]</span> <span class="c">}</span> <span class="c">},</span>
+  <span class="k">"properties"</span><span class="c">:</span> <span class="c">{</span>
+    <span class="k">"adp"</span><span class="c">:</span>      <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"string"</span><span class="c">,</span> <span class="k">"pattern"</span><span class="c">:</span> <span class="v">"^1\\.[0-9]+$"</span> <span class="c">},</span>
+    <span class="k">"specs"</span><span class="c">:</span>    <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"array"</span><span class="c">,</span> <span class="k">"items"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"object"</span><span class="c">,</span> <span class="k">"required"</span><span class="c">:</span> <span class="v">["href"]</span><span class="c">,</span> <span class="k">"properties"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"href"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"string"</span><span class="c">},</span> <span class="k">"id"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"string"</span><span class="c">},</span> <span class="k">"scope"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"array"</span><span class="c">,</span> <span class="k">"items"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"string"</span><span class="c">}}</span> <span class="c">}</span> <span class="c">}</span> <span class="c">},</span>
+    <span class="k">"policies"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"array"</span><span class="c">,</span> <span class="k">"items"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"object"</span><span class="c">,</span> <span class="k">"required"</span><span class="c">:</span> <span class="v">["engine"]</span><span class="c">,</span> <span class="k">"properties"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"engine"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"string"</span><span class="c">},</span> <span class="k">"allow"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"array"</span><span class="c">,</span> <span class="k">"items"</span><span class="c">:</span> <span class="c">{</span><span class="k">"$ref"</span><span class="c">:</span> <span class="v">"#/$defs/action"</span><span class="c">}},</span> <span class="k">"disallow"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"array"</span><span class="c">,</span> <span class="k">"items"</span><span class="c">:</span> <span class="c">{</span><span class="k">"$ref"</span><span class="c">:</span> <span class="v">"#/$defs/action"</span><span class="c">}}</span> <span class="c">}</span> <span class="c">}</span> <span class="c">},</span>
+    <span class="k">"rate"</span><span class="c">:</span>     <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"object"</span><span class="c">,</span> <span class="k">"properties"</span><span class="c">:</span> <span class="c">{</span> <span class="k">"requests_per_minute"</span><span class="c">:</span> <span class="c">{</span><span class="k">"type"</span><span class="c">:</span> <span class="v">"integer"</span><span class="c">,</span> <span class="k">"minimum"</span><span class="c">:</span> <span class="v">1</span><span class="c">}</span> <span class="c">}</span> <span class="c">},</span>
+    <span class="k">"contact"</span><span class="c">:</span>  <span class="c">{</span> <span class="k">"type"</span><span class="c">:</span> <span class="v">"string"</span> <span class="c">}</span>
+  <span class="c">},</span>
+  <span class="k">"additionalProperties"</span><span class="c">:</span> <span class="v">false</span>
+<span class="c">}</span></pre>
+
+    <footer>
+      <div>© 2026 AI Coding Consortium · AICC-TR-006 · Published under CC-BY-4.0</div>
+      <div style="margin-top:8px;"><a href="../index.html" style="font-family:var(--mono); font-size:12.5px;">← Back to the Consortium</a> · <a href="aicc-core-1.0.html" style="font-family:var(--mono); font-size:12.5px;">AICC Core 1.0</a></div>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>

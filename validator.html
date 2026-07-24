@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AICC Validator — AI Coding Consortium</title>
+<meta name="description" content="The official AICC validation service. Check any AICC Markdown document against AICC Core 1.0.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --bg-raise: #121316;
+    --bg-raise-2: #17181c;
+    --ink: #e9e7e2;
+    --ink-dim: #9b9994;
+    --ink-faint: #8a8781;
+    --border: rgba(128, 128, 128, 0.5);
+    --border-soft: rgba(128, 128, 128, 0.28);
+    --accent: #e0b84f;
+    --accent-ink: #14100a;
+    --ok: #58b98a;
+    --err: #d97066;
+    --warn: #e0b84f;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+    --sans: "IBM Plex Sans", system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 15.5px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(12,13,15,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .in {
+    max-width: 1240px; margin: 0 auto; padding: 0 32px;
+    height: 56px; display: flex; align-items: center; gap: 16px;
+  }
+  .topbar .seal {
+    font-family: var(--mono); font-weight: 600; font-size: 13px;
+    letter-spacing: 0.08em; border: 1px solid var(--border);
+    padding: 2px 7px; color: var(--accent);
+  }
+  .topbar a { border: none; }
+  .topbar .crumb { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); }
+  .topbar .crumb b { color: var(--ink-dim); font-weight: 500; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 48px 32px 120px; }
+
+  .kicker {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.2; margin-bottom: 8px;
+  }
+  .sub { color: var(--ink-dim); max-width: 640px; margin-bottom: 40px; }
+  .sub code { font-family: var(--mono); font-size: 0.86em; background: var(--bg-raise-2); border: 1px solid var(--border-soft); padding: 1px 6px; }
+
+  .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: start; }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel { border: 1px solid var(--border); background: var(--bg-raise); }
+  .panel .bar {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border-soft);
+    padding: 10px 16px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-faint);
+    flex-wrap: wrap;
+  }
+  .bar .actions { display: flex; gap: 8px; }
+  .chip {
+    font-family: var(--mono); font-size: 11.5px; cursor: pointer;
+    background: transparent; color: var(--ink-dim);
+    border: 1px solid var(--border); padding: 5px 11px;
+  }
+  .chip:hover { color: var(--ink); border-color: var(--ink-dim); }
+
+  textarea {
+    display: block; width: 100%; min-height: 520px; resize: vertical;
+    background: transparent; color: var(--ink);
+    border: none; outline: none;
+    font-family: var(--mono); font-size: 13px; line-height: 1.7;
+    padding: 18px 20px;
+    tab-size: 2;
+  }
+
+  .btn {
+    display: inline-block; font-family: var(--mono); font-size: 13.5px; font-weight: 600;
+    letter-spacing: 0.03em; padding: 12px 26px; cursor: pointer;
+    border: 1px solid var(--accent);
+    background: var(--accent); color: var(--accent-ink);
+    transition: background .15s ease, transform .12s ease;
+  }
+  .btn:hover { background: #ecc55e; }
+  .btn:active { transform: translateY(1px); }
+
+  .verdict {
+    border: 1px solid var(--border); background: var(--bg-raise);
+    padding: 22px 26px; margin-bottom: 20px; display: none;
+  }
+  .verdict.show { display: block; }
+  .verdict .stamp {
+    display: inline-block; font-family: var(--mono); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em; padding: 5px 12px; border: 1.5px solid;
+    margin-bottom: 10px;
+  }
+  .verdict.pass .stamp { color: var(--ok); border-color: var(--ok); }
+  .verdict.fail .stamp { color: var(--err); border-color: var(--err); }
+  .verdict .line { font-family: var(--mono); font-size: 13px; color: var(--ink-dim); }
+  .verdict .line b { color: var(--ink); }
+
+  .findings { list-style: none; }
+  .finding {
+    border: 1px solid var(--border-soft); background: var(--bg-raise);
+    padding: 14px 18px; margin-bottom: 10px;
+    display: grid; grid-template-columns: 72px 1fr; gap: 4px 16px;
+  }
+  .finding .code {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    align-self: start; padding: 3px 0; text-align: center;
+    border: 1px solid;
+  }
+  .finding.error .code { color: var(--err); border-color: var(--err); }
+  .finding.warning .code { color: var(--warn); border-color: var(--warn); }
+  .finding .msg { font-size: 14px; color: var(--ink); }
+  .finding .loc { grid-column: 2; font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); }
+  .finding .ref { grid-column: 2; font-size: 12.5px; color: var(--ink-dim); }
+  .finding .ref a { font-size: 12.5px; }
+
+  .empty {
+    border: 1px dashed var(--border); color: var(--ink-faint);
+    font-family: var(--mono); font-size: 13px;
+    padding: 40px; text-align: center;
+  }
+  footer {
+    border-top: 1px solid var(--border); margin-top: 80px;
+    padding: 28px 32px; font-family: var(--mono); font-size: 12px; color: var(--ink-faint);
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    max-width: 1240px; margin-left: auto; margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="in">
+    <a href="index.html"><span class="seal">AICC</span></a>
+    <span class="crumb"><b>Services</b> / AICC Validation Service</span>
+    <span style="margin-left:auto;"><a class="crumb" href="spec/aicc-core-1.0.html" style="border-bottom:1px solid var(--border);">AICC Core 1.0 ↗</a></span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="kicker">Official Validation Service</div>
+  <h1>AICC Validator</h1>
+  <p class="sub">
+    Paste a <code>.aicc.md</code> document and validate it against
+    <a href="spec/aicc-core-1.0.html">AICC Core — Level 1.0</a>. The validator implements the
+    normative error taxonomy of <a href="spec/aicc-core-1.0.html#errors">§ 10.3</a> and runs
+    entirely in your browser — nothing is uploaded.
+  </p>
+
+  <div class="grid">
+    <div>
+      <div class="panel">
+        <div class="bar">
+          <span>INPUT — document source</span>
+          <span class="actions">
+            <button class="chip" onclick="loadExample('valid')">Load valid example</button>
+            <button class="chip" onclick="loadExample('broken')">Load broken example</button>
+            <button class="chip" onclick="document.getElementById('src').value=''">Clear</button>
+          </span>
+        </div>
+        <textarea id="src" spellcheck="false" aria-label="AICC document source" placeholder="---&#10;aicc: &quot;1.0&quot;&#10;kind: product-spec&#10;id: com.example.app&#10;version: 1.0.0&#10;---&#10;&#10;# My Product&#10;&#10;## Overview&#10;…"></textarea>
+      </div>
+      <div style="margin-top:18px; display:flex; gap:14px; align-items:center;">
+        <button class="btn" onclick="runValidation()">Validate document</button>
+        <span id="meta" style="font-family:var(--mono); font-size:12px; color:var(--ink-faint);"></span>
+      </div>
+    </div>
+
+    <div>
+      <div id="verdict" class="verdict" role="status" aria-live="polite">
+        <span class="stamp" id="verdict-stamp"></span>
+        <div class="line" id="verdict-line"></div>
+      </div>
+      <ul class="findings" id="findings" aria-live="polite"></ul>
+      <div class="empty" id="empty">— results appear here —</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 AI Coding Consortium · AICC Validation Service v1.0</span>
+  <span>Implements AICC-TR-001 § 10.3 · <a href="index.html">aicc home</a></span>
+</footer>
+
+<script>
+"use strict";
+
+/* ---------------- AICC Core 1.0 reference validator ---------------- */
+
+const KIND_ENUM = ["product-spec","feature-spec","agent-config","architecture","constraint-set"];
+const CONF_ENUM = ["basic","strict"];
+const KNOWN_KEYS = ["aicc","kind","id","version","conformance","engines","extends","scope","owner","updated","context-exclude","context-prime"];
+const CANONICAL = {
+  "overview":      "informative",
+  "requirements":  "normative",
+  "constraints":   "directives",
+  "architecture":  "informative",
+  "interfaces":    "normative",
+  "non-goals":     "normative",
+  "glossary":      "informative"
+};
+const REQUIRED_SECTIONS = {
+  "product-spec":   ["overview","requirements"],
+  "feature-spec":   ["overview","requirements"],
+  "agent-config":   ["constraints"],
+  "constraint-set": ["constraints"],
+  "architecture":   []
+};
+const ANNOTATIONS = ["normative","informative","directives","example","deprecated"];
+// Longest-first so "MUST NOT" is not counted as "MUST"
+const KW_RE = /\b(MUST NOT|SHALL NOT|SHOULD NOT|MUST|SHALL|SHOULD|MAY|REQUIRED|RECOMMENDED|OPTIONAL)\b/g;
+
+function validate(text) {
+  const findings = [];
+  const err  = (code, line, msg, ref) => findings.push({code, sev:"error",   line, msg, ref});
+  const warn = (code, line, msg, ref) => findings.push({code, sev:"warning", line, msg, ref});
+
+  const lines = text.replace(/\r\n/g, "\n").split("\n");
+
+  /* --- E101: frontmatter block --- */
+  if (lines[0] !== "---") {
+    err("E101", 1, "Document must begin with a YAML frontmatter block delimited by '---' as its first bytes.", "#docmodel");
+    return { findings, fm: null };
+  }
+  let fmEnd = -1;
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i] === "---") { fmEnd = i; break; }
+  }
+  if (fmEnd === -1) {
+    err("E101", 1, "Frontmatter block is never closed — no terminating '---' found.", "#docmodel");
+    return { findings, fm: null };
+  }
+
+  /* --- minimal YAML subset parser (scalars + inline arrays) --- */
+  const fm = {};
+  for (let i = 1; i < fmEnd; i++) {
+    const raw = lines[i];
+    if (!raw.trim() || raw.trim().startsWith("#")) continue;
+    const m = raw.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!m) {
+      err("E104", i + 1, `Line is outside the Level 1.0 YAML subset (scalars and inline arrays only): "${raw.trim()}"`, "#encoding");
+      continue;
+    }
+    const key = m[1];
+    let val = m[2].trim();
+    if (val.startsWith("[") && val.endsWith("]")) {
+      val = val.slice(1, -1).split(",").map(s => s.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
+    } else {
+      val = val.replace(/^["']|["']$/g, "");
+    }
+    fm[key] = { value: val, line: i + 1 };
+  }
+
+  /* --- E102: required keys & constraints --- */
+  for (const k of ["aicc","kind","id","version"]) {
+    if (!(k in fm)) err("E102", 1, `Required frontmatter key '${k}' is missing.`, "#fm-required");
+  }
+  if (fm.aicc && !/^1\.[0-9]+$/.test(fm.aicc.value))
+    err("E102", fm.aicc.line, `'aicc' must declare a 1.x level (got "${fm.aicc.value}").`, "#fm-required");
+  if (fm.kind && !KIND_ENUM.includes(fm.kind.value))
+    err("E102", fm.kind.line, `'kind' must be one of ${KIND_ENUM.join(", ")} (got "${fm.kind.value}").`, "#fm-required");
+  if (fm.id && !/^[a-z0-9]+(\.[a-z0-9-]+)+$/.test(fm.id.value))
+    err("E102", fm.id.line, `'id' must be a reverse-DNS identifier matching ^[a-z0-9]+(\\.[a-z0-9-]+)+$ (got "${fm.id.value}").`, "#fm-required");
+  if (fm.version && !/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$/.test(fm.version.value))
+    err("E102", fm.version.line, `'version' must be a Semantic Version 2.0.0 string (got "${fm.version.value}").`, "#fm-required");
+  if (fm.conformance && !CONF_ENUM.includes(fm.conformance.value))
+    err("E102", fm.conformance.line, `'conformance' must be 'basic' or 'strict' (got "${fm.conformance.value}").`, "#fm-optional");
+  if (fm.updated && !/^\d{4}-\d{2}-\d{2}$/.test(fm.updated.value))
+    err("E102", fm.updated.line, `'updated' must be an ISO-8601 date (YYYY-MM-DD).`, "#fm-optional");
+
+  /* --- E103: unknown keys --- */
+  for (const k of Object.keys(fm)) {
+    if (!KNOWN_KEYS.includes(k) && !k.startsWith("x-"))
+      err("E103", fm[k].line, `Unknown top-level key '${k}'. Private extensions must use the 'x-' prefix.`, "#fm-optional");
+  }
+
+  /* --- E502: scope + context globs --- */
+  for (const key of ["scope", "context-exclude", "context-prime"]) {
+    if (!fm[key]) continue;
+    const globs = Array.isArray(fm[key].value) ? fm[key].value : [fm[key].value];
+    for (const g of globs) {
+      if (g.startsWith("/") || g.includes(".."))
+        err("E502", fm[key].line, `'${key}' glob "${g}" must be repository-relative and must not escape the root ('..' / absolute paths forbidden).`, "#security");
+    }
+  }
+  if (fm["context-prime"] && Array.isArray(fm["context-prime"].value) && fm["context-prime"].value.length > 8)
+    err("E102", fm["context-prime"].line, `'context-prime' lists ${fm["context-prime"].value.length} paths — the maximum is 8.`, "#context");
+
+  /* --- body: section scan --- */
+  const sections = []; // {name, canon, line, cls, items:[{line,text}], annotated}
+  let cur = null;
+  let inFence = false, fenceChar = "", fenceLen = 0;
+  for (let i = fmEnd + 1; i < lines.length; i++) {
+    const ln = lines[i];
+    const fmk = ln.match(/^ {0,3}(`{3,}|~{3,})/);
+    if (fmk) {
+      if (!inFence) { inFence = true; fenceChar = fmk[1][0]; fenceLen = fmk[1].length; continue; }
+      if (fmk[1][0] === fenceChar && fmk[1].length >= fenceLen) { inFence = false; continue; }
+    }
+    if (inFence) continue;
+
+    const h = ln.match(/^##\s+([^#].*?)\s*(<!--.*-->)?\s*$/);
+    if (h) {
+      const name = h[1].trim();
+      const canon = name.toLowerCase().replace(/\s+/g, "-");
+      cur = { name, canon, line: i + 1, cls: CANONICAL[canon] || null, items: [], annotated: false, annLine: null };
+      sections.push(cur);
+      // annotation on heading line
+      const annHere = (h[2] || "").match(/@aicc:([a-z-]+)/);
+      // or on the immediately following line
+      let annNext = null;
+      if (!annHere && lines[i+1]) {
+        const nm = lines[i+1].match(/^\s*<!--\s*@aicc:([a-z-]+)([^>]*)-->\s*$/);
+        if (nm) annNext = nm;
+      }
+      const ann = annHere ? annHere[1] : (annNext ? annNext[1] : null);
+      /* unknown @aicc annotations are ignored (§ 3.2) and do not satisfy § 10.1 */
+      if (ann && ANNOTATIONS.includes(ann)) {
+        cur.annotated = true;
+        cur.annLine = i + 1;
+        cur.cls = ann === "deprecated" ? "deprecated" : ann;
+      }
+      continue;
+    }
+
+    /* --- E401: stray annotation not attached to a heading --- */
+    const stray = ln.match(/^\s*<!--\s*@aicc:([a-z-]+)([^>]*)-->\s*$/);
+    if (stray) {
+      const prev = lines[i-1] || "";
+      const attached = /^#{1,6}\s/.test(prev.trim());
+      if (!attached && ANNOTATIONS.includes(stray[1]))
+        err("E401", i + 1, `Annotation '@aicc:${stray[1]}' must appear on, or immediately after, a heading line.`, "#annotations");
+      continue;
+    }
+
+    const im = cur && ln.match(/^\s*(?:[-*+]|\d{1,3}[.)])\s+(.*)$/);
+    if (im) {
+      let text = im[1], rid = null;
+      const idm = text.match(/^\[([A-Z][A-Z0-9]{0,7}-[0-9]{1,5})\]\s*/);
+      if (idm) { rid = idm[1]; text = text.slice(idm[0].length); }
+      cur.items.push({ line: i + 1, text, rid });
+    }
+  }
+
+  /* --- E201: required canonical sections for kind --- */
+  const kind = fm.kind ? fm.kind.value : null;
+  if (kind && REQUIRED_SECTIONS[kind]) {
+    for (const req of REQUIRED_SECTIONS[kind]) {
+      if (!sections.some(s => s.canon === req))
+        err("E201", 1, `Documents of kind '${kind}' must contain the canonical section '## ${req[0].toUpperCase() + req.slice(1)}'.`, "#taxonomy");
+    }
+  }
+
+  /* --- E301 / E302 / E303 / E202: keyword + identifier discipline --- */
+  const strict = fm.conformance && fm.conformance.value === "strict";
+  let strictViolations = 0;
+  const seenIds = new Set();
+  for (const s of sections) {
+    const isNormative = s.cls === "normative" || s.cls === "directives";
+    const isNonNormative = s.cls === "informative" || s.cls === "example" || s.cls === "deprecated";
+    if (isNormative) {
+      const withId = s.items.filter(it => it.rid).length;
+      for (const it of s.items) {
+        const n = (it.text.match(KW_RE) || []).length;
+        if (n !== 1) {
+          strictViolations++;
+          const msg = n === 0
+            ? `Requirement in normative section '## ${s.name}' contains no RFC-2119 keyword.`
+            : `Requirement in normative section '## ${s.name}' contains ${n} RFC-2119 keywords — exactly one is allowed.`;
+          if (strict) err("E301", it.line, msg, "#keywords");
+          else warn("E301", it.line, msg + " (error in class strict)", "#keywords");
+        }
+        if (it.rid) {
+          if (seenIds.has(it.rid)) {
+            strictViolations++;
+            (strict ? err : warn)("E303", it.line, `Duplicate requirement identifier [${it.rid}] — identifiers must be unique in the effective document (§ 6.2).`, "#req-ids");
+          }
+          seenIds.add(it.rid);
+        }
+      }
+      if (withId > 0 && withId < s.items.length) {
+        strictViolations++;
+        (strict ? err : warn)("E303", s.line, `Section '## ${s.name}' mixes identified and unidentified requirements — in class strict, all or none carry identifiers (§ 6.2).`, "#req-ids");
+      }
+    } else if (isNonNormative || s.cls === null) {
+      for (const it of s.items) {
+        if ((it.text.match(KW_RE) || []).length > 0)
+          warn("E302", it.line, `RFC-2119 keyword found in ${s.cls === null ? "unclassified" : "non-normative"} section '## ${s.name}' — likely a misplaced requirement.`, "#keywords");
+      }
+    }
+    /* strict: non-canonical sections must be annotated (E202) */
+    if (!CANONICAL[s.canon] && !s.annotated) {
+      strictViolations++;
+      if (strict) err("E202", s.line, `Class 'strict' requires every non-canonical section to carry an explicit @aicc annotation ('## ${s.name}' has none).`, "#classes");
+    }
+  }
+
+  /* --- E501: extends sanity (single-file heuristics) --- */
+  if (fm.extends && typeof fm.extends.value === "string") {
+    if (fm.extends.value.includes(".."))
+      err("E501", fm.extends.line, `'extends' must not escape the repository root.`, "#composition");
+  }
+
+  return { findings, fm, sections, strictViolations };
+}
+
+/* ---------------- UI ---------------- */
+
+function runValidation() {
+  const src = document.getElementById("src").value;
+  const out = document.getElementById("findings");
+  const verdict = document.getElementById("verdict");
+  const empty = document.getElementById("empty");
+  out.innerHTML = "";
+
+  if (!src.trim()) {
+    empty.style.display = "block";
+    empty.textContent = "— paste a document first —";
+    verdict.classList.remove("show");
+    return;
+  }
+  empty.style.display = "none";
+
+  const t0 = performance.now();
+  const { findings, fm, strictViolations } = validate(src);
+  const ms = (performance.now() - t0).toFixed(1);
+
+  const errors = findings.filter(f => f.sev === "error").length;
+  const warnings = findings.filter(f => f.sev === "warning").length;
+
+  const claimedRaw = fm && fm.conformance ? fm.conformance.value : "basic";
+  const claimed = CONF_ENUM.includes(claimedRaw) ? claimedRaw : "invalid";
+  let achieved = "—";
+  if (errors === 0) achieved = (strictViolations === 0 && warnings === 0) ? "AA (strict)" : "A (basic)";
+
+  verdict.classList.add("show");
+  verdict.classList.toggle("pass", errors === 0);
+  verdict.classList.toggle("fail", errors > 0);
+  document.getElementById("verdict-stamp").textContent =
+    errors === 0 ? "✓  DOCUMENT CONFORMS" : "✗  DOES NOT CONFORM";
+  document.getElementById("verdict-line").innerHTML =
+    `AICC/1.0 · claimed class: <b>${claimed}</b> · achieved: <b>${achieved}</b> · ` +
+    `<b>${errors}</b> error${errors===1?"":"s"} · <b>${warnings}</b> warning${warnings===1?"":"s"}`;
+  document.getElementById("meta").textContent = `validated in ${ms} ms · ${src.split("\n").length} lines`;
+
+  for (const f of findings.sort((a,b) => (a.sev===b.sev ? a.line-b.line : a.sev==="error" ? -1 : 1))) {
+    const li = document.createElement("li");
+    li.className = "finding " + f.sev;
+    li.innerHTML =
+      `<span class="code">${f.code}</span>` +
+      `<span class="msg"></span>` +
+      `<span class="loc">line ${f.line} · ${f.sev.toUpperCase()}</span>` +
+      `<span class="ref"><a href="spec/aicc-core-1.0.html${f.ref}">specification reference ↗</a></span>`;
+    li.querySelector(".msg").textContent = f.msg;
+    out.appendChild(li);
+  }
+  if (findings.length === 0) {
+    const li = document.createElement("li");
+    li.className = "finding";
+    li.style.borderColor = "var(--ok)";
+    li.innerHTML = `<span class="code" style="color:var(--ok); border-color:var(--ok);">PASS</span>
+      <span class="msg">No findings. This document satisfies every machine-checkable requirement of AICC Core 1.0.</span>`;
+    out.appendChild(li);
+  }
+}
+
+const EXAMPLES = {
+valid: `---
+aicc: "1.0"
+kind: product-spec
+id: com.example.checkout
+version: 2.3.0
+conformance: strict
+engines: [claude-code, cursor]
+scope: ["src/checkout/**"]
+owner: payments-team
+updated: 2026-07-24
+---
+
+# Checkout Service
+
+## Overview
+Handles cart-to-payment conversion for all storefronts.
+Talks to the PSP via the payments gateway; never directly.
+
+## Requirements
+- Payments MUST be idempotent per order id.
+- The API MUST NOT expose card data in any response or log.
+- Checkout MUST complete in under 2 s at p95.
+- Retries SHOULD use exponential backoff with jitter.
+
+## Non-Goals
+- Subscription billing MUST NOT be implemented in this service.
+
+## Constraints <!-- @aicc:directives -->
+- Engines MUST run \`pnpm test --filter checkout\` before proposing a commit.
+- Engines MUST NOT modify files under \`migrations/\`.
+
+## Glossary <!-- @aicc:informative -->
+- **PSP** — Payment Service Provider.
+`,
+broken: `---
+aicc: "2.5"
+kind: productspec
+id: Checkout!
+version: v2
+team: payments
+scope: ["../../etc/**"]
+conformance: strict
+---
+
+# Checkout Service
+
+## Requirements
+- Use retries and MUST log failures, SHOULD alert too.
+- Payments need to be idempotent somehow.
+
+## Random Notes
+- The gateway MUST be nice to use.
+
+<!-- @aicc:normative -->
+`
+};
+
+function loadExample(which) {
+  document.getElementById("src").value = EXAMPLES[which];
+  runValidation();
+}
+</script>
+
+</body>
+</html>

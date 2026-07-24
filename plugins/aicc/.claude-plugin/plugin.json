@@ -1,0 +1,8 @@
+{
+  "name": "aicc",
+  "version": "1.0.0",
+  "description": "AICC Markdown support for Claude Code: author spec files that every AI code engine can parse, validate them against AICC Core 1.0, and adopt context directives that cut token usage.",
+  "author": { "name": "AI Coding Consortium", "url": "https://aicodingconsortium.org" },
+  "homepage": "https://github.com/instabytemedia/aicoding-consortium",
+  "license": "MIT"
+}
