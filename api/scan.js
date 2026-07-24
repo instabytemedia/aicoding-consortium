@@ -5,17 +5,66 @@
 const TIMEOUT_MS = 5000;
 const MAX_BYTES = 512 * 1024;
 
-const PRIVATE_HOST = /^(localhost|127\.|10\.|192\.168\.|169\.254\.|0\.|\[?::1\]?$|172\.(1[6-9]|2\d|3[01])\.)/i;
+const PRIVATE_HOST = /^(localhost|localhost\.|.*\.local|.*\.internal|metadata\.google\.internal)$/i;
+
+import { lookup } from "node:dns/promises";
+
+function isPrivateIp(ip) {
+  if (ip.includes(":")) {
+    const v6 = ip.toLowerCase();
+    return v6 === "::1" || v6 === "::" || v6.startsWith("fe80") || v6.startsWith("fc") ||
+           v6.startsWith("fd") || v6.startsWith("::ffff:") || v6.startsWith("64:ff9b");
+  }
+  const p = ip.split(".").map(Number);
+  if (p.length !== 4 || p.some(n => Number.isNaN(n))) return true;
+  return p[0] === 0 || p[0] === 10 || p[0] === 127 ||
+         (p[0] === 100 && p[1] >= 64 && p[1] <= 127) ||
+         (p[0] === 169 && p[1] === 254) ||
+         (p[0] === 172 && p[1] >= 16 && p[1] <= 31) ||
+         (p[0] === 192 && p[1] === 168) ||
+         (p[0] === 192 && p[1] === 0) ||
+         (p[0] === 198 && (p[1] === 18 || p[1] === 19)) ||
+         p[0] >= 224;
+}
+
+async function assertPublicUrl(urlStr) {
+  const u = new URL(urlStr);
+  if (u.protocol !== "https:") throw new Error("https only");
+  if (u.port && u.port !== "443") throw new Error("port 443 only");
+  if (PRIVATE_HOST.test(u.hostname) || !u.hostname.includes(".")) throw new Error("public hosts only");
+  if (/^\[?[0-9a-f:.]+\]?$/i.test(u.hostname) && /[:]/.test(u.hostname)) throw new Error("ip literals rejected");
+  if (/^\d+(\.\d+){0,3}$/.test(u.hostname)) throw new Error("ip literals rejected");
+  const addrs = await lookup(u.hostname, { all: true, verbatim: true });
+  if (!addrs.length || addrs.some(a => isPrivateIp(a.address))) throw new Error("resolves to non-public address");
+  return u;
+}
+
+async function fetchGuarded(urlStr, opts, ctrl) {
+  // manual redirect following: every hop is re-validated against the SSRF rules
+  let current = urlStr;
+  for (let hop = 0; hop < 3; hop++) {
+    await assertPublicUrl(current);
+    const res = await fetch(current, {
+      redirect: "manual",
+      signal: ctrl.signal,
+      headers: { "user-agent": "aicc-scanner/1.0 (+https://aicoding-consortium.vercel.app/scanner.html)", ...(opts.headers || {}) },
+    });
+    if (res.status >= 301 && res.status <= 308) {
+      const loc = res.headers.get("location");
+      if (!loc) return res;
+      current = new URL(loc, current).href;
+      continue;
+    }
+    return res;
+  }
+  throw new Error("too many redirects");
+}
 
 async function probe(base, path, opts = {}) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(base + path, {
-      redirect: "follow",
-      signal: ctrl.signal,
-      headers: { "user-agent": "aicc-scanner/1.0 (+https://aicoding-consortium.vercel.app/scanner.html)", ...(opts.headers || {}) },
-    });
+    const res = await fetchGuarded(base + path, opts, ctrl);
     let body = "";
     if (res.ok && opts.body !== false) {
       const reader = res.body.getReader();
@@ -47,8 +96,8 @@ export default async function handler(req, res) {
   if (!/^https?:\/\//i.test(raw)) raw = "https://" + raw;
   let u;
   try { u = new URL(raw); } catch { return res.status(400).json({ error: "invalid url" }); }
-  if (u.protocol !== "https:") return res.status(400).json({ error: "https origins only" });
-  if (PRIVATE_HOST.test(u.hostname) || !u.hostname.includes(".")) return res.status(400).json({ error: "public origins only" });
+  if (raw.length > 300) return res.status(400).json({ error: "url too long" });
+  try { u = await assertPublicUrl(u.href); } catch (e) { return res.status(400).json({ error: e.message }); }
   const base = u.origin;
 
   const checks = [];
