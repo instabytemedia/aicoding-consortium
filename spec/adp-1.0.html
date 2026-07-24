@@ -192,6 +192,7 @@
       <a href="#caching">6. Caching</a>
       <a href="#conformance">7. Conformance</a>
       <a href="#security">8. Security Considerations</a>
+      <a href="#level11">9. Level 1.1 Preview</a>
       <a href="#appendix-a">Appendix A. Complete Example</a>
       <a href="#appendix-b">Appendix B. Manifest JSON Schema</a>
     </div>
@@ -446,6 +447,71 @@
       <li><strong>Fingerprinting.</strong> <code>Agent-Profile</code> identifies engine software, not users. Engines <span class="kw">MUST NOT</span> embed user-identifying data in it.</li>
       <li><strong>Cross-origin spec references.</strong> A <code>Spec:</code> pointing at a foreign origin <span class="kw">MAY</span> be fetched, and only under all of these conditions: HTTPS only; no redirects to a third origin; no private, loopback, or link-local address targets; a response-size cap. Content fetched cross-origin is <em>informative only</em> — it <span class="kw">MUST NOT</span> contribute directives or requirements, preventing both third-party steering and the use of <code>agents.txt</code> as an SSRF vector.</li>
     </ul>
+
+    <h2 id="level11"><span class="no">9</span>Level 1.1 — The Efficient Agent Web (Editor's Draft)</h2>
+    <div class="note">
+      <p>This section is an <strong>Editor's Draft preview</strong> of ADP Level 1.1. Nothing here
+      is normative yet. It exists so origins and engines can see where the protocol is going and
+      comment early. Every feature below answers one question, asked from the engine's chair:
+      <em>what would let an agent do this task with fewer requests and fewer tokens?</em></p>
+    </div>
+
+    <h3><span class="no">9.1</span>Agent Content Negotiation</h3>
+    <p>
+      A typical page spends over 95% of its bytes on markup an agent discards. Level 1.1 lets an
+      origin serve a content-equivalent markdown representation of any resource via standard HTTP
+      content negotiation: a request carrying <code>Accept: text/markdown</code> and an
+      <code>Agent-Profile</code> header receives <code>text/markdown</code> with
+      <code>Vary: Accept, Agent-Profile</code>. Same URL, same cache, no parallel file tree —
+      and one to two orders of magnitude fewer tokens per page read.
+    </p>
+
+    <h3><span class="no">9.2</span>Action Manifest</h3>
+    <p>
+      Driving a UI costs an agent dozens of observe-act round trips. Level 1.1 extends
+      <code>adp.json</code> with an <code>actions</code> array: each entry declares an operation
+      (<code>id</code>, <code>method</code>, <code>href</code>, JSON-Schema
+      <code>params</code>, and its ADP action class), so "search", "add-to-cart" or
+      "open-issue" become one declared API call instead of fifteen DOM interactions. Grants
+      follow the § 3.1 escalation ladder unchanged.
+    </p>
+
+    <h3><span class="no">9.3</span>Content Trust Labels</h3>
+    <p>
+      The defining security problem of the agent web is that pages mix an origin's own content
+      with third-party text (comments, reviews, user bios) that may contain instructions aimed at
+      agents. Level 1.1 defines <code>data-agent-trust="first-party | ugc | syndicated"</code>:
+      engines treat everything below a <code>ugc</code> boundary as data, never as instructions —
+      the same rule AICC Core § 8.2 already applies to untrusted repository content, extended to
+      markup.
+    </p>
+
+    <h3><span class="no">9.4</span>Structured Agent Errors</h3>
+    <p>
+      A "200 OK" carrying an error modal costs an agent a full parse to discover it failed.
+      Level 1.1 requires origins that accept <code>Agent-Intent</code> to answer agent-visible
+      failures with <a href="https://www.rfc-editor.org/rfc/rfc9457">RFC 9457</a>
+      <code>application/problem+json</code> plus an <code>Agent-Error</code> header
+      (<code>rate-limited; retry-after=30</code>, <code>auth-required</code>,
+      <code>action-disallowed</code>) — machine-branchable, zero scraping.
+    </p>
+
+    <h3><span class="no">9.5</span>Human Handoff</h3>
+    <p>
+      When a flow reaches a step agents must not complete alone (login, CAPTCHA, payment
+      confirmation), the origin answers with <code>Agent-Error: handoff-required</code> and an
+      <code>Agent-Handoff: &lt;url&gt;</code> — a deep link the engine hands its user, resuming
+      the task after the human step, instead of failing opaquely.
+    </p>
+
+    <h3><span class="no">9.6</span>Stable Anchors &amp; State Validation</h3>
+    <p>
+      Where DOM interaction remains necessary, <code>data-agent-id</code> gives interactive
+      elements identifiers that survive redesigns, collapsing retry loops. And an
+      <code>Agent-State</code> response header (a content-semantic hash) lets an agent revalidate
+      a previously read page with one conditional request — the ETag idea, applied to meaning
+      rather than bytes.
+    </p>
 
     <h2 id="appendix-a">Appendix A — Complete Example</h2>
     <p>A shop that lets any engine read and propose, lets one engine execute, and publishes its spec at the root:</p>
