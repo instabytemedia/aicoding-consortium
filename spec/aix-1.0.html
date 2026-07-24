@@ -84,15 +84,74 @@
   td:first-child { color: var(--ink); }
   footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 32px 0; font-family: var(--mono); font-size: 12px; color: var(--ink-faint); }
 </style>
+<style id="aicc-nav">
+.anav{position:sticky;top:0;z-index:100;background:rgba(12,13,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(128,128,128,.5)}
+.anav .row{max-width:1140px;margin:0 auto;padding:0 32px;height:60px;display:flex;align-items:center;gap:6px}
+.anav .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;border:none;margin-right:auto}
+.anav .brand .seal{font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.08em;border:1px solid rgba(128,128,128,.5);padding:3px 8px;color:var(--accent)}
+.anav .brand .bname{font-family:var(--serif);font-size:16.5px;font-weight:500;color:var(--ink)}
+.anav a{border:none;text-decoration:none}
+.anav .lnk,.anav summary{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink-dim);padding:8px 12px;cursor:pointer;list-style:none;display:block;white-space:nowrap}
+.anav summary::-webkit-details-marker{display:none}
+.anav summary::after{content:" ▾";font-size:10px;color:var(--ink-faint)}
+.anav .lnk:hover,.anav summary:hover{color:var(--ink)}
+.anav .lnk.on{color:var(--accent)}
+.anav details{position:relative}
+.anav details[open] summary{color:var(--ink)}
+.anav .menu{position:absolute;top:calc(100% + 10px);left:0;min-width:290px;background:#121316;border:1px solid rgba(128,128,128,.5);padding:8px 0;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.anav .menu a{display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding:8px 18px;font-size:13.5px;color:var(--ink-dim);white-space:nowrap}
+.anav .menu a:hover{color:var(--ink);background:rgba(128,128,128,.08)}
+.anav .menu a.on{color:var(--accent)}
+.anav .menu .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase;white-space:nowrap}
+.anav .menu .sep{height:1px;background:rgba(128,128,128,.28);margin:7px 0}
+.anav .cta{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.03em;background:var(--accent);color:var(--accent-ink);padding:9px 16px;margin-left:10px;white-space:nowrap}
+.anav .cta:hover{background:#ecc55e;color:var(--accent-ink)}
+@media(max-width:960px){.anav .row{height:auto;flex-wrap:wrap;padding:10px 20px;gap:2px}.anav .brand{width:100%;padding:4px 0 8px}.anav .brand .bname{font-size:15px}.anav .menu{position:static;box-shadow:none;border-left:2px solid rgba(128,128,128,.28);border-top:none;border-right:none;border-bottom:none;min-width:0;margin:2px 0 6px 12px;padding:0}.anav .cta{margin-left:auto}}
+</style>
 </head>
 <body>
-
-<div class="topbar">
-  <div class="in">
-    <a href="../index.html"><span class="seal">AICC</span></a>
-    <span class="crumb"><b>Technical Reports</b> / AICC-TR-008 / AIX — Agent Content Index 1.0</span>
+<nav class="anav" aria-label="Main">
+  <div class="row">
+    <a class="brand" href="../index.html"><span class="seal">AICC</span><span class="bname">AI Coding Consortium</span></a>
+    <details><summary>Standards</summary>
+      <div class="menu">
+        <a href="../spec/aicc-core-1.0.html">AICC Core 1.0 <span class="tag">Candidate Rec.</span></a>
+        <a href="../spec/adp-1.0.html">ADP — Agent Discovery &amp; Policy <span class="tag">Working Draft</span></a>
+        <a class="on" href="../spec/aix-1.0.html">AIX — Content Index <span class="tag">Editor's Draft</span></a>
+        <a href="../spec/interop-1.0.html">Interop Mappings <span class="tag">Editor's Draft</span></a>
+        <div class="sep"></div>
+        <a href="../spec/aqp-1.0.html">AQP — Query Protocol <span class="tag">Editor's Draft</span></a>
+        <a href="../spec/chunks-1.0.html">Chunk Addressing <span class="tag">Editor's Draft</span></a>
+        <a href="../spec/provenance-1.0.html">Provenance &amp; Freshness <span class="tag">Editor's Draft</span></a>
+        <a href="../spec/economics-1.0.html">Crawl Economics <span class="tag">Editor's Draft</span></a>
+        <a href="../spec/identity-1.0.html">Agent Identity <span class="tag">Editor's Draft</span></a>
+        <a href="../spec/licensing-1.0.html">AI Licensing Signals <span class="tag">Editor's Draft</span></a>
+      </div>
+    </details>
+    <a class="lnk" href="../stack.html">Stack</a>
+    <details><summary>Tools</summary>
+      <div class="menu">
+        <a href="../validator.html">Spec Validator <span class="tag">In-browser</span></a>
+        <a href="../scanner.html">Readiness Scanner <span class="tag">Live</span></a>
+        <a href="../badges.html">Badges <span class="tag">Earned</span></a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium#claude-code-plugin">Claude Code Plugin <span class="tag">GitHub</span></a>
+      </div>
+    </details>
+    <details><summary>Community</summary>
+      <div class="menu">
+        <a href="../adopters.html">Adopter Directory</a>
+        <a href="../index.html#governance">Governance &amp; Process</a>
+        <a href="../index.html#membership">Membership</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/NEWS.md">News</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium">GitHub</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/discussions">Discussions</a>
+      </div>
+    </details>
+    <a class="cta" href="../scanner.html">Scan your site</a>
   </div>
-</div>
+</nav>
+<script>document.addEventListener('click',e=>{document.querySelectorAll('.anav details[open]').forEach(d=>{if(!d.contains(e.target))d.removeAttribute('open')})});</script>
+
 
 <div class="layout">
   <nav class="toc">

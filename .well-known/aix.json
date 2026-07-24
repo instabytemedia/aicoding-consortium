@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-24T22:02:12.096Z",
+  "generated": "2026-07-24T22:05:36.018Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -70,8 +70,8 @@
       "url": "/adopters.html",
       "title": "Adopters — AI Coding Consortium",
       "summary": "Origins that are ready for the agent web: the public AICC adopter directory. Verified via the Agent-Readiness Scanner.",
-      "hash": "sha256-5d791fa5749acf8252158f3be973e94d79d760d744411e163c33fb0032253321",
-      "tokens": 139,
+      "hash": "sha256-3c9fb54250124fa7d8845f6c07c11878d025a531ba91bdc4745679af39f0a262",
+      "tokens": 275,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -79,8 +79,8 @@
       "url": "/badges.html",
       "title": "Badges — AI Coding Consortium",
       "summary": "Show that your site is ready for the agent web: AICC badges for adopters, earned via the Agent-Readiness Scanner.",
-      "hash": "sha256-e95b0afc2b44434f01827421fa64ed9565a84a7173884c45356c3569305ed297",
-      "tokens": 325,
+      "hash": "sha256-2698293f40d3ac09be9898c8810dc7907daa0a6973230b563374115195950905",
+      "tokens": 464,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -97,8 +97,8 @@
       "url": "/index.html",
       "title": "AI Coding Consortium — The Open Standard for AI-Readable Specifications",
       "summary": "The AI Coding Consortium (AICC) maintains AICC Markdown, the open specification standard consumed by AI code engines, and ADP, the agent-web policy layer. One format. Every engine.",
-      "hash": "sha256-85c8c9fa841f5d3146a64f3793d60830295a97eddd4f157ea4ee6f631c929c36",
-      "tokens": 2065,
+      "hash": "sha256-704c6420b4b51f071201722b0bb1e4a7ebc2ea15bf9d10380eb384c3e821ad8b",
+      "tokens": 2183,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -151,8 +151,8 @@
       "url": "/scanner.html",
       "title": "Agent-Readiness Scanner — AI Coding Consortium",
       "summary": "Is your site ready for the agent web? Scan any origin for agents.txt, ADP policy, AIX index and markdown negotiation — get a grade from A to F.",
-      "hash": "sha256-1cd5b13862940d82d7bd8c3139ea38904901071850dc876f731a27bb05cc44cf",
-      "tokens": 133,
+      "hash": "sha256-b44e8053c24ad5c71c861275f6b072d8d34d56f9568c93020d9d5b6a978c6f9b",
+      "tokens": 262,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -160,8 +160,8 @@
       "url": "/spec/adp-1.0.html",
       "title": "ADP — Agent Discovery &amp; Policy 1.0 | AICC Technical Report 006",
       "summary": "ADP 1.0 — the discovery and policy layer for the agent-native web: agents.txt, the /.well-known/adp.json manifest, and HTTP signalling for AI code engines.",
-      "hash": "sha256-da90b754ee94382f76af62aa5835980aa456876f11285aacce45fa90dc19cac7",
-      "tokens": 4134,
+      "hash": "sha256-02ca2ff0803580d8690f2c6faec567b9b15c8e62b46ad6bc04e106192c13983c",
+      "tokens": 4260,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -169,8 +169,8 @@
       "url": "/spec/aicc-core-1.0.html",
       "title": "AICC Core — Level 1.0 | AICC Technical Report 001",
       "summary": "AICC Core 1.0 — the normative specification for AICC Markdown, the open standard format consumed by AI code engines.",
-      "hash": "sha256-e4a89487a5b76d943d8b71aea03fc67d696e791975e38f2cbebf829932415da5",
-      "tokens": 6070,
+      "hash": "sha256-1aa3a734a23526fb67b14e01bb6ff2092638e5dae4242728a82a3bf6cabc3230",
+      "tokens": 6200,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -178,8 +178,8 @@
       "url": "/spec/aix-1.0.html",
       "title": "AIX — Agent Content Index 1.0 | AICC Technical Report 008",
       "summary": "AICC-TR-008 — AIX, the agent-native successor to sitemap.xml: a machine-readable content index with summaries, content hashes and token costs, enabling differential crawling.",
-      "hash": "sha256-02047a37928e3c29f045ddce7041cd13a0ba6fd982cd5232bab6db49832b4869",
-      "tokens": 2591,
+      "hash": "sha256-8e2b2d3e5acb43034a37677efbf0a73ff83e59af51ce5ad7dab02292b3a18fab",
+      "tokens": 2719,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -187,8 +187,8 @@
       "url": "/spec/aqp-1.0.html",
       "title": "AQP — Agent Query Protocol 1.0 | AICC Technical Report 009",
       "summary": "AICC-TR-009 — a declared query endpoint that replaces multi-page crawling with one grounded question.",
-      "hash": "sha256-359235c7b1f271d67843d278d6bb8f2b9016d7e9163cf312e81a5b2c848a5cf0",
-      "tokens": 684,
+      "hash": "sha256-aad88ad87ddf1dd0da2827ce146c50679fbe6e34a36973b189570bb5cc310d22",
+      "tokens": 818,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -196,8 +196,8 @@
       "url": "/spec/chunks-1.0.html",
       "title": "Chunk Addressing 1.0 | AICC Technical Report 010",
       "summary": "AICC-TR-010 — stable fragment identity for web content: id grammar, stability rules, hashing, and the citation format.",
-      "hash": "sha256-2b13122fdde4fc4c651e1983c8fb56c1b1e1c9a33ec3f81f65ef0487fcf45145",
-      "tokens": 712,
+      "hash": "sha256-1508ac1dbb2a1e5fcc75665b0c4141fc0756d0b55febcae882db8ae4c75c196c",
+      "tokens": 843,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -205,8 +205,8 @@
       "url": "/spec/economics-1.0.html",
       "title": "Crawl Economics 1.0 | AICC Technical Report 012",
       "summary": "AICC-TR-012 — rate budgets, batch endpoints and HTTP 402 payment negotiation for agent access.",
-      "hash": "sha256-eca41b4f3881bed67fb5a13841148e7f69b11f74c724815b1905de168753fa99",
-      "tokens": 543,
+      "hash": "sha256-f7673e179f78809fba29baeff95791ef3bef493b3e935a7e8e255fdbc10bc86f",
+      "tokens": 675,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -214,8 +214,8 @@
       "url": "/spec/identity-1.0.html",
       "title": "Agent Identity &amp; Attestation 1.0 | AICC Technical Report 013",
       "summary": "AICC-TR-013 — signed agent attestations over HTTP: engine identity, principal class, and verification keys.",
-      "hash": "sha256-38f4cd1635243499e43d08db49d6c580e0c3710af8cb0c6ec23b52ffdd6cc1d0",
-      "tokens": 675,
+      "hash": "sha256-95b66ea76380b7d9f07cd94a5c0cdf684add38d32416fac13af36bcdb292998d",
+      "tokens": 807,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -223,8 +223,8 @@
       "url": "/spec/interop-1.0.html",
       "title": "AICC Interop Mappings 1.0 | AICC Technical Report 005",
       "summary": "AICC-TR-005 — lossless translation between AICC Markdown and engine dialects: CLAUDE.md, AGENTS.md, .cursor/rules, copilot-instructions.md and more.",
-      "hash": "sha256-c2cc8b64d757858cd85ed380f1d7062d98070a213d03c5ec1f93a77f0d2be070",
-      "tokens": 1634,
+      "hash": "sha256-3ababdc66841ea8965447f33f9cd8b1a5e58fe4ec48cde0b66a3a2be99d5f76c",
+      "tokens": 1764,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -232,8 +232,8 @@
       "url": "/spec/licensing-1.0.html",
       "title": "AI Licensing Signals 1.0 | AICC Technical Report 014",
       "summary": "AICC-TR-014 — per-resource AI usage grants (quote/process/train) via AIX entries and the AICC-Usage header.",
-      "hash": "sha256-fbfb2b6a01266d1cf6ffac6e213e81861f460505170f38e922079c71f1187ecb",
-      "tokens": 698,
+      "hash": "sha256-b8ba5e952e2f308cac9bb72a4891520c67e5fef5f2a927186b791690c3c366e2",
+      "tokens": 830,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -241,8 +241,8 @@
       "url": "/spec/provenance-1.0.html",
       "title": "Provenance &amp; Freshness 1.0 | AICC Technical Report 011",
       "summary": "AICC-TR-011 — source classes, verification timestamps, and a signing envelope for web content consumed by agents.",
-      "hash": "sha256-f52f16eef25f8665716f716537f17285e0d4392e8b9801a83caad47fe4952a65",
-      "tokens": 652,
+      "hash": "sha256-30563852cb417f4583867ac9032552c4756e25cfd4b0eda5f8b1ca7e0c9caf29",
+      "tokens": 785,
       "updated": "2026-07-24",
       "type": "docs"
     },
@@ -250,8 +250,8 @@
       "url": "/stack.html",
       "title": "The Agent Web Stack — AI Coding Consortium",
       "summary": "The web was built for browsers. The next decade of traffic will be agents. The Agent Web Stack maps every layer the agent-native web needs — and the AICC standard that covers it.",
-      "hash": "sha256-8a63fec0c75b4fee14a3f618864b4fda5693c1ea84f69316d386f83e702bad4a",
-      "tokens": 917,
+      "hash": "sha256-5ad2ba00514f7d5aaa0b2ed84df848855a7c6dc4df37fb561cd940ed0cf8bf56",
+      "tokens": 1053,
       "updated": "2026-07-24",
       "type": "article"
     },
@@ -259,8 +259,8 @@
       "url": "/validator.html",
       "title": "AICC Validator — AI Coding Consortium",
       "summary": "The official AICC validation service. Check any AICC Markdown document against AICC Core 1.0.",
-      "hash": "sha256-9ffc169a7c841c4aee9db7b7f28f4516c9c1b967528fdb6291adf4e582ac415e",
-      "tokens": 136,
+      "hash": "sha256-67b331900fecf7c552a8a1c9640da2f82b7d412ce98d625dce5f932e0a8781a5",
+      "tokens": 267,
       "updated": "2026-07-24",
       "type": "article"
     }
