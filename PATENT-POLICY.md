@@ -18,4 +18,4 @@ Version 1.0 — normative for all consortium work. Modeled on the W3C Patent Pol
 7. **Non-participants.** Specification text is CC-BY-4.0; this policy binds participants.
    Implementers who are not participants receive the benefit of every §1 grant.
 
-Questions: governance@aicodingconsortium.org (after domain setup) or the public issue tracker.
+Questions: the public issue tracker (email channels follow once the consortium domain is live).

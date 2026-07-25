@@ -22,6 +22,6 @@
       ]
     }
   ],
-  "contact": "mailto:agents@aicodingconsortium.org",
+  "contact": "https://github.com/instabytemedia/aicoding-consortium/discussions",
   "index": "/.well-known/aix.json"
 }

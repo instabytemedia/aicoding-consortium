@@ -22,6 +22,8 @@ and policy layer for the agent-native web. Write once. Parse everywhere.
 | AICC-TR-009…014 | [AQP](spec/aqp-1.0.html) · [Chunk Addressing](spec/chunks-1.0.html) · [Provenance](spec/provenance-1.0.html) · [Crawl Economics](spec/economics-1.0.html) · [Agent Identity](spec/identity-1.0.html) · [AI Licensing](spec/licensing-1.0.html) — [The Agent Web Stack](stack.html) | Editor's Drafts |
 | AICC-TR-002/003/004/007 | Frontmatter Schema · Conformance & Validation · Agent Directives · Media Type Registration (numbers reserved; content currently lives in TR-001/TR-006) | Reserved |
 
+About (plain-language): [about.html](about.html) · Business: [Monetization Plan](docs/monetization-plan.md) + [Growth Playbook](docs/growth-playbook.md)
+
 Community: [Agent-Readiness Scanner](scanner.html) · [Badges](badges.html) · [Adopter Directory](adopters.html) · [Growth Playbook](docs/growth-playbook.md)
 
 See [NEWS.md](NEWS.md) for announcements and [PATENT-POLICY.md](PATENT-POLICY.md) for the RF patent policy.

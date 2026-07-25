@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — AI Coding Consortium</title>
+<meta name="description" content="What the AI Coding Consortium is, in plain language: why the agent-driven web needs standards, what we built, and how you benefit — explained for technical people who don't write specs for a living.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aicoding-consortium.vercel.app/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Consortium">
+<meta property="og:title" content="About the AI Coding Consortium">
+<meta property="og:description" content="Why the agent-driven web needs standards, what we built, and how you benefit.">
+<meta property="og:url" content="https://aicoding-consortium.vercel.app/about.html">
+<meta property="og:image" content="https://aicoding-consortium.vercel.app/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0d0f;--bg-raise:#121316;--bg-raise-2:#17181c;--ink:#e9e7e2;--ink-dim:#9b9994;--ink-faint:#8a8781;--border:rgba(128,128,128,.5);--border-soft:rgba(128,128,128,.28);--accent:#e0b84f;--accent-ink:#14100a;--ok:#58b98a;--mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--serif:"Newsreader",Georgia,serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--accent-ink)}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border)}a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:64px 32px 120px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1.2;margin-bottom:14px}
+h2{font-family:var(--serif);font-weight:400;font-size:1.55rem;margin:64px 0 12px;padding-top:22px;border-top:1px solid var(--border)}
+p{margin:14px 0;color:var(--ink-dim)}
+p strong,li strong{color:var(--ink)}
+ul{margin:14px 0 14px 24px;color:var(--ink-dim)}li{margin:8px 0}
+code{font-family:var(--mono);font-size:.86em;background:var(--bg-raise-2);border:1px solid var(--border-soft);padding:1.5px 6px;color:var(--ink)}
+.big{font-size:18px;color:var(--ink)}
+.card{border:1px solid var(--border);background:var(--bg-raise);padding:22px 26px;margin:18px 0}
+.card h3{font-family:var(--serif);font-weight:500;font-size:1.1rem;margin-bottom:6px}
+.card p{font-size:14.5px;margin:6px 0}
+footer{border-top:1px solid var(--border);padding:28px 32px;font-family:var(--mono);font-size:12px;color:var(--ink-faint);text-align:center}
+</style>
+<style id="aicc-nav">
+.anav{position:sticky;top:0;z-index:100;background:rgba(12,13,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(128,128,128,.5)}
+.anav .row{max-width:1140px;margin:0 auto;padding:0 32px;height:60px;display:flex;align-items:center;gap:6px}
+.anav .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;border:none;margin-right:auto}
+.anav .brand .seal{font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.08em;border:1px solid rgba(128,128,128,.5);padding:3px 8px;color:var(--accent)}
+.anav .brand .bname{font-family:var(--serif);font-size:16.5px;font-weight:500;color:var(--ink)}
+.anav a{border:none;text-decoration:none}
+.anav .links{display:contents}
+.anav .burger{display:none}
+.anav .lnk,.anav summary{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink-dim);padding:8px 12px;cursor:pointer;list-style:none;display:block;white-space:nowrap}
+.anav summary::-webkit-details-marker{display:none}
+.anav summary::after{content:" ▾";font-size:10px;color:var(--ink-faint)}
+.anav .lnk:hover,.anav summary:hover{color:var(--ink)}
+.anav .lnk.on{color:var(--accent)}
+.anav details{position:relative}
+.anav details[open] summary{color:var(--ink)}
+.anav .menu{position:absolute;top:calc(100% + 10px);left:0;min-width:290px;background:#121316;border:1px solid rgba(128,128,128,.5);padding:8px 0;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.anav .menu a{display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding:8px 18px;font-size:13.5px;color:var(--ink-dim);white-space:nowrap}
+.anav .menu a:hover{color:var(--ink);background:rgba(128,128,128,.08)}
+.anav .menu a.on{color:var(--accent)}
+.anav .menu .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase;white-space:nowrap}
+.anav .menu .sep{height:1px;background:rgba(128,128,128,.28);margin:7px 0}
+.anav .cta{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.03em;background:var(--accent);color:var(--accent-ink);padding:9px 16px;margin-left:10px;white-space:nowrap}
+.anav .cta:hover{background:#ecc55e;color:var(--accent-ink)}
+@media(max-width:960px){
+.anav .row{height:56px;padding:0 20px;position:relative}
+.anav .brand .bname{font-size:14.5px}
+.anav .burger{display:block;background:none;border:1px solid rgba(128,128,128,.5);color:var(--ink);font-size:17px;line-height:1;padding:7px 13px;cursor:pointer}
+.anav.open .burger{color:var(--accent);border-color:var(--accent)}
+.anav .links{display:none;position:absolute;top:100%;left:0;right:0;background:#0f1012;border-bottom:1px solid rgba(128,128,128,.5);padding:8px 20px 20px;max-height:calc(100vh - 56px);overflow-y:auto;box-shadow:0 24px 48px rgba(0,0,0,.6)}
+.anav.open .links{display:block}
+.anav .lnk,.anav summary{padding:13px 4px;font-size:15.5px;border-bottom:1px solid rgba(128,128,128,.28);white-space:normal}
+.anav summary::after{float:right}
+.anav details{position:static}
+.anav details:last-of-type summary{border-bottom:1px solid rgba(128,128,128,.28)}
+.anav .menu{position:static;box-shadow:none;border:none;border-left:2px solid rgba(224,184,79,.4);margin:2px 0 10px 8px;min-width:0;padding:2px 0;background:transparent}
+.anav .menu a{white-space:normal;padding:10px 14px;font-size:14px}
+.anav .cta{display:block;text-align:center;margin:18px 0 0;padding:13px}
+}
+</style>
+</head>
+<body>
+<nav class="anav" aria-label="Main">
+  <div class="row">
+    <a class="brand" href="index.html"><span class="seal">AICC</span><span class="bname">AI Coding Consortium</span></a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" onclick="const n=this.closest('.anav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
+    <div class="links">
+    <details><summary>Standards</summary>
+      <div class="menu">
+        <a href="spec/aicc-core-1.0.html">AICC Core 1.0 <span class="tag">Candidate Rec.</span></a>
+        <a href="spec/adp-1.0.html">ADP — Agent Discovery &amp; Policy <span class="tag">Working Draft</span></a>
+        <a href="spec/aix-1.0.html">AIX — Content Index <span class="tag">Editor's Draft</span></a>
+        <a href="spec/interop-1.0.html">Interop Mappings <span class="tag">Editor's Draft</span></a>
+        <div class="sep"></div>
+        <a href="spec/aqp-1.0.html">AQP — Query Protocol <span class="tag">Editor's Draft</span></a>
+        <a href="spec/chunks-1.0.html">Chunk Addressing <span class="tag">Editor's Draft</span></a>
+        <a href="spec/provenance-1.0.html">Provenance &amp; Freshness <span class="tag">Editor's Draft</span></a>
+        <a href="spec/economics-1.0.html">Crawl Economics <span class="tag">Editor's Draft</span></a>
+        <a href="spec/identity-1.0.html">Agent Identity <span class="tag">Editor's Draft</span></a>
+        <a href="spec/licensing-1.0.html">AI Licensing Signals <span class="tag">Editor's Draft</span></a>
+      </div>
+    </details>
+    <a class="lnk" href="stack.html">Stack</a>
+    <a class="lnk on" href="about.html">About</a>
+    <details><summary>Tools</summary>
+      <div class="menu">
+        <a href="validator.html">Spec Validator <span class="tag">In-browser</span></a>
+        <a href="scanner.html">Readiness Scanner <span class="tag">Live</span></a>
+        <a href="badges.html">Badges <span class="tag">Earned</span></a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium#claude-code-plugin">Claude Code Plugin <span class="tag">GitHub</span></a>
+      </div>
+    </details>
+    <details><summary>Community</summary>
+      <div class="menu">
+        <a href="adopters.html">Adopter Directory</a>
+        <a href="index.html#governance">Governance &amp; Process</a>
+        <a href="index.html#membership">Membership</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/NEWS.md">News</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium">GitHub</a>
+        <a href="https://github.com/instabytemedia/aicoding-consortium/discussions">Discussions</a>
+      </div>
+    </details>
+    <a class="cta" href="scanner.html">Scan your site</a>
+    </div>
+  </div>
+</nav>
+<script>document.addEventListener('click',e=>{document.querySelectorAll('.anav details[open]').forEach(d=>{if(!d.contains(e.target))d.removeAttribute('open')})});</script>
+
+<div class="wrap">
+  <div class="kicker">About the Consortium</div>
+  <h1>What this is, in plain language.</h1>
+
+  <p class="big">
+    Software is increasingly written and operated by AI agents — tools like Claude Code that
+    read your project, follow your rules, and do work on your behalf. Soon those agents will
+    also be the web's biggest readers: fetching documentation, comparing products, filing
+    issues, completing transactions. <strong>The AI Coding Consortium exists to give that
+    world rules — open, free, owned by no vendor.</strong> Think of it as what the W3C was for
+    the browser web, built for the agent web.
+  </p>
+
+  <h2>The three problems we solve</h2>
+
+  <div class="card">
+    <h3>1. Every AI tool speaks its own dialect</h3>
+    <p>Teams write the same instructions five times — a <code>CLAUDE.md</code> for one tool, an
+    <code>AGENTS.md</code> for another, <code>.cursorrules</code> for a third. The copies drift
+    apart and none of them can be checked for correctness. Our answer is
+    <a href="spec/aicc-core-1.0.html">AICC Markdown</a>: one file format that every tool can
+    read, precise enough that a validator can prove it's well-formed — the way HTML has one
+    standard instead of one per browser.</p>
+  </div>
+
+  <div class="card">
+    <h3>2. Agents read the web blindly — and wastefully</h3>
+    <p>When an AI agent researches a website today, it downloads whole pages full of menus and
+    trackers to find a paragraph of content, and re-reads everything on every visit because
+    nothing tells it what changed. That waste has a price tag (AI reading is metered in
+    "tokens"). Our answer is a set of small, boring files a site publishes —
+    <a href="spec/adp-1.0.html">agents.txt</a> says what agents may do,
+    <a href="spec/aix-1.0.html">an index</a> says what each page contains and whether it changed.
+    Like <code>robots.txt</code> and sitemaps in the 2000s: one text file, massive effect.</p>
+  </div>
+
+  <div class="card">
+    <h3>3. Nobody agreed on the rules of engagement</h3>
+    <p>May an agent submit a form on your site? Quote your content? Pay for access? Prove who
+    sent it? Today these questions are settled by blocking bots and hoping. The
+    <a href="stack.html">Agent Web Stack</a> drafts answer each one explicitly — permission
+    levels, provenance, payment negotiation, agent identity, content licensing signals.</p>
+  </div>
+
+  <h2>Why should you care?</h2>
+  <p><strong>If you run a website:</strong> agents that can read you cheaply will find, quote,
+  and recommend you; agents that can't will skip you. Being agent-readable is becoming what
+  being Google-indexable was in 2005. <a href="scanner.html">Scan your site</a> — most fixes
+  are a single text file.</p>
+  <p><strong>If you build software with AI tools:</strong> one validated spec file replaces
+  your zoo of instruction files, and features like <code>context-exclude</code> measurably cut
+  what your AI tool reads — which is time and money on every session.
+  There's a <a href="https://github.com/instabytemedia/aicoding-consortium#claude-code-plugin">Claude Code plugin</a>
+  that migrates your existing files in one command.</p>
+  <p><strong>If you make an AI engine:</strong> the standards are vendor-neutral, royalty-free,
+  and come with conformance tests. Adopting them means every AICC-ready site on the internet
+  just became cheaper for your engine to use.</p>
+
+  <h2>Who is behind this — honestly</h2>
+  <p>This is a young initiative, and we label everything by maturity: one standard is feature-
+  frozen (<em>Candidate Recommendation</em>), one is a stable <em>Working Draft</em>, and the
+  frontier layers are <em>Editor's Drafts</em> — published early precisely so they can be
+  challenged. Everything is open source (specs CC-BY-4.0, code MIT, a
+  <a href="https://github.com/instabytemedia/aicoding-consortium/blob/HEAD/PATENT-POLICY.md">royalty-free patent policy</a>),
+  every claim is one click from proof (validators, conformance suite, live scanner), and this
+  very website implements every standard it publishes — it is the first origin to score
+  <a href="scanner.html?url=aicoding-consortium.vercel.app">grade A</a> in its own scanner.
+  What we need next is what every standard needs: adopters, critics, and a second independent
+  implementation. <a href="https://github.com/instabytemedia/aicoding-consortium/discussions">That could be you.</a></p>
+
+  <h2>In one sentence</h2>
+  <p class="big">We write the boring text files that make the AI-driven internet work — open,
+  verifiable, and owned by everyone.</p>
+</div>
+
+<footer>© 2026 AI Coding Consortium · <a href="index.html">home</a> · <a href="stack.html">the stack</a> · <a href="https://github.com/instabytemedia/aicoding-consortium">github</a></footer>
+
+</body>
+</html>

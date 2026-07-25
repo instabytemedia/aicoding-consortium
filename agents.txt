@@ -7,4 +7,4 @@ Allow: read
 Allow: propose
 Disallow: write
 Disallow: execute
-Contact: mailto:agents@aicodingconsortium.org
+Contact: https://github.com/instabytemedia/aicoding-consortium/discussions
