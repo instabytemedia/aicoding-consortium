@@ -2,13 +2,24 @@
   "routes": [
     {
       "src": "/",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
-      "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept, Agent-Profile" },
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Vary": "Accept, Agent-Profile"
+      },
       "dest": "/index.md"
     },
     {
       "src": "/(.*)\\.md",
-      "headers": { "Content-Type": "text/markdown; charset=utf-8" },
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      },
       "continue": true
     },
     {
@@ -16,10 +27,13 @@
       "headers": {
         "ADP-Version": "1.0",
         "Spec-Location": "/product.aicc.md",
-        "Agent-Policy": "allow=(read propose), disallow=(write execute)"
+        "Agent-Policy": "allow=(read propose), disallow=(write execute)",
+        "AICC-Usage": "quote, process"
       },
       "continue": true
     },
-    { "handle": "filesystem" }
+    {
+      "handle": "filesystem"
+    }
   ]
 }

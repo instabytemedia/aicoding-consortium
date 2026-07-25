@@ -23,5 +23,26 @@
     }
   ],
   "contact": "https://github.com/instabytemedia/aicoding-consortium/discussions",
-  "index": "/.well-known/aix.json"
+  "index": "/.well-known/aix.json",
+  "query": {
+    "href": "/api/query",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "class": "read"
+  },
+  "access": [
+    {
+      "id": "free",
+      "rate": {
+        "requests_per_minute": 120
+      },
+      "classes": [
+        "read",
+        "propose"
+      ],
+      "price": null
+    }
+  ]
 }

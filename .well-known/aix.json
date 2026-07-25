@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-25T09:29:46.152Z",
+  "generated": "2026-07-25T09:40:02.011Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -10,7 +10,8 @@
       "hash": "sha256-478fb40e4af270cf36e616104754415905c5d9a3b22fe568d292cd39c98f525b",
       "tokens": 110,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/CONTRIBUTING.md",
@@ -19,7 +20,8 @@
       "hash": "sha256-d3c1e274c444da7d32f57bc6a85e53381805dc5466058b1ca7c938a4dffbd7fa",
       "tokens": 466,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/GOVERNANCE.md",
@@ -28,7 +30,8 @@
       "hash": "sha256-16fcfb0d2dd061b6aa446478bd178a8c2dabbc13b975cded5208dc70abe93133",
       "tokens": 770,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/LICENSE.md",
@@ -37,7 +40,8 @@
       "hash": "sha256-2e2bc14614948cae95e6b369ff43cd553b858a76212857d5b88fa4b73122f78a",
       "tokens": 591,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/NEWS.md",
@@ -46,7 +50,8 @@
       "hash": "sha256-4eea3e723f327c5202d7e27ae56ae8d266719d6af113e42935959724ab9b65d7",
       "tokens": 360,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/PATENT-POLICY.md",
@@ -55,7 +60,8 @@
       "hash": "sha256-b562ad6c8617d29a4347f8511c687d5f6d46585b82e34bdf5635650b5efcdf5d",
       "tokens": 374,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/README.md",
@@ -64,7 +70,8 @@
       "hash": "sha256-1278e74437e865bcd6ccad0be1cf637f66540c092b24020773fb501f6f7315c5",
       "tokens": 983,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/about.html",
@@ -73,7 +80,8 @@
       "hash": "sha256-db108db1611305dbcb2e1bffe1e402cf56d3e60627b594839c3c3a0ac237be5d",
       "tokens": 1042,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     },
     {
       "url": "/adopters.html",
@@ -82,7 +90,8 @@
       "hash": "sha256-654c2b13dfb79893fc83440f440a82cb9b13095c16440c9db60283fe174975c0",
       "tokens": 277,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     },
     {
       "url": "/badges.html",
@@ -91,7 +100,8 @@
       "hash": "sha256-2af9601d17e1c422bd9cdf97964a6a2200e15e12c0aa4c03c027c9e7f3f99fa8",
       "tokens": 466,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     },
     {
       "url": "/examples/product.aicc.md",
@@ -100,16 +110,18 @@
       "hash": "sha256-324cad165fa151dcb888709dab068140d9f3ddabf429bfc115b3c7f520d4206c",
       "tokens": 301,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/index.html",
-      "title": "AI Coding Consortium — The Open Standard for AI-Readable Specifications",
-      "summary": "The AI Coding Consortium (AICC) maintains AICC Markdown, the open specification standard consumed by AI code engines, and ADP, the agent-web policy layer. One format. Every engine.",
-      "hash": "sha256-9982d69587ea19a61c1e906cd3e6fa772789498a8dba8e41d11663aa0cfb32ef",
-      "tokens": 2185,
+      "title": "AI Coding Consortium — The Standards Body for Agent Contracts",
+      "summary": "The contracts AI agents actually read — in your repo and on the web. AICC Markdown replaces the CLAUDE.md sprawl; the Agent Web Stack (agents.txt, AIX, ADP) does what robots.txt never could.",
+      "hash": "sha256-709eea86856273ba55cd3099e9197c30318b4e0fb59767db786dc2ad3e7977e2",
+      "tokens": 2215,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     },
     {
       "url": "/index.md",
@@ -118,7 +130,8 @@
       "hash": "sha256-a1e11b639004a70d172afe2e154140e4f25e4e669296ac2732870412b7cd8d1b",
       "tokens": 548,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/plugins/aicc/commands/aicc-index.md",
@@ -127,7 +140,8 @@
       "hash": "sha256-45155691d3908d8384d5f5a4d7d0f8ad1dfc55eedb105607d3514d8ce5484a3d",
       "tokens": 169,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/plugins/aicc/commands/aicc-migrate.md",
@@ -136,7 +150,8 @@
       "hash": "sha256-1bb76a3d3bd17761efd1e8b8136caf51f7e98fa3f4c5bcc26812c434c920604d",
       "tokens": 163,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/plugins/aicc/commands/aicc-validate.md",
@@ -145,7 +160,8 @@
       "hash": "sha256-48587ce73462189704b88170b6a7240b4997fb0a36ef3687ab1368a57ca5e87e",
       "tokens": 115,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/plugins/aicc/skills/aicc-markdown/SKILL.md",
@@ -154,7 +170,8 @@
       "hash": "sha256-0817ad82763e3f3d95cf2f07090424d41b0f78687b352a9dbd2df16c4ded29b4",
       "tokens": 1085,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/product.aicc.md",
@@ -163,7 +180,8 @@
       "hash": "sha256-370bfb0784f7bc16292caf2c9002fdc1cdb9a1ae28b5c964de2f740ae2eb63e8",
       "tokens": 329,
       "updated": "2026-07-24",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted"
     },
     {
       "url": "/scanner.html",
@@ -172,7 +190,8 @@
       "hash": "sha256-459a8fa82dea5747c68951d79fda1bae2064ebe0c9e884a9df659a937d81dd5c",
       "tokens": 264,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     },
     {
       "url": "/spec/adp-1.0.html",
@@ -181,7 +200,75 @@
       "hash": "sha256-7db5356fa43e0cdca49218660518afe60a0a3cd77030a7bad2c0f091742996ee",
       "tokens": 4262,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "abstract",
+          "hash": "sha256-58f01d4214b31982d306a50cdf67b080477a7e198798675dee22cb84b16489b6",
+          "tokens": 152
+        },
+        {
+          "id": "status",
+          "hash": "sha256-44f1bc287130700d399a3b6af3544f8fa021808bf7ca8f7bc7d2be36219d1084",
+          "tokens": 50
+        },
+        {
+          "id": "intro",
+          "hash": "sha256-f2da17b33399c344ee2419b4febd39aae1a6cb289031ca244a229522ba971692",
+          "tokens": 220
+        },
+        {
+          "id": "terminology",
+          "hash": "sha256-27839b5f03148dc1bf4ede9815e92687effb5e8c1ed6714d20950e7cc1c007f5",
+          "tokens": 73
+        },
+        {
+          "id": "discovery",
+          "hash": "sha256-ea893655de49585adcc8154bd101459087f87fd00e737e2958c3cb061c93c630",
+          "tokens": 756
+        },
+        {
+          "id": "http",
+          "hash": "sha256-aa48f6d697e05c3b84da89d157af3f9db39df2c676b3bbff9c784766af2d5740",
+          "tokens": 555
+        },
+        {
+          "id": "precedence",
+          "hash": "sha256-50f274df7464bc9e3b05beaa292728ec8320a1d785572d5d896e1fe662d5f992",
+          "tokens": 359
+        },
+        {
+          "id": "caching",
+          "hash": "sha256-a4333c74e433486237fc7db17a248552aa29e62dba032b7b9b04926dd2cc89c0",
+          "tokens": 76
+        },
+        {
+          "id": "conformance",
+          "hash": "sha256-519a13dee20db472dea2661b80ac7bae2ddb9affd18d369faaa5e99377fb0bf4",
+          "tokens": 88
+        },
+        {
+          "id": "security",
+          "hash": "sha256-69cff92c60a6a9c9496aca2cb03c913c151637c623b37fd30378f6b1dedf8c06",
+          "tokens": 292
+        },
+        {
+          "id": "level11",
+          "hash": "sha256-83cb6380d4638a57e72e3343cab2ca42aa17f0589ca59b88e12125f407a55348",
+          "tokens": 691
+        },
+        {
+          "id": "appendix-a",
+          "hash": "sha256-033fc0a88ffb81cb447d86b3fbe740237c75df67787b70d8ba86a0bd1d46786d",
+          "tokens": 185
+        },
+        {
+          "id": "appendix-b",
+          "hash": "sha256-3e2c880ff6ad8ccfa8b1feff969c5067b370e744e8e935d8b70478016e2637f4",
+          "tokens": 345
+        }
+      ]
     },
     {
       "url": "/spec/aicc-core-1.0.html",
@@ -190,7 +277,90 @@
       "hash": "sha256-03abaf2aaedf775bcd225c2344e7bffe7fce38b75f7934aaf4f751dd5f7d54fa",
       "tokens": 6202,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "abstract",
+          "hash": "sha256-97f4214f33cd0b20a83b67b949a55e4ad9c67f521546bbb9ab5b85c5ff28a913",
+          "tokens": 153
+        },
+        {
+          "id": "status",
+          "hash": "sha256-dbed9a18ffd3b1f7fc0597d068beb67b0c408e0199c96131d9a8c0b995aa57fc",
+          "tokens": 71
+        },
+        {
+          "id": "intro",
+          "hash": "sha256-4ef7fa6a2fd37d0de518f85b4572085aadbbe9573928ddcead5a5bbc414f843e",
+          "tokens": 328
+        },
+        {
+          "id": "terminology",
+          "hash": "sha256-b574471d6cf7c83d271db8a8ae0afd59870c13fefba1ef66e08ca37922821d7e",
+          "tokens": 240
+        },
+        {
+          "id": "docmodel",
+          "hash": "sha256-0bc738b9be474b366354ac4146b6599e22cbcf07c4895a0e563d19bedc5cd356",
+          "tokens": 512
+        },
+        {
+          "id": "frontmatter",
+          "hash": "sha256-53ad11f0f3c1813fed88a2e0dff4e1f7bb187752f2f9106ed143d5880b78d335",
+          "tokens": 713
+        },
+        {
+          "id": "taxonomy",
+          "hash": "sha256-b41c205cd24dfdb9923e7263b4efe84eea2931e6532bb2cc7e7b6b2a3c991bad",
+          "tokens": 296
+        },
+        {
+          "id": "keywords",
+          "hash": "sha256-93f60fd2da3881ea8b18b6bbe694bff868ed83ee0562d257524b2558b91bbb39",
+          "tokens": 598
+        },
+        {
+          "id": "annotations",
+          "hash": "sha256-a056a1373b9ed22492148486bb7932870b5f28e663758bbf0bfee01b5c602b99",
+          "tokens": 290
+        },
+        {
+          "id": "directives",
+          "hash": "sha256-028c4a17c1525a636cc5c7cce9002593c7fb93a021840ccaeff2dd8888111869",
+          "tokens": 455
+        },
+        {
+          "id": "composition",
+          "hash": "sha256-f9507fe3ccab6ce45ec959f03faad918fd17dd02a8e5ba6858d8e1c67300b710",
+          "tokens": 394
+        },
+        {
+          "id": "conformance",
+          "hash": "sha256-b0e52c14623b005dddf36ec4a4b875500107876aa2e7173793c14d392f23afca",
+          "tokens": 678
+        },
+        {
+          "id": "interop",
+          "hash": "sha256-4796eb2eb0244f2db115e64a62680c75401d7a01373d047fc7d101fec3609353",
+          "tokens": 267
+        },
+        {
+          "id": "security",
+          "hash": "sha256-bd232fe65f417170f48b2fcfe125baf5af2026dbcf5232255543a8cabec4f48a",
+          "tokens": 198
+        },
+        {
+          "id": "appendix-a",
+          "hash": "sha256-f09434114e81623199c506f837a97eda9b88a409ac802eb05ba8fb4422971637",
+          "tokens": 256
+        },
+        {
+          "id": "appendix-b",
+          "hash": "sha256-9aac1c6b9fbb84f9da5c21b78272d358de327b6e333efcca6da26332d5135d04",
+          "tokens": 301
+        }
+      ]
     },
     {
       "url": "/spec/aix-1.0.html",
@@ -199,7 +369,70 @@
       "hash": "sha256-af856fa214cb905ca264f2079d9c6ce0f30d4b68e185797d88a733835a4bf655",
       "tokens": 2721,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "abstract",
+          "hash": "sha256-1cde2e4f3d1e6616b77a1e21cfb0f1050915930dedaa0f26bc63f304d194842e",
+          "tokens": 153
+        },
+        {
+          "id": "status",
+          "hash": "sha256-25016888e948f61daf38dd8fd1dec9eb70201a6d7c0175ad1e29db46bcbbf938",
+          "tokens": 81
+        },
+        {
+          "id": "intro",
+          "hash": "sha256-4decb8ec03cb5df378b17c21e54c90f8553208abd0caa7b6eb5b0265a368e656",
+          "tokens": 182
+        },
+        {
+          "id": "location",
+          "hash": "sha256-987ae24f7695935094b29712e024c2d507e4fdc766fb3b198263e2f8db4b2078",
+          "tokens": 120
+        },
+        {
+          "id": "format",
+          "hash": "sha256-e46164f9afb989a1e1d5f594d0e8449ba389da2f0328dde89d73d6862b7827b8",
+          "tokens": 418
+        },
+        {
+          "id": "chunks",
+          "hash": "sha256-11c80125135d0f7f6f08c5ebe7861a5461e0e00d70c56133dec511b6c056f8cb",
+          "tokens": 187
+        },
+        {
+          "id": "behavior",
+          "hash": "sha256-c3308108c16f94506566b6b99db84f8d39d71ed4763fea4923f5704b226541d2",
+          "tokens": 197
+        },
+        {
+          "id": "delta",
+          "hash": "sha256-2aae1c8115cabd23983fddfccb56289eff76652b405c307cfdbab08e4a69e28a",
+          "tokens": 99
+        },
+        {
+          "id": "conformance",
+          "hash": "sha256-124cfa86978d398219ad5126807f5b1b5d2ff4d7ce6fd15ce9b8a456a865ec09",
+          "tokens": 110
+        },
+        {
+          "id": "security",
+          "hash": "sha256-8132a5f71eb3d6d447c478e92f6c93694c93b16fcc1ac2f9739b45026ffb6715",
+          "tokens": 230
+        },
+        {
+          "id": "appendix-a",
+          "hash": "sha256-e61ad9d0f2e9cc02c83e623d53c1222039994a0605f5fadff955a19f792a0d08",
+          "tokens": 246
+        },
+        {
+          "id": "appendix-b",
+          "hash": "sha256-b1145d730353825119787b301b4489c5879ca18eab66a45dfa2cd36a6d40b89a",
+          "tokens": 325
+        }
+      ]
     },
     {
       "url": "/spec/aqp-1.0.html",
@@ -208,7 +441,35 @@
       "hash": "sha256-f384f42d313d03b250938dc89841a472cad0c833595eabcf548f75c8d93ccc50",
       "tokens": 820,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "status",
+          "hash": "sha256-636a513f95c34fb054542359c89056e94d0479e75988b3dd2714e89c747b2219",
+          "tokens": 57
+        },
+        {
+          "id": "abstract",
+          "hash": "sha256-a57d8e7cd50190a538f498df118123ff8ff56a76b2d51d5cb0b6cbb0caacf6bf",
+          "tokens": 102
+        },
+        {
+          "id": "declare",
+          "hash": "sha256-135cdf9d4a1c22ff2dc4a1d78c22e84d4a7a3831221402b48c29835f880946b3",
+          "tokens": 65
+        },
+        {
+          "id": "request",
+          "hash": "sha256-46bf04612c17e62f92625dd3df2714c11861a084ca61f4778e47ee6b1d84f0cf",
+          "tokens": 179
+        },
+        {
+          "id": "security",
+          "hash": "sha256-855e337a0727c731f28487d5876b6140dbee2e6533898e702574ccbe504f8f23",
+          "tokens": 95
+        }
+      ]
     },
     {
       "url": "/spec/chunks-1.0.html",
@@ -217,7 +478,35 @@
       "hash": "sha256-860a799eb7dda94a0562218611883b825688c4e2829dd73b0784cae38f80b6d0",
       "tokens": 845,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "status",
+          "hash": "sha256-636a513f95c34fb054542359c89056e94d0479e75988b3dd2714e89c747b2219",
+          "tokens": 57
+        },
+        {
+          "id": "abstract",
+          "hash": "sha256-b3b70d5ea701577f274755f7983c2a0271f6e30a0b905543c354c57c859c2008",
+          "tokens": 104
+        },
+        {
+          "id": "grammar",
+          "hash": "sha256-26226942143db380cc29a99ce448eb74ce06f59f411cc3a7a9b79cf8f8ab5ebd",
+          "tokens": 176
+        },
+        {
+          "id": "citation",
+          "hash": "sha256-7e23a5c85a1e764597a7920dee6faeff03211725448bc56379b165fea9d8c948",
+          "tokens": 101
+        },
+        {
+          "id": "security",
+          "hash": "sha256-d7ed3bdae1e5435f410b3839a03cfc6c73694e77787a213d9856714681775aba",
+          "tokens": 78
+        }
+      ]
     },
     {
       "url": "/spec/economics-1.0.html",
@@ -226,7 +515,30 @@
       "hash": "sha256-4126deab0593f330599eae221cbf57a25c23aba3ccc716446a0b2f9f157b04fb",
       "tokens": 677,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "status",
+          "hash": "sha256-636a513f95c34fb054542359c89056e94d0479e75988b3dd2714e89c747b2219",
+          "tokens": 57
+        },
+        {
+          "id": "abstract",
+          "hash": "sha256-0b27cd5f942ee23d8ce3fbc56d14226ed149dd0ef856b45ee126a63a190aee50",
+          "tokens": 91
+        },
+        {
+          "id": "tiers",
+          "hash": "sha256-1c6e58dd822bd2827e7664ef7a929e5140b8df09dfcf601dcfad76dca3017836",
+          "tokens": 122
+        },
+        {
+          "id": "security",
+          "hash": "sha256-d4352c6e95c51ed6f998eb17b5773a95946d7460b4e8fb5732e34150fbb7a66a",
+          "tokens": 83
+        }
+      ]
     },
     {
       "url": "/spec/identity-1.0.html",
@@ -235,7 +547,30 @@
       "hash": "sha256-397be0a521ef1e13ed683c7d955287d3a58a643ee1d0f3c6a9d8c277b16f2141",
       "tokens": 809,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "status",
+          "hash": "sha256-636a513f95c34fb054542359c89056e94d0479e75988b3dd2714e89c747b2219",
+          "tokens": 57
+        },
+        {
+          "id": "abstract",
+          "hash": "sha256-29be4c65953bf6602f40ed6ada79adbb4c94d2ec5027ee650392ea4ad03fd3d6",
+          "tokens": 134
+        },
+        {
+          "id": "mech",
+          "hash": "sha256-079abd544f6cad245e951923ba51bd3f92662326f00694227874bcac1652800e",
+          "tokens": 169
+        },
+        {
+          "id": "security",
+          "hash": "sha256-eb4a3cd87b8324239f514e5c747009c43aa71543095f2b6f03fe243d5b0cb621",
+          "tokens": 130
+        }
+      ]
     },
     {
       "url": "/spec/interop-1.0.html",
@@ -244,7 +579,65 @@
       "hash": "sha256-9753c84e1923b65d543675deb04821ebb6e07599c27693133ba4badf6785bee7",
       "tokens": 1766,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "abstract",
+          "hash": "sha256-0668dfaef3f03cdd0726efa628e41a1b86fcb86d9a4df999e3b6adb201d95cd1",
+          "tokens": 118
+        },
+        {
+          "id": "status",
+          "hash": "sha256-912c0649299e22a6c73b2a913bbbd58700b7fe78d95d553db8b82e08250ca91f",
+          "tokens": 86
+        },
+        {
+          "id": "principles",
+          "hash": "sha256-631797e56ebb1abab1c61dece12591fdd10676a5778806f97876089b850676e3",
+          "tokens": 156
+        },
+        {
+          "id": "loss",
+          "hash": "sha256-92e309832bd7621e07a00f2e28dda3b69dff8cf80bcc84c336c5912c5f3ce71e",
+          "tokens": 81
+        },
+        {
+          "id": "claude",
+          "hash": "sha256-ad0ad3af329afb921fbf787f56a62a7dbdd1a8bd659cd45a662d2c5de7320253",
+          "tokens": 240
+        },
+        {
+          "id": "cursor",
+          "hash": "sha256-070549346f0bb98c5bf2500386f1616a77838239fe2033e928670576b7be848e",
+          "tokens": 119
+        },
+        {
+          "id": "copilot",
+          "hash": "sha256-a479fadc31d3780a9f2a5f5d7d54c01448e3cbf7ceaa8db50fc4efe911336578",
+          "tokens": 117
+        },
+        {
+          "id": "others",
+          "hash": "sha256-620593eb44db0615eff04c0fd7ccfd620a44e6c507343519330cd456544ad05d",
+          "tokens": 67
+        },
+        {
+          "id": "reverse",
+          "hash": "sha256-b704b596a8e92d372d2b5280df30dc316269085ee85f3f27bf019462f4bfd904",
+          "tokens": 160
+        },
+        {
+          "id": "roundtrip",
+          "hash": "sha256-fad704f7f4f6d1a9037aa71df1adc2928180208f404dd1b1d1c9612c4da3ccd8",
+          "tokens": 108
+        },
+        {
+          "id": "appendix-a",
+          "hash": "sha256-70fa271317108d04109ba33d18f6e7c1e547feccb27ac509e6270861da56e792",
+          "tokens": 149
+        }
+      ]
     },
     {
       "url": "/spec/licensing-1.0.html",
@@ -253,7 +646,30 @@
       "hash": "sha256-b33f45104a3d0ad2d00f3335b1c0ad15941e7b4c7e763be38d87aaf22f9a4738",
       "tokens": 832,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "status",
+          "hash": "sha256-636a513f95c34fb054542359c89056e94d0479e75988b3dd2714e89c747b2219",
+          "tokens": 57
+        },
+        {
+          "id": "abstract",
+          "hash": "sha256-dd0ce5d09bc26606139d4560450d0a397bae3974d8a9eb34fd200b49ac97588f",
+          "tokens": 141
+        },
+        {
+          "id": "semantics",
+          "hash": "sha256-6679f82889a5e77187515d10bcccf8dd985266c3d1a9515272eb9d6aad3aab2e",
+          "tokens": 230
+        },
+        {
+          "id": "security",
+          "hash": "sha256-6d92606832658d713387c4ff89848d9d926cddbe84a0cb2847143ef818360ade",
+          "tokens": 89
+        }
+      ]
     },
     {
       "url": "/spec/provenance-1.0.html",
@@ -262,16 +678,40 @@
       "hash": "sha256-80c44bffe0cbee34e0c92c873a17806d391e5bcc735725a59d700fff4de58434",
       "tokens": 787,
       "updated": "2026-07-25",
-      "type": "docs"
+      "type": "docs",
+      "source": "ai-assisted",
+      "chunks": [
+        {
+          "id": "status",
+          "hash": "sha256-636a513f95c34fb054542359c89056e94d0479e75988b3dd2714e89c747b2219",
+          "tokens": 57
+        },
+        {
+          "id": "abstract",
+          "hash": "sha256-92f48823c5c32a3b06c87634c38a385898a87851e4d55d9965fd958677d85de6",
+          "tokens": 128
+        },
+        {
+          "id": "fields",
+          "hash": "sha256-90ac111ab8988ee858313882776cd22c0a4558d19af288ecb3a32d216edaf84f",
+          "tokens": 169
+        },
+        {
+          "id": "security",
+          "hash": "sha256-2e0ff1c1a58cbdf4b1779d7adc0a258a00f8c1feb5edb9287d2fa6645f8da867",
+          "tokens": 120
+        }
+      ]
     },
     {
       "url": "/stack.html",
       "title": "The Agent Web Stack — AI Coding Consortium",
       "summary": "The web was built for browsers. The next decade of traffic will be agents. The Agent Web Stack maps every layer the agent-native web needs — and the AICC standard that covers it.",
-      "hash": "sha256-6ce7b8d19488bbab52d3e2484875f313f2bafbd09f0104922639496f25af0a6e",
-      "tokens": 1055,
+      "hash": "sha256-934ad38a459266fc6b609791186272de9ea27618b195386807c550ee17dbc60a",
+      "tokens": 1108,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     },
     {
       "url": "/validator.html",
@@ -280,7 +720,8 @@
       "hash": "sha256-f941c93e8fdcc0e1c7d342d0e216055ccdd4f50cc20b30bd6eef1517c6d7c995",
       "tokens": 269,
       "updated": "2026-07-25",
-      "type": "article"
+      "type": "article",
+      "source": "ai-assisted"
     }
   ]
 }

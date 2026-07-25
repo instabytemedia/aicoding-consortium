@@ -34,9 +34,18 @@ export function entryFor(file, root, ext) {
   const summary = (source.match(/<meta name="description" content="([^"]+)"/i)?.[1]
     || text.slice(0, 240)).slice(0, 280);
   const mtime = statSync(file).mtime.toISOString().slice(0, 10);
+  const chunks = [];
+  if (ext === ".html") {
+    for (const m of source.matchAll(/<h2 id="([a-z0-9][a-z0-9-]{0,63})">([\s\S]*?)<\/h2>([\s\S]*?)(?=<h2 id=|<footer|$)/g)) {
+      const ctext = extractText(m[2] + " " + m[3], ".html");
+      chunks.push({ id: m[1], hash: "sha256-" + createHash("sha256").update(ctext, "utf8").digest("hex"), tokens: Math.round(ctext.length / 4) });
+    }
+  }
   const rel = "/" + relative(root, file).replace(/\\/g, "/");
   const type = /ugc|comments/.test(rel) ? "ugc" : ext === ".md" ? "docs" : /spec\//.test(rel) ? "docs" : "article";
-  return { url: rel, title, summary, hash, tokens, updated: mtime, type };
+  const entry = { url: rel, title, summary, hash, tokens, updated: mtime, type, source: "ai-assisted" };
+  if (chunks.length) entry.chunks = chunks;
+  return entry;
 }
 
 export function generate(root, origin) {

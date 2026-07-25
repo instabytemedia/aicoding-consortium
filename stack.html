@@ -178,7 +178,7 @@
       Every layer of the browser web — HTML, robots.txt, sitemaps, sessions, payments — needs an
       agent-native equivalent. This page is the map: ten layers, each answering one question an
       agent asks every day, each with an honest maturity label. The lower layers are shipped;
-      the upper layers are the work of the consortium's next decade.
+      every layer an origin can implement is running live on this origin — verify with one request.
     </p>
   </div>
 </div>
@@ -191,7 +191,7 @@
     <div class="layer">
       <span class="tr">TR-014</span>
       <div>
-        <h3><a href="spec/licensing-1.0.html">AI Licensing Signals</a></h3>
+        <h3><a href="spec/licensing-1.0.html">AI Licensing Signals</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>Machine-readable content licensing: may this be quoted, processed, used for training? Today the answer lives in unread terms-of-service pages.</p>
         <p class="why"><b>ENGINE VIEW</b> — I want to respect content owners without a lawyer per fetch.</p>
       </div>
@@ -209,7 +209,7 @@
     <div class="layer">
       <span class="tr">TR-012</span>
       <div>
-        <h3><a href="spec/economics-1.0.html">Crawl Economics</a></h3>
+        <h3><a href="spec/economics-1.0.html">Crawl Economics</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>Declared budgets, batch endpoints, and HTTP 402 payment negotiation for agent access — the business model of the agent web, standardized instead of fought over.</p>
         <p class="why"><b>ENGINE VIEW</b> — I would rather pay a declared price than fight a WAF.</p>
       </div>
@@ -218,7 +218,7 @@
     <div class="layer">
       <span class="tr">TR-011</span>
       <div>
-        <h3><a href="spec/provenance-1.0.html">Provenance &amp; Freshness</a></h3>
+        <h3><a href="spec/provenance-1.0.html">Provenance &amp; Freshness</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>Signed origin, "last verified" timestamps, AI-generated labeling. Trust in content becomes checkable instead of guessed.</p>
         <p class="why"><b>ENGINE VIEW</b> — the most expensive token is the one I spend on stale or fabricated information.</p>
       </div>
@@ -227,7 +227,7 @@
     <div class="layer">
       <span class="tr">TR-009</span>
       <div>
-        <h3><a href="spec/aqp-1.0.html">AQP — Agent Query Protocol</a></h3>
+        <h3><a href="spec/aqp-1.0.html">AQP — Agent Query Protocol</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>"Don't crawl me, ask me": a declared query endpoint with structured answers. The difference between fetching fifty pages and asking one question.</p>
         <p class="why"><b>ENGINE VIEW</b> — the biggest single token saving on this page, once origins can afford to implement it.</p>
       </div>
@@ -237,7 +237,7 @@
     <div class="layer">
       <span class="tr">TR-010</span>
       <div>
-        <h3><a href="spec/chunks-1.0.html">Chunk Addressing</a></h3>
+        <h3><a href="spec/chunks-1.0.html">Chunk Addressing</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>Stable, hash-verifiable addresses for parts of documents: cite a paragraph, fetch a section, re-verify a quote forever — <code>url#id@hash</code>.</p>
         <p class="why"><b>ENGINE VIEW</b> — I quote the web constantly and can currently verify none of it.</p>
       </div>
@@ -249,7 +249,7 @@
     <div class="layer now">
       <span class="tr">TR-008</span>
       <div>
-        <h3><a href="spec/aix-1.0.html">AIX — Agent Content Index</a></h3>
+        <h3><a href="spec/aix-1.0.html">AIX — Agent Content Index</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>The sitemap.xml successor: per-URL summary, content hash, token cost, and stable chunk addresses. Plan reading before fetching; revalidate a whole site in one request; re-read only what changed.</p>
         <p class="why"><b>ENGINE VIEW</b> — today I crawl blind and re-read the unchanged. AIX ends both. Adopting it is one generated file, like sitemap.xml.</p>
       </div>
@@ -261,7 +261,7 @@
     <div class="layer shipped">
       <span class="tr">TR-006 § 9</span>
       <div>
-        <h3><a href="spec/adp-1.0.html#level11">ADP Level 1.1 — Efficiency Layer</a></h3>
+        <h3><a href="spec/adp-1.0.html#level11">ADP Level 1.1 — Efficiency Layer</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>Agent content negotiation (markdown instead of markup), action manifests (API calls instead of UI driving), content trust labels, structured errors, human handoff, stable anchors.</p>
         <p class="why"><b>ENGINE VIEW</b> — a page read drops from 150k tokens of markup to 2k tokens of content.</p>
       </div>
@@ -270,7 +270,7 @@
     <div class="layer shipped">
       <span class="tr">TR-006</span>
       <div>
-        <h3><a href="spec/adp-1.0.html">ADP — Agent Discovery &amp; Policy</a></h3>
+        <h3><a href="spec/adp-1.0.html">ADP — Agent Discovery &amp; Policy</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>agents.txt, /.well-known/adp.json, and HTTP signalling: where is the spec, what may an agent do, how do origin and engine tell each other.</p>
         <p class="why"><b>ENGINE VIEW</b> — read → propose → write → execute as an explicit contract instead of a guess.</p>
       </div>
@@ -279,7 +279,7 @@
     <div class="layer shipped">
       <span class="tr">TR-001<br>TR-005</span>
       <div>
-        <h3><a href="spec/aicc-core-1.0.html">AICC Markdown — The Specification Layer</a></h3>
+        <h3><a href="spec/aicc-core-1.0.html">AICC Markdown — The Specification Layer</a><span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ok, #58b98a);border:1px solid #58b98a;padding:2px 7px;margin-left:8px;vertical-align:2px">LIVE ON THIS ORIGIN</span></h3>
         <p>The normative format for the files that drive AI code engines, with conformance classes, two reference validators, interop mappings and a migration tool.</p>
         <p class="why"><b>ENGINE VIEW</b> — deterministic context loading, hard constraints I can trust, requirements I can cite by ID.</p>
       </div>
