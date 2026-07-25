@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-25T09:16:50.753Z",
+  "generated": "2026-07-25T09:22:40.391Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -101,6 +101,15 @@
       "tokens": 2184,
       "updated": "2026-07-25",
       "type": "article"
+    },
+    {
+      "url": "/index.md",
+      "title": "AI Coding Consortium (AICC)",
+      "summary": "# AI Coding Consortium (AICC) > The standards body for AI-readable specifications and the agent-native web. > One normative format for the markdown that drives every AI code engine — plus the > discovery, policy, indexing and efficiency lay",
+      "hash": "sha256-a1e11b639004a70d172afe2e154140e4f25e4e669296ac2732870412b7cd8d1b",
+      "tokens": 548,
+      "updated": "2026-07-25",
+      "type": "docs"
     },
     {
       "url": "/plugins/aicc/commands/aicc-index.md",

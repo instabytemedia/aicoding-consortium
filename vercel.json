@@ -1,0 +1,27 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "destination": "/index.md"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "ADP-Version", "value": "1.0" },
+        { "key": "Spec-Location", "value": "/product.aicc.md" },
+        { "key": "Agent-Policy", "value": "allow=(read propose), disallow=(write execute)" }
+      ]
+    },
+    {
+      "source": "/(.*).md",
+      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+    },
+    {
+      "source": "/",
+      "headers": [{ "key": "Vary", "value": "Accept, Agent-Profile" }]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# AI Coding Consortium (AICC)
+
+> The standards body for AI-readable specifications and the agent-native web. Standards:
+> AICC Markdown (spec format), ADP (agents.txt + policy), AIX (content index), and the
+> Agent Web Stack drafts (query, chunks, provenance, economics, identity, licensing).
+
+## Docs
+
+- [Agent view of this site](/index.md): full machine-readable overview
+- [AICC Core 1.0](/spec/aicc-core-1.0.html): the normative spec format standard
+- [ADP 1.0](/spec/adp-1.0.html): agents.txt and agent policy
+- [AIX 1.0](/spec/aix-1.0.html): content index for differential crawling
+
+## Note
+
+This origin implements the standards it publishes: see /.well-known/agents.txt,
+/.well-known/adp.json and /.well-known/aix.json. Content index beats crawling.
