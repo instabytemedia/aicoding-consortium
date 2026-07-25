@@ -36,6 +36,8 @@ footer{border-top:1px solid var(--border);padding:28px 32px;font-family:var(--mo
 .anav .brand .seal{font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.08em;border:1px solid rgba(128,128,128,.5);padding:3px 8px;color:var(--accent)}
 .anav .brand .bname{font-family:var(--serif);font-size:16.5px;font-weight:500;color:var(--ink)}
 .anav a{border:none;text-decoration:none}
+.anav .links{display:contents}
+.anav .burger{display:none}
 .anav .lnk,.anav summary{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink-dim);padding:8px 12px;cursor:pointer;list-style:none;display:block;white-space:nowrap}
 .anav summary::-webkit-details-marker{display:none}
 .anav summary::after{content:" ▾";font-size:10px;color:var(--ink-faint)}
@@ -51,13 +53,29 @@ footer{border-top:1px solid var(--border);padding:28px 32px;font-family:var(--mo
 .anav .menu .sep{height:1px;background:rgba(128,128,128,.28);margin:7px 0}
 .anav .cta{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.03em;background:var(--accent);color:var(--accent-ink);padding:9px 16px;margin-left:10px;white-space:nowrap}
 .anav .cta:hover{background:#ecc55e;color:var(--accent-ink)}
-@media(max-width:960px){.anav .row{height:auto;flex-wrap:wrap;padding:10px 20px;gap:2px}.anav .brand{width:100%;padding:4px 0 8px}.anav .brand .bname{font-size:15px}.anav .menu{position:static;box-shadow:none;border-left:2px solid rgba(128,128,128,.28);border-top:none;border-right:none;border-bottom:none;min-width:0;margin:2px 0 6px 12px;padding:0}.anav .cta{margin-left:auto}}
+@media(max-width:960px){
+.anav .row{height:56px;padding:0 20px;position:relative}
+.anav .brand .bname{font-size:14.5px}
+.anav .burger{display:block;background:none;border:1px solid rgba(128,128,128,.5);color:var(--ink);font-size:17px;line-height:1;padding:7px 13px;cursor:pointer}
+.anav.open .burger{color:var(--accent);border-color:var(--accent)}
+.anav .links{display:none;position:absolute;top:100%;left:0;right:0;background:#0f1012;border-bottom:1px solid rgba(128,128,128,.5);padding:8px 20px 20px;max-height:calc(100vh - 56px);overflow-y:auto;box-shadow:0 24px 48px rgba(0,0,0,.6)}
+.anav.open .links{display:block}
+.anav .lnk,.anav summary{padding:13px 4px;font-size:15.5px;border-bottom:1px solid rgba(128,128,128,.28);white-space:normal}
+.anav summary::after{float:right}
+.anav details{position:static}
+.anav details:last-of-type summary{border-bottom:1px solid rgba(128,128,128,.28)}
+.anav .menu{position:static;box-shadow:none;border:none;border-left:2px solid rgba(224,184,79,.4);margin:2px 0 10px 8px;min-width:0;padding:2px 0;background:transparent}
+.anav .menu a{white-space:normal;padding:10px 14px;font-size:14px}
+.anav .cta{display:block;text-align:center;margin:18px 0 0;padding:13px}
+}
 </style>
 </head>
 <body>
 <nav class="anav" aria-label="Main">
   <div class="row">
     <a class="brand" href="index.html"><span class="seal">AICC</span><span class="bname">AI Coding Consortium</span></a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" onclick="const n=this.closest('.anav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
+    <div class="links">
     <details><summary>Standards</summary>
       <div class="menu">
         <a href="spec/aicc-core-1.0.html">AICC Core 1.0 <span class="tag">Candidate Rec.</span></a>
@@ -93,6 +111,7 @@ footer{border-top:1px solid var(--border);padding:28px 32px;font-family:var(--mo
       </div>
     </details>
     <a class="cta" href="scanner.html">Scan your site</a>
+    </div>
   </div>
 </nav>
 <script>document.addEventListener('click',e=>{document.querySelectorAll('.anav details[open]').forEach(d=>{if(!d.contains(e.target))d.removeAttribute('open')})});</script>
