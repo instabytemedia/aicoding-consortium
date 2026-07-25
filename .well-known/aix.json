@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-25T09:40:02.011Z",
+  "generated": "2026-07-25T10:41:52.126Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -117,8 +117,8 @@
       "url": "/index.html",
       "title": "AI Coding Consortium — The Standards Body for Agent Contracts",
       "summary": "The contracts AI agents actually read — in your repo and on the web. AICC Markdown replaces the CLAUDE.md sprawl; the Agent Web Stack (agents.txt, AIX, ADP) does what robots.txt never could.",
-      "hash": "sha256-709eea86856273ba55cd3099e9197c30318b4e0fb59767db786dc2ad3e7977e2",
-      "tokens": 2215,
+      "hash": "sha256-77026b9d533cc290ddf13d563d0e2491308a5f9faa7a438f9537107f1962fc63",
+      "tokens": 2451,
       "updated": "2026-07-25",
       "type": "article",
       "source": "ai-assisted"
