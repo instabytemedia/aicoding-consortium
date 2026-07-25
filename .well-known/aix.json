@@ -1,7 +1,7 @@
 {
   "aix": "1.0",
   "origin": "https://aicoding-consortium.vercel.app",
-  "generated": "2026-07-25T10:41:52.126Z",
+  "generated": "2026-07-25T10:55:50.882Z",
   "entries": [
     {
       "url": "/CODE_OF_CONDUCT.md",
@@ -67,8 +67,8 @@
       "url": "/README.md",
       "title": "AI Coding Consortium (AICC)",
       "summary": "# AI Coding Consortium (AICC) **The standards body for AI-readable specifications.** One normative format for the markdown that drives every AI code engine. CLAUDE.md, AGENTS.md, `.cursorrules`, scattered spec files — every engine invents i",
-      "hash": "sha256-1278e74437e865bcd6ccad0be1cf637f66540c092b24020773fb501f6f7315c5",
-      "tokens": 983,
+      "hash": "sha256-df2d20043545e446bea598680a3a5ce9ebd63cdf6af325e05387de92e897b955",
+      "tokens": 984,
       "updated": "2026-07-25",
       "type": "docs",
       "source": "ai-assisted"
@@ -117,8 +117,8 @@
       "url": "/index.html",
       "title": "AI Coding Consortium — The Standards Body for Agent Contracts",
       "summary": "The contracts AI agents actually read — in your repo and on the web. AICC Markdown replaces the CLAUDE.md sprawl; the Agent Web Stack (agents.txt, AIX, ADP) does what robots.txt never could.",
-      "hash": "sha256-77026b9d533cc290ddf13d563d0e2491308a5f9faa7a438f9537107f1962fc63",
-      "tokens": 2451,
+      "hash": "sha256-a145fb7aed1e028a936205227704b81144cf73f6f559c926c63ab515fed4af77",
+      "tokens": 2452,
       "updated": "2026-07-25",
       "type": "article",
       "source": "ai-assisted"
@@ -127,8 +127,8 @@
       "url": "/index.md",
       "title": "AI Coding Consortium (AICC)",
       "summary": "# AI Coding Consortium (AICC) > The standards body for AI-readable specifications and the agent-native web. > One normative format for the markdown that drives every AI code engine — plus the > discovery, policy, indexing and efficiency lay",
-      "hash": "sha256-a1e11b639004a70d172afe2e154140e4f25e4e669296ac2732870412b7cd8d1b",
-      "tokens": 548,
+      "hash": "sha256-d3a762b3ca3ff669f6616853b717f3a13fa675d8a95ce456b571b7c7afd9085c",
+      "tokens": 549,
       "updated": "2026-07-25",
       "type": "docs",
       "source": "ai-assisted"

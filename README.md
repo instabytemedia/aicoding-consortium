@@ -46,7 +46,7 @@ This repository is an installable Claude Code plugin marketplace:
 
 ```
 /plugin marketplace add instabytemedia/aicoding-consortium
-/plugin install aicc
+/plugin install aicc@aicc
 ```
 
 You get the `aicc-markdown` skill (author, migrate, and consume AICC documents) plus three

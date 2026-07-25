@@ -23,7 +23,7 @@
 
 - [Spec Validator](/validator.html) — validate .aicc.md documents in-browser (error codes E101–E502).
 - [Agent-Readiness Scanner](/scanner.html) — grade any origin A–F (`/api/scan?url=`).
-- Claude Code plugin: `/plugin marketplace add instabytemedia/aicoding-consortium` → `/plugin install aicc`
+- Claude Code plugin: `/plugin marketplace add instabytemedia/aicoding-consortium` → `/plugin install aicc@aicc`
   (skill aicc-markdown, commands /aicc-validate, /aicc-migrate, /aicc-index).
 
 ## Machine endpoints on this origin
