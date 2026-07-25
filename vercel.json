@@ -1,27 +1,25 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
-      "destination": "/index.md"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "ADP-Version", "value": "1.0" },
-        { "key": "Spec-Location", "value": "/product.aicc.md" },
-        { "key": "Agent-Policy", "value": "allow=(read propose), disallow=(write execute)" }
-      ]
+      "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept, Agent-Profile" },
+      "dest": "/index.md"
     },
     {
-      "source": "/(.*).md",
-      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+      "src": "/(.*)\\.md",
+      "headers": { "Content-Type": "text/markdown; charset=utf-8" },
+      "continue": true
     },
     {
-      "source": "/",
-      "headers": [{ "key": "Vary", "value": "Accept, Agent-Profile" }]
-    }
+      "src": "/(.*)",
+      "headers": {
+        "ADP-Version": "1.0",
+        "Spec-Location": "/product.aicc.md",
+        "Agent-Policy": "allow=(read propose), disallow=(write execute)"
+      },
+      "continue": true
+    },
+    { "handle": "filesystem" }
   ]
 }
